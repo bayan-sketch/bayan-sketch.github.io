@@ -190,6 +190,7 @@ h2.title{margin:4px 0 6px;font-size:30px;font-weight:800;text-wrap:balance}
 .pword.solved{display:inline-block}
 .slot{display:inline-grid;place-items:center;min-width:1.1em;height:1.25em;border-radius:16px;border:4px dashed var(--berry);background:var(--coral-pale);margin:0 2px;color:var(--berry)}
 .slot.over{background:#f6c8cb}
+.slot .hint{opacity:.22;color:var(--ink)}
 .slot.filled{border-color:transparent;background:transparent}
 .opts{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
 .opt{min-width:96px;height:96px;border-radius:22px;background:var(--card);box-shadow:0 6px 0 var(--line);font-family:var(--f-letter);font-size:50px;font-weight:700;color:var(--ink);touch-action:none;user-select:none;-webkit-user-select:none;padding:0 14px}
@@ -590,11 +591,11 @@ function Tracer(host, { strokes, dots = [], refChar = null, onDone, onProgress }
     const s = S[cur], p0 = s.pts[prog], p1 = s.pts[Math.min(prog + 4, s.pts.length - 1)];
     const ang = Math.atan2(p1[1] - p0[1], p1[0] - p0[0]) * 180 / Math.PI;
     const g = mk("g", { transform: `translate(${p0[0]} ${p0[1]})` });
-    const c = mk("circle", { r: 17, fill: "#DE4A52", class: prog === 0 ? "pulse" : "" });
+    const c = mk("circle", { r: 11, fill: "#DE4A52", class: prog === 0 ? "pulse" : "" });
     g.append(c);
-    const arrow = mk("path", { d: "M12 -9 L30 0 L12 9 Z", fill: "#DE4A52", transform: `rotate(${ang})` });
+    const arrow = mk("path", { d: "M8 -6 L20 0 L8 6 Z", fill: "#DE4A52", transform: `rotate(${ang})` });
     g.append(arrow);
-    if (S.length > 1) { const t = mk("text", { "text-anchor": "middle", "dominant-baseline": "central", fill: "#fff", "font-size": 18, "font-weight": 800, "font-family": "Baloo Bhaijaan 2, sans-serif" }); t.textContent = cur + 1; g.append(t); }
+    if (S.length > 1) { const t = mk("text", { "text-anchor": "middle", "dominant-baseline": "central", fill: "#fff", "font-size": 13, "font-weight": 800, "font-family": "Baloo Bhaijaan 2, sans-serif" }); t.textContent = cur + 1; g.append(t); }
     markers.append(g);
   }
   function setMeter() {
@@ -1132,7 +1133,7 @@ function screenPositions(id, tab = "board") {
       const before = cs.slice(0, i).join(""), after = cs.slice(i + 1).join("");
       const beforeTxt = before + (before && connects(cs[i - 1]) ? ZWJ : "");
       const afterTxt = (after && connects(l.char) ? ZWJ : "") + after;
-      const slot = h("span", { class: "slot", "aria-label": "فراغ الحرف" }, "؟");
+      const slot = h("span", { class: "slot", "aria-label": "فراغ الحرف" }, h("span", { class: "hint" }, formText(l.char, kind)));
       const opts = h("div", { class: "opts" });
       shuffle(kinds).forEach(k => {
         const o = h("button", { class: "opt", "aria-label": formText(l.char, k) }, formText(l.char, k));
