@@ -20,9 +20,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
 button,input,select,textarea{font:inherit;color:inherit}
 
 .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:8px;
-  background:linear-gradient(90deg,var(--navy) 0 40%,var(--teal) 40% 62%,var(--red) 62% 78%,var(--peach) 78% 100%)}
-.hero-in{max-width:1080px;margin:auto;padding:34px 22px 40px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.hero-in{max-width:1080px;margin:auto;padding:30px 22px 22px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:16px}
 .mark{width:62px;height:62px;border-radius:18px;background:var(--peach);display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:22px;color:var(--navy);flex:none}
 .hero h1{font-family:var(--head);font-weight:800;font-size:clamp(20px,3vw,28px);margin:0;line-height:1.4}
@@ -30,6 +28,24 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero-meta{display:flex;gap:8px;flex-wrap:wrap}
 .pill{border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 14px;font-size:13px;background:rgba(255,255,255,.06)}
 
+.tabs{position:sticky;top:0;z-index:15;background:var(--navy);box-shadow:0 8px 18px -14px rgba(0,0,0,.5)}
+.tabs-in{max-width:1080px;margin:auto;padding:4px 18px 0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.tabs-in::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;min-width:128px;border:0;border-bottom:4px solid var(--tc);background:rgba(255,255,255,.06);color:#e3e8f1;border-radius:12px 12px 0 0;padding:9px 12px 8px;cursor:pointer;display:flex;align-items:center;gap:9px;text-align:start;transition:background .15s,color .15s}
+.tab:hover{background:rgba(255,255,255,.13)}
+.tab .tl{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--tc);color:#fff;font-weight:800;font-size:15px;flex:none;box-shadow:0 0 0 1.5px rgba(255,255,255,.3)}
+.tab b{display:block;font-size:14px;font-weight:700;line-height:1.35;white-space:nowrap}
+.tab small{display:block;font-size:11.5px;opacity:.78;white-space:nowrap}
+.tab small.ok{color:#9fd6c0;opacity:1}
+.tab[aria-selected="true"]{background:var(--bg);color:var(--ink)}
+.tab[aria-selected="true"] small{color:var(--muted)}
+.tab[aria-selected="true"] small.ok{color:var(--teal)}
+.pane{display:none}
+.pane.on{display:block;animation:fade .2s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.pager{display:flex;justify-content:space-between;gap:10px;margin:0 0 22px}
+.pager button{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px 18px;font-weight:700;cursor:pointer;color:var(--navy)}
+.pager button.nx{background:var(--navy);border-color:var(--navy);color:#fff;margin-inline-start:auto}
 .wrap{max-width:1080px;margin:auto;padding:24px 18px 140px}
 .guide{background:var(--peach-t);border-inline-start:5px solid var(--peach);border-radius:12px;padding:14px 18px;font-size:14px;color:#5a3a2e;margin-bottom:22px}
 .guide b{color:var(--red)}
@@ -163,7 +179,8 @@ table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
   .track button{flex:0 0 auto;padding:4px 12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .ev.has textarea{display:block;min-height:0;height:auto;padding:4px 8px;font-size:11px}
   .sample td{padding:0 2px}.sample input{padding:3px 8px}
-  .hero::after{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tabs,.pager{display:none!important}
+  .pane{display:block!important}
 }
 </style>
 </head>
@@ -184,6 +201,7 @@ table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
     </div>
   </div>
 </header>
+<nav class="tabs" aria-label="أقسام البطاقة"><div class="tabs-in" id="tabs" role="tablist"></div></nav>
 
 <main class="wrap">
   <div class="guide">
@@ -191,13 +209,14 @@ table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
   </div>
 
   <!-- بيانات الزيارة -->
-  <section class="block c-a">
-    <div class="block-h"><div class="dom">١</div><h2>بيانات الزيارة<small>المعلم/ـة والحلقة والزيارة</small></h2></div>
+  <div class="pane" data-pane="info"><section class="block c-a">
+    <div class="block-h"><div class="dom">ⓘ</div><h2>بيانات الزيارة<small>المعلم/ـة والحلقة والزيارة</small></h2></div>
     <div class="block-b"><div class="grid" id="info"></div></div>
-  </section>
+  </section></div>
 
   <div id="domains"></div>
 
+  <div class="pane" data-pane="res">
   <!-- النتيجة -->
   <section class="block c-a" id="result">
     <div class="block-h"><div class="dom">∑</div><h2>النتيجة<small>تُحسب النسبة من البنود المحتسبة فقط</small></h2></div>
@@ -241,6 +260,7 @@ table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
       <div class="box"><h4>المشرف/ـة التعليمي/ـة لبيان</h4><div class="line">التوقيع</div></div>
     </div>
   </section>
+  </div>
 </main>
 
 <div class="dock">
@@ -394,7 +414,7 @@ function renderSample(it){
   <div class="avg"><span>متوسط العيّنة</span><span id="sAvg">—</span></div></div>`;
 }
 function renderDomains(){
-  $("#domains").innerHTML = DOMAINS.map(d=>`<section class="block c-${d.k}" id="dom-${d.k}">
+  $("#domains").innerHTML = DOMAINS.map(d=>`<section class="block pane c-${d.k}" data-pane="${d.k}" id="dom-${d.k}">
     <div class="block-h"><div class="dom">${d.n}</div><h2>${d.title}<small>${d.sub}</small></h2><div class="dscore"><b data-dom="${d.k}">—</b><span data-domr="${d.k}"></span></div></div>
     <div class="block-b">${d.items.map(renderItem).join("")}</div></section>`).join("");
 }
@@ -409,11 +429,11 @@ function scoreOf(id, code){
 }
 function compute(){
   const R={dom:{},parts:{},unfilled:0};
-  const add=(dk,r,key)=>{const D=R.dom[dk]??={s:0,m:0}; D.s+=r.s; D.m+=r.m; if(!r.filled) R.unfilled++; if(key){const P=R.parts[key]??={s:0,m:0,any:false,all:true,na:true}; P.s+=r.s;P.m+=r.m; if(r.filled)P.any=true; else P.all=false; if(!r.na)P.na=false;}};
+  const add=(dk,r,key)=>{const D=R.dom[dk]??={s:0,m:0,u:0}; D.s+=r.s; D.m+=r.m; if(!r.filled){R.unfilled++; D.u++;} if(key){const P=R.parts[key]??={s:0,m:0,any:false,all:true,na:true}; P.s+=r.s;P.m+=r.m; if(r.filled)P.any=true; else P.all=false; if(!r.na)P.na=false;}};
   // المسار
   let tr={s:0,m:0};
   if(S.track){ TRACKS[S.track].forEach((_,i)=>{const a=scoreOf(`t${i}k`,"KIF"), b=scoreOf(`t${i}z`,"ZAM"); add("a",a,"track"); add("a",b,"track"); add("a",{s:0,m:0,filled:true},`t${i}k|t${i}z`); R.parts[`t${i}k|t${i}z`]={s:a.s+b.s,m:a.m+b.m,any:a.filled||b.filled,all:a.filled&&b.filled,na:a.na&&b.na}; tr.s+=a.s+b.s; tr.m+=a.m+b.m;}); }
-  else { R.unfilled++; R.dom.a??={s:0,m:0}; }
+  else { R.unfilled++; R.dom.a??={s:0,m:0,u:0}; R.dom.a.u++; }
   R.trackPct = tr.m? tr.s/tr.m : null;
   DOMAINS.forEach(d=>d.items.forEach(it=>{
     if(it.track) return;
@@ -468,6 +488,7 @@ function update(){
   $("#tPct").textContent=pctF(R.total.pct); $("#tGrade").textContent=R.final;
   $("#tRaw").textContent=`${fmt(R.total.s)} من ${fmt(R.total.m)} درجة محتسبة`+(R.capped?" · حُجب «ممتاز»":"");
   $("#dPct").textContent=pctF(R.total.pct); $("#dGrade").textContent=R.final==="—"?"":R.final;
+  renderTabStatus(R);
   $("#dLeft").textContent=R.unfilled?`بنود لم تُعبّأ: ${R.unfilled.toLocaleString("ar-SA")}`:"اكتملت البنود ✓";
   persist(); return R;
 }
@@ -504,7 +525,7 @@ document.addEventListener("change",e=>{ if(e.target.dataset.info) e.target.dispa
 function toast(m,ms=3200){const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),ms);}
 
 $("#bPrint").onclick=()=>window.print();
-$("#bNew").onclick=()=>{ if(!confirm("بدء تقييم جديد؟ ستُمسح البيانات الحالية من هذا الجهاز.")) return; S=blank(); persist(); boot(); scrollTo(0,0); };
+$("#bNew").onclick=()=>{ if(!confirm("بدء تقييم جديد؟ ستُمسح البيانات الحالية من هذا الجهاز.")) return; S=blank(); persist(); CUR="info"; history.replaceState(null,"","#info"); boot(); scrollTo(0,0); };
 
 function payload(R){
   const DOMS=DOMAINS.map(d=>{const D=R.dom[d.k]||{s:0,m:0};return {key:d.n,name:d.title,score:Math.round(D.s*10)/10,max:D.m};});
@@ -541,10 +562,54 @@ $("#bSave").onclick=async()=>{
   finally{ b.disabled=false; b.textContent="حفظ وإرسال الدرجات"; }
 };
 
+const TABS=[
+  {k:"info",l:"ⓘ",t:"بيانات الزيارة",c:"#5E6E8F"},
+  {k:"a",l:"أ",t:"الوفاء بمنهجية بيان",c:"#3D5A8F"},
+  {k:"b",l:"ب",t:"جودة التدريس والبيئة الصفية",c:"var(--teal)"},
+  {k:"c",l:"ج",t:"التخطيط والمتابعة",c:"var(--peach)"},
+  {k:"d",l:"د",t:"نواتج التعلّم",c:"var(--red)"},
+  {k:"res",l:"∑",t:"النتيجة والاعتماد",c:"#8A93A6"},
+];
+let CUR="info";
+function renderTabs(){
+  $("#tabs").innerHTML=TABS.map(t=>`<button type="button" class="tab" role="tab" data-tab="${t.k}" aria-selected="${t.k===CUR}" style="--tc:${t.c}"><span class="tl">${t.l}</span><span><b>${t.t}</b><small data-ts="${t.k}"></small></span></button>`).join("");
+}
+function renderTabStatus(R){
+  const set=(k,txt,ok)=>{const e=document.querySelector(`[data-ts="${k}"]`); if(e){e.textContent=txt; e.classList.toggle("ok",!!ok);}};
+  const need=["teacher","mosque","eduSup","date","level"].filter(k=>!S.info[k]).length;
+  set("info", need?`بقي ${need.toLocaleString("ar-SA")} حقول أساسية`:"مكتملة ✓", !need);
+  DOMAINS.forEach(d=>{const D=R.dom[d.k]||{s:0,m:0,u:0};
+    set(d.k, D.u?`${fmt(D.s)} / ${fmt(D.m)} · بقي ${D.u.toLocaleString("ar-SA")}`:`${fmt(D.s)} / ${fmt(D.m)} ✓`, !D.u);});
+  set("res", R.total.pct==null?"—":`${pctF(R.total.pct)} · ${R.final}`, !R.unfilled);
+}
+function addPagers(){
+  document.querySelectorAll(".pager").forEach(p=>p.remove());
+  TABS.forEach((t,i)=>{
+    const pane=document.querySelector(`.pane[data-pane="${t.k}"]`); if(!pane) return;
+    const prev=TABS[i-1], next=TABS[i+1];
+    const pg=document.createElement("div"); pg.className="pager";
+    pg.innerHTML=(prev?`<button type="button" data-go="${prev.k}">→ ${prev.t}</button>`:"")+(next?`<button type="button" class="nx" data-go="${next.k}">التالي: ${next.t} ←</button>`:"");
+    pane.appendChild(pg);
+  });
+}
+function showPane(k,scroll){
+  if(!TABS.some(t=>t.k===k)) k="info";
+  CUR=k;
+  document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.dataset.pane===k));
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===k));
+  const tb=document.querySelector(`.tab[data-tab="${k}"]`); if(tb) tb.scrollIntoView({block:"nearest",inline:"nearest"});
+  try{history.replaceState(null,"","#"+k);}catch(e){}
+  if(scroll){const top=document.querySelector(".tabs").offsetTop; if(scrollY>top) scrollTo({top,behavior:"smooth"});}
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-tab],[data-go]"); if(!t) return;
+  showPane(t.dataset.tab||t.dataset.go, true);
+});
+
 function boot(){
-  renderInfo(); renderDomains();
+  renderInfo(); renderDomains(); renderTabs(); addPagers();
   $("#pos").value=S.positives||""; $("#rec").value=S.recommendations||"";
-  update();
+  update(); showPane((location.hash||"").slice(1)||CUR);
 }
 load(); boot();
 </script>
