@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#24385F">
+<title>بطاقة تقييم أداء معلم/ـة بيان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@600;800&display=swap">
+<style>
+:root{
+  --navy:#24385F; --teal:#457C8A; --red:#C05648; --peach:#D89478;
+  --navy-t:#E8EBF2; --teal-t:#E4EFF1; --red-t:#F7E5E2; --peach-t:#F8EAE3;
+  --bg:#F7F3EF; --card:#fff; --ink:#1E2A40; --muted:#6B7385; --line:#E4DED7;
+  --ui:"IBM Plex Sans Arabic",system-ui,sans-serif; --head:"Noto Kufi Arabic","IBM Plex Sans Arabic",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:8px;
+  background:linear-gradient(90deg,var(--navy) 0 40%,var(--teal) 40% 62%,var(--red) 62% 78%,var(--peach) 78% 100%)}
+.hero-in{max-width:1080px;margin:auto;padding:34px 22px 40px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:16px}
+.mark{width:62px;height:62px;border-radius:18px;background:var(--peach);display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:22px;color:var(--navy);flex:none}
+.hero h1{font-family:var(--head);font-weight:800;font-size:clamp(20px,3vw,28px);margin:0;line-height:1.4}
+.hero p{margin:4px 0 0;opacity:.82;font-size:14px}
+.hero-meta{display:flex;gap:8px;flex-wrap:wrap}
+.pill{border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 14px;font-size:13px;background:rgba(255,255,255,.06)}
+
+.wrap{max-width:1080px;margin:auto;padding:24px 18px 140px}
+.guide{background:var(--peach-t);border-inline-start:5px solid var(--peach);border-radius:12px;padding:14px 18px;font-size:14px;color:#5a3a2e;margin-bottom:22px}
+.guide b{color:var(--red)}
+section.block{background:var(--card);border-radius:18px;box-shadow:0 1px 0 var(--line),0 6px 24px -14px rgba(36,56,95,.25);margin-bottom:22px;overflow:hidden}
+.block-h{display:flex;align-items:center;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.dom{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:20px;color:#fff;flex:none}
+.block-h h2{margin:0;font-family:var(--head);font-size:18px;font-weight:800;line-height:1.4}
+.block-h small{display:block;color:var(--muted);font-size:13px;font-family:var(--ui);font-weight:500}
+.block-h .dscore{margin-inline-start:auto;text-align:center;min-width:92px}
+.dscore b{display:block;font-size:20px;font-weight:700}
+.dscore span{font-size:12px;color:var(--muted)}
+.block-b{padding:18px 22px 22px}
+.c-a .dom{background:var(--navy)} .c-b .dom{background:var(--teal)} .c-c .dom{background:var(--peach);color:var(--navy)} .c-d .dom{background:var(--red)}
+.c-a{--acc:var(--navy);--acc-t:var(--navy-t)} .c-b{--acc:var(--teal);--acc-t:var(--teal-t)} .c-c{--acc:#a8613f;--acc-t:var(--peach-t)} .c-d{--acc:var(--red);--acc-t:var(--red-t)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px 16px}
+.f label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+.f input,.f select,textarea{width:100%;border:1.5px solid var(--line);background:#FDFBF9;border-radius:10px;padding:9px 12px;outline:none;transition:border-color .15s,background .15s}
+.f input:focus,.f select:focus,textarea:focus{border-color:var(--teal);background:#fff}
+textarea{resize:vertical;min-height:70px}
+
+.track{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 6px}
+.track button{flex:1 1 160px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:600;transition:.15s}
+.track button small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.track button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.track button[aria-pressed="true"] small{color:#cfd6e4}
+.subhead{font-family:var(--head);font-weight:700;font-size:15px;color:var(--acc);margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.subhead::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.item{border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;transition:border-color .15s,background .15s}
+.item.done{border-color:color-mix(in srgb,var(--acc) 35%,var(--line))}
+.item.na{background:#FAF9F7}
+.item-h{display:flex;gap:12px;align-items:flex-start}
+.num{min-width:32px;height:32px;padding:0 6px;border-radius:9px;background:var(--acc-t);color:var(--acc);font-weight:700;display:grid;place-items:center;font-size:14px;flex:none}
+.item-t{flex:1;font-weight:600;padding-top:3px}
+.item-t small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.sc{flex:none;font-weight:700;font-size:15px;color:var(--acc);background:var(--acc-t);border-radius:9px;padding:4px 10px;white-space:nowrap}
+.sc.empty{color:#a1a7b3;background:#F2F0ED}
+.row{margin-top:10px}
+.row-l{font-size:13px;color:var(--muted);font-weight:600;margin:0 0 6px}
+.opts{display:flex;flex-wrap:wrap;gap:7px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:14px;text-align:start;display:flex;gap:8px;align-items:center;transition:.12s;line-height:1.45}
+.opt:hover{border-color:var(--acc)}
+.opt .pts{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;background:var(--acc-t);color:var(--acc);flex:none}
+.opt[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.opt[aria-pressed="true"] .pts{background:rgba(255,255,255,.2);color:#fff}
+.opt.na-o{color:var(--muted);border-style:dashed}
+.opt.na-o[aria-pressed="true"]{background:#8A8F99;border-color:#8A8F99;border-style:solid;color:#fff}
+.ev{margin-top:10px}
+.ev-btn{background:none;border:0;color:var(--teal);font-size:13px;font-weight:600;cursor:pointer;padding:2px 0}
+.ev textarea{min-height:54px;margin-top:6px;font-size:14px}
+
+table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
+.sample td{vertical-align:middle;padding:0 4px}
+.sample td:first-child{width:36px}
+.sample input{width:100%;border:1.5px solid var(--line);background:#FDFBF9;border-radius:10px;padding:8px 10px;outline:none}
+.sample .opts{gap:5px}
+.sample .opt{padding:5px 10px;font-size:13px}
+.avg{display:flex;justify-content:space-between;align-items:center;background:var(--red-t);border-radius:10px;padding:10px 14px;margin-top:6px;font-weight:600}
+
+.res{display:grid;grid-template-columns:1.3fr 1fr;gap:22px}
+@media (max-width:820px){.res{grid-template-columns:1fr}}
+.bars .bar{margin-bottom:14px}
+.bar-h{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:5px}
+.bar-h span{color:var(--muted);font-weight:500}
+.track-bg{height:12px;border-radius:99px;background:#EFEBE6;overflow:hidden}
+.track-bg i{display:block;height:100%;border-radius:99px;width:0;transition:width .4s}
+.total{background:var(--navy);color:#fff;border-radius:16px;padding:20px;text-align:center}
+.total .pct{font-family:var(--head);font-size:44px;font-weight:800;line-height:1.2}
+.total .lbl{font-size:13px;opacity:.75}
+.total .grade{display:inline-block;margin-top:10px;background:var(--peach);color:var(--navy);font-weight:800;font-family:var(--head);border-radius:999px;padding:6px 22px;font-size:18px}
+.total .raw{margin-top:8px;font-size:13px;opacity:.8}
+.checks{margin-top:14px;display:grid;gap:8px}
+.chk{display:flex;justify-content:space-between;gap:10px;border-radius:10px;padding:9px 13px;background:#F5F2EE;font-size:14px}
+.chk b{white-space:nowrap}
+.chk.ok b{color:var(--teal)} .chk.bad{background:var(--red-t)} .chk.bad b{color:var(--red)}
+.scale{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.9}
+.scale b{color:var(--ink)}
+
+.sig{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:760px){.sig{grid-template-columns:1fr}}
+.sig .box{border:1.5px dashed var(--line);border-radius:12px;padding:12px 14px}
+.sig .box h4{margin:0 0 8px;font-size:14px;color:var(--navy)}
+.sig .line{border-bottom:1px solid var(--muted);height:34px;margin-top:6px;font-size:12px;color:var(--muted)}
+
+.dock{position:fixed;inset:auto 0 0 0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);z-index:20}
+.dock-in{max-width:1080px;margin:auto;padding:10px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.live{display:flex;align-items:baseline;gap:10px;margin-inline-end:auto}
+.live b{font-family:var(--head);font-size:24px;color:var(--navy)}
+.live .g{font-weight:700;color:var(--red)}
+.live small{color:var(--muted)}
+.btn{border:0;border-radius:11px;padding:10px 18px;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.btn.p{background:var(--navy);color:#fff}
+.btn.s{background:var(--peach-t);color:var(--navy)}
+.btn.g{background:none;color:var(--muted);padding:10px 8px}
+.btn:disabled{opacity:.6;cursor:wait}
+.toast{position:fixed;left:50%;bottom:88px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:12px;opacity:0;transition:.25s;z-index:30;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;font-size:11.5px}
+  .dock,.guide,.ev-btn,.no-print,.toast{display:none!important}
+  .hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hero-in{padding:14px 10px 18px}
+  .wrap{padding:10px 0}
+  section.block{box-shadow:none;border:1px solid #ccc;break-inside:auto;margin-bottom:10px}
+  .item{break-inside:avoid;padding:8px 10px;margin-bottom:6px}
+  .opt:not([aria-pressed="true"]){display:none}
+  .opt{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .track button:not([aria-pressed="true"]){display:none}
+  .ev textarea:placeholder-shown,.ev:not(.has) {display:none}
+  .total,.dom,.track-bg i,.grade{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  textarea{border:1px solid #ccc;min-height:0}
+  .res{grid-template-columns:1.2fr 1fr}
+  .sig{grid-template-columns:repeat(3,1fr)}
+  #trackItem{break-inside:auto}
+  .grid{grid-template-columns:repeat(4,1fr);gap:6px 10px}
+  .f input,.f select{padding:3px 8px;border-radius:6px;-webkit-appearance:none;appearance:none;background:#fff}
+  .f label{margin-bottom:1px;font-size:10.5px}
+  .block-h{padding:8px 12px;break-after:avoid}.block-b{padding:8px 12px}
+  .dom{width:30px;height:30px;font-size:15px;border-radius:8px}
+  .block-h h2{font-size:14px}
+  .row{display:flex;align-items:center;gap:10px;margin-top:4px}
+  .row-l{margin:0;min-width:110px}
+  .item-t small{font-size:10.5px}
+  .num{min-width:24px;height:24px;font-size:11px}
+  .opt{padding:3px 9px;font-size:11px}
+  .subhead{margin:8px 0 4px}
+  .track{margin:0}
+  .track button{flex:0 0 auto;padding:4px 12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ev.has textarea{display:block;min-height:0;height:auto;padding:4px 8px;font-size:11px}
+  .sample td{padding:0 2px}.sample input{padding:3px 8px}
+  .hero::after{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="brand">
+      <div class="mark">بيان</div>
+      <div>
+        <h1>بطاقة تقييم أداء معلم/ـة بيان</h1>
+        <p>يعبّئها المشرف/ـة التعليمي/ـة لبيان أثناء الزيارة · الدرجات تُحسب تلقائياً</p>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <span class="pill">جمعية غراس</span>
+      <span class="pill">لائحة الإشراف التعليمي</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="guide">
+    اختر المستوى الملاحظ لكل بند، واكتب الدليل عند الحاجة. اختر <b>«لا ينطبق»</b> للبند الذي لا تتضمنه خطة الحصة، فيُستبعد من الحساب. تُحفظ المسودة تلقائياً على هذا الجهاز حتى تُرسلها، فتظهر الدرجات في ورقة «ملخص تقييم معلم بيان».
+  </div>
+
+  <!-- بيانات الزيارة -->
+  <section class="block c-a">
+    <div class="block-h"><div class="dom">١</div><h2>بيانات الزيارة<small>المعلم/ـة والحلقة والزيارة</small></h2></div>
+    <div class="block-b"><div class="grid" id="info"></div></div>
+  </section>
+
+  <div id="domains"></div>
+
+  <!-- النتيجة -->
+  <section class="block c-a" id="result">
+    <div class="block-h"><div class="dom">∑</div><h2>النتيجة<small>تُحسب النسبة من البنود المحتسبة فقط</small></h2></div>
+    <div class="block-b">
+      <div class="res">
+        <div>
+          <div class="bars" id="bars"></div>
+          <div class="checks" id="checks"></div>
+        </div>
+        <div>
+          <div class="total">
+            <div class="lbl">النسبة الكلية</div>
+            <div class="pct" id="tPct">—</div>
+            <div class="grade" id="tGrade">—</div>
+            <div class="raw" id="tRaw"></div>
+          </div>
+          <div class="scale">
+            <b>السلّم:</b> ممتاز 90–100% · جيد جداً 80–89% · جيد 70–79% · مقبول 60–69% · دون المستوى 59% فأقل.<br>
+            <b>شرط «ممتاز»:</b> الإسقاط 7 فأكثر، ونسبة مسار المهاري 60% فأكثر؛ ولا يثبت السقف في التقدير الفصلي إلا إذا تكرّر القصور في زيارتين.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الإيجابيات والتوصيات -->
+  <section class="block c-b">
+    <div class="block-h"><div class="dom">✎</div><h2>الإيجابيات والتوصيات</h2></div>
+    <div class="block-b">
+      <div class="f"><label for="pos">الإيجابيات</label><textarea id="pos" data-k="positives" rows="3"></textarea></div>
+      <div class="f" style="margin-top:14px"><label for="rec">التوصيات (توصية أو توصيتان تُتابَعان في الزيارة القادمة)</label><textarea id="rec" data-k="recommendations" rows="3"></textarea></div>
+    </div>
+  </section>
+
+  <!-- التوقيعات -->
+  <section class="block c-c">
+    <div class="block-h"><div class="dom">✓</div><h2>الاعتماد</h2></div>
+    <div class="block-b sig">
+      <div class="box"><h4>المعلم/ـة</h4><div class="line">التوقيع</div></div>
+      <div class="box"><h4>مشرف/ـة الحلقة / المدرسة</h4><div class="line">التوقيع</div></div>
+      <div class="box"><h4>المشرف/ـة التعليمي/ـة لبيان</h4><div class="line">التوقيع</div></div>
+    </div>
+  </section>
+</main>
+
+<div class="dock">
+  <div class="dock-in">
+    <div class="live"><b id="dPct">—</b><span class="g" id="dGrade"></span><small id="dLeft"></small></div>
+    <button class="btn g" id="bNew" type="button">تقييم جديد</button>
+    <button class="btn s" id="bPrint" type="button">طباعة / PDF</button>
+    <button class="btn p" id="bSave" type="button">حفظ وإرسال الدرجات</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SCRIPT_URL = ""; // ضع هنا رابط تطبيق الويب (Apps Script) بعد نشره
+
+const NA = "لا ينطبق";
+const LV = {
+  KIF:[["مكتمل بمصطلحات المنهج مع مشاركة الطلاب",4],["مكتمل دون مشاركة أو بمصطلحات غير دقيقة",3],["ينقصه خطوة أساسية",1],["لم يُشرح",0]],
+  ZAM:[["ضمن المدة ±2 دقيقة",2],["تجاوز أو نقص طفيف",1],["خارج المدة",0]],
+  IQR:[["كل الحاضرين بسطرين فأكثر مع تصحيح فوري",4],["أكثر من النصف",3],["أقل من النصف",1],["لم يُقرأ أحد",0]],
+  IML:[["أملى المطلوب وصحّح في الكتاب",4],["أملى دون تصحيح",3],["أملى بعض المطلوب",1],["لم يُملِ",0]],
+  TKT:[["لكل الطلاب",2],["لبعضهم",1],["لم يلتزم",0]],
+  TMQ:[["5 أسطر فأكثر من المقرر",3],["3–4 أسطر",2],["أقل من 3 أسطر",1],["لا تهجي",0]],
+  TMZ:[["10 دقائق ±2",2],["خارج المدة",0]],
+  ISQ:[["كلمتان فأكثر على قاعدة اليوم مع استخراج الطلاب والتصحيح",10],["كلمة على قاعدة اليوم بشرح صحيح",7],["على قاعدة سابقة أو بشرح ناقص",4],["لا إسقاط",0]],
+  TUH_M:[["مطابقة للخطة",1],["غير مطابقة",0]],
+  TUH_T:[["تلقين واضح مع الاستماع لترديد الطلاب",2],["تلقين دون استماع للترديد",1],["لا تلقين",0]],
+  TUH_R:[["راجع تراكمياً قبل الجديد",1],["لم يراجع",0]],
+  TUH_Z:[["التزم بـ10 دقائق",1],["لم يلتزم",0]],
+  DBT:[["إيماءات غير لفظية فقط دون إيقاف الشرح",5],["توجيهات لفظية سريعة مع استمرار الدرس",4],["إيقاف الشرح متكرراً",2],["رفع الصوت والتوجيه المستمر",1],["تدخل خارجي من الإدارة",0]],
+  TFA:[["تحقق من فهم 3 طلاب فأكثر بينهم ضعيف وعدّل شرحه",5],["تحقق من 3 فأكثر دون تعديل",3],["سؤال جماعي عام فقط",1],["لا تحقق",0]],
+  TRB:[["استثمر موقفاً فعلياً بتوجيه هادئ مؤثر",5],["استجاب للموقف دون توجيه تربوي",3],["ذكر قيمة عامة غير مرتبطة بموقف",1],["أهمل سلوكاً خاطئاً",0]],
+  FSH:[["لا عامية إطلاقاً",5],["عامية 1–3 مرات",3],["عامية 4–5 مرات",1],["عامية 6 مرات فأكثر",0]],
+  NMQ:[["لا أخطاء",5],["خطأ خفي أو خطآن",3],["أخطاء خفية متكررة",1],["لحن جلي",0]],
+  THD:[["مكتمل: الأهداف + توزيع زمن الركائز + كلمات الإسقاط",5],["ينقصه عنصر",3],["عناوين فقط",1],["لا يوجد",0]],
+  ILJ:[["إجراء مؤرخ خلال أسبوعين لكلا الطالبين",5],["لأحدهما",3],["سجل دون إجراء",1],["لا سجل",0]],
+  MWQ:[["مطابق",5],["فرق درس أو درسين",3],["فرق 3–4 دروس",1],["5 دروس فأكثر",0]],
+};
+const STU = [["ممتاز",10],["جيد جداً",8],["جيد",6],["مقبول",4],["ضعيف",2]];
+const maxOf = c => Math.max(...LV[c].map(x=>x[1]));
+
+const TRACKS = {
+  "الحروف":[["الحروف بالصورة",5],["الحروف المجردة",5],["الحروف بالفتح",5],["العمل الأسبوعي واليومي",10]],
+  "المربعات الأربعة":[["المربع الأول: المراجعة",5],["المربع الثاني: القاعدة الحالية",10],["المربع الثالث: القاعدة بمثال",10],["المربع الرابع: لعبة الوصل",15]],
+  "الخاتمة":[["شرح الدرس كما في الدرس التمهيدي",5],["القراءة الجماعية لكلمات الدرس مع الحكم التطبيقي",5],["القراءة الفردية مع الاستشهاد بالتحفة",5],["كتابة آية دون تشكيل ثم تشكيلها من طالب",5]],
+};
+const TRACK_HINT = {"الحروف":"لمستوى الحروف","المربعات الأربعة":"لمستوى الحركات والتنوينات","الخاتمة":"لمستوى خاتمة التلاوة"};
+const LEVEL_TO_TRACK = {"التمهيدي":"الحروف","حروف":"الحروف","حركات":"المربعات الأربعة","تنوينات":"المربعات الأربعة","خاتمة التلاوة":"الخاتمة"};
+
+const DOMAINS = [
+  {k:"a",n:"أ",title:"الوفاء بمنهجية بيان",sub:"مسار المهاري والإقراء والإملاء والتهجي والإسقاط والتحفة",items:[
+    {track:true},
+    {no:2,t:"الإقراء الفردي",d:"10 د",c:"IQR"},
+    {no:3,t:"الإملاء والتصحيح",d:"10 د",c:"IML"},
+    {no:4,t:"التكتيب",d:"10 د",c:"TKT"},
+    {no:5,t:"مقدار التهجي",c:"TMQ"},
+    {no:6,t:"زمن التهجي",c:"TMZ"},
+    {no:7,t:"الإسقاط",c:"ISQ",note:"يُشترط 7 فأكثر لتقدير «ممتاز»"},
+    {no:8,t:"التحفة",group:[["TUH_M","مطابقة الأبيات لخطة المرحلة"],["TUH_T","التلقين السليم"],["TUH_R","المراجعة التراكمية"],["TUH_Z","الالتزام بالوقت"]]},
+  ]},
+  {k:"b",n:"ب",title:"جودة التدريس والبيئة الصفية",sub:"الإدارة والتفاعل والتوجيه واللغة والنموذج القرائي",items:[
+    {no:9,t:"إدارة الفصل وضبط السلوك",c:"DBT"},
+    {no:10,t:"التفاعل والتحقق من الفهم",c:"TFA"},
+    {no:11,t:"التوجيه التربوي",c:"TRB"},
+    {no:12,t:"التحدث بالفصحى",c:"FSH"},
+    {no:13,t:"صحة النموذج القرائي أثناء التلقين",c:"NMQ",note:"«لحن جلي» يُحيل المعلم/ـة لاختبار تمكين التلاوة"},
+  ]},
+  {k:"c",n:"ج",title:"التخطيط والمتابعة",sub:"التحضير الكتابي والخطة العلاجية",items:[
+    {no:14,t:"جودة التحضير الكتابي لدرس اليوم",c:"THD"},
+    {no:15,t:"الخطة العلاجية وسجل المتابعة",c:"ILJ"},
+  ]},
+  {k:"d",n:"د",title:"نواتج التعلّم",sub:"العيّنة العشوائية وموقع الحلقة من الخطة",items:[
+    {no:16,sample:true,t:"مستوى العيّنة العشوائية",d:"متوسط 5 طلاب"},
+    {no:17,t:"موقع الحلقة من الخطة الزمنية",c:"MWQ"},
+  ]},
+];
+
+const INFO = [
+  ["teacher","اسم المعلم/ـة","text"],["mosque","المسجد / المدرسة","text"],["district","الحي","text"],
+  ["halaqaSup","مشرف/ـة الحلقة","text"],["eduSup","المشرف/ـة التعليمي/ـة","text"],["date","التاريخ (هـ)","text"],
+  ["term","الفصل الدراسي","select",["الأول","الثاني","الثالث"]],["period","الفترة","select",["الفجر","الصباح","العصر","المغرب"]],
+  ["visitType","نوع الزيارة","select",["حضوري","عن بُعد"]],["visitNo","رقم الزيارة في الفصل","select",["الأولى","الثانية","الثالثة","الرابعة"]],
+  ["level","المستوى","select",["التمهيدي","حروف","حركات","تنوينات","خاتمة التلاوة"]],["lesson","الدرس الحالي","text"],
+  ["students","عدد الطلاب","number"],["present","عدد الحاضرين","number"],
+];
+
+const KEY = "bayan-teacher-eval-draft-v1";
+let S = blank();
+function blank(){return {info:{date:hijriToday()},track:"",sel:{},ev:{},sample:[{},{},{},{},{}],positives:"",recommendations:""};}
+function hijriToday(){
+  try{const p=new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn",{year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+    const g=t=>p.find(x=>x.type===t).value; return `${g("year").replace(/\D/g,"")}/${g("month")}/${g("day")}`;}catch(e){return "";}
+}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null"); if(s) S=Object.assign(blank(),s);}catch(e){}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = n => (Math.round(n*10)/10).toLocaleString("ar-SA",{maximumFractionDigits:1});
+const pctF = n => n==null ? "—" : (Math.round(n*1000)/10).toLocaleString("ar-SA",{maximumFractionDigits:1})+"٪";
+
+function optButtons(id, code){
+  const cur = S.sel[id];
+  return `<div class="opts">${LV[code].map(([l,p])=>`<button type="button" class="opt" data-id="${id}" data-v="${esc(l)}" aria-pressed="${cur===l}"><span class="pts">${fmt(p)}</span>${esc(l)}</button>`).join("")}
+  <button type="button" class="opt na-o" data-id="${id}" data-v="${NA}" aria-pressed="${cur===NA}">${NA}</button></div>`;
+}
+function evBox(id){
+  const v=S.ev[id]||"";
+  return `<div class="ev ${v?"has":""}"><button type="button" class="ev-btn" data-ev="${id}">${v?"الدليل الملاحظ":"+ إضافة الدليل الملاحظ"}</button>
+  <textarea data-evt="${id}" placeholder="اكتب ما لاحظته…" ${v?"":"hidden"}>${esc(v)}</textarea></div>`;
+}
+function renderInfo(){
+  $("#info").innerHTML = INFO.map(([k,l,t,o])=>{
+    const v=S.info[k]??"";
+    const ctl = t==="select"
+      ? `<select id="i_${k}" data-info="${k}"><option value="">— اختر —</option>${o.map(x=>`<option ${x===v?"selected":""}>${x}</option>`).join("")}</select>`
+      : `<input id="i_${k}" data-info="${k}" type="${t==="number"?"number":"text"}" ${t==="number"?'min="0" inputmode="numeric"':""} value="${esc(v)}" ${k==="date"?'placeholder="1448/05/21"':""}>`;
+    return `<div class="f"><label for="i_${k}">${l}</label>${ctl}</div>`;
+  }).join("");
+}
+function renderTrack(){
+  const t=S.track;
+  let h = `<div class="item" id="trackItem"><div class="item-h"><div class="num">1</div><div class="item-t">مسار المهاري المطبّق<small>اختر المسار المناسب لمستوى الحلقة؛ تظهر بنوده الفرعية (كفاية الشرح + الالتزام بالزمن)</small></div><div class="sc" data-sc="track"></div></div>
+  <div class="track row">${Object.keys(TRACKS).map(k=>`<button type="button" data-track="${k}" aria-pressed="${t===k}">${k}<small>${TRACK_HINT[k]}</small></button>`).join("")}</div>`;
+  if(t){
+    h += TRACKS[t].map(([name,min],i)=>{
+      const a=`t${i}k`, b=`t${i}z`;
+      return `<div class="item" style="margin:12px 0 0;border-style:dashed"><div class="item-h"><div class="num">1.${i+1}</div><div class="item-t">${esc(name)}<small>الزمن المقرر ${fmt(min)} د</small></div><div class="sc" data-sc="${a}|${b}"></div></div>
+        <div class="row"><p class="row-l">كفاية الشرح</p>${optButtons(a,"KIF")}</div>
+        <div class="row"><p class="row-l">الالتزام بالزمن (${fmt(min)} د)</p>${optButtons(b,"ZAM")}</div>
+        ${evBox("t"+i)}</div>`;
+    }).join("");
+  }
+  return h+`</div>`;
+}
+function renderItem(it){
+  if(it.track) return renderTrack();
+  if(it.sample) return renderSample(it);
+  if(it.group){
+    return `<div class="item" data-item="${it.no}"><div class="item-h"><div class="num">${it.no}</div><div class="item-t">${it.t}<small>أربعة بنود فرعية</small></div><div class="sc" data-sc="${it.group.map(g=>g[0]).join("|")}"></div></div>
+      ${it.group.map(([c,l])=>`<div class="row"><p class="row-l">${l}</p>${optButtons(c,c)}</div>`).join("")}${evBox("i"+it.no)}</div>`;
+  }
+  return `<div class="item" data-item="${it.no}"><div class="item-h"><div class="num">${it.no}</div><div class="item-t">${it.t}${it.d?` <span style="color:var(--muted);font-weight:500">(${it.d})</span>`:""}${it.note?`<small>${it.note}</small>`:""}</div><div class="sc" data-sc="${it.c}"></div></div>
+    <div class="row">${optButtons(it.c,it.c)}</div>${evBox("i"+it.no)}</div>`;
+}
+function renderSample(it){
+  return `<div class="item" data-item="16"><div class="item-h"><div class="num">16</div><div class="item-t">${it.t} <span style="color:var(--muted);font-weight:500">(${it.d})</span><small>يختار المشرف 5 طلاب من كشف الحضور ويقيّمهم بسلّم المرحلة، بما فيه تسميع التحفة</small></div><div class="sc" data-sc="sample"></div></div>
+  <table class="sample"><tbody>${S.sample.map((s,i)=>`<tr><td><div class="num">${i+1}</div></td>
+    <td style="width:30%"><input data-sname="${i}" placeholder="اسم الطالب" value="${esc(s.name)}" aria-label="اسم الطالب ${i+1}"></td>
+    <td><div class="opts">${STU.map(([l,p])=>`<button type="button" class="opt" data-stu="${i}" data-v="${l}" aria-pressed="${s.g===l}"><span class="pts">${fmt(p)}</span>${l}</button>`).join("")}</div></td></tr>`).join("")}</tbody></table>
+  <div class="avg"><span>متوسط العيّنة</span><span id="sAvg">—</span></div></div>`;
+}
+function renderDomains(){
+  $("#domains").innerHTML = DOMAINS.map(d=>`<section class="block c-${d.k}" id="dom-${d.k}">
+    <div class="block-h"><div class="dom">${d.n}</div><h2>${d.title}<small>${d.sub}</small></h2><div class="dscore"><b data-dom="${d.k}">—</b><span data-domr="${d.k}"></span></div></div>
+    <div class="block-b">${d.items.map(renderItem).join("")}</div></section>`).join("");
+}
+
+function scoreOf(id, code){
+  const v=S.sel[id];
+  if(v===NA) return {na:true,s:0,m:0,filled:true};
+  const max=maxOf(code);
+  if(v==null) return {na:false,s:0,m:max,filled:false};
+  const f=LV[code].find(x=>x[0]===v);
+  return {na:false,s:f?f[1]:0,m:max,filled:!!f};
+}
+function compute(){
+  const R={dom:{},parts:{},unfilled:0};
+  const add=(dk,r,key)=>{const D=R.dom[dk]??={s:0,m:0}; D.s+=r.s; D.m+=r.m; if(!r.filled) R.unfilled++; if(key){const P=R.parts[key]??={s:0,m:0,any:false,all:true,na:true}; P.s+=r.s;P.m+=r.m; if(r.filled)P.any=true; else P.all=false; if(!r.na)P.na=false;}};
+  // المسار
+  let tr={s:0,m:0};
+  if(S.track){ TRACKS[S.track].forEach((_,i)=>{const a=scoreOf(`t${i}k`,"KIF"), b=scoreOf(`t${i}z`,"ZAM"); add("a",a,"track"); add("a",b,"track"); add("a",{s:0,m:0,filled:true},`t${i}k|t${i}z`); R.parts[`t${i}k|t${i}z`]={s:a.s+b.s,m:a.m+b.m,any:a.filled||b.filled,all:a.filled&&b.filled,na:a.na&&b.na}; tr.s+=a.s+b.s; tr.m+=a.m+b.m;}); }
+  else { R.unfilled++; R.dom.a??={s:0,m:0}; }
+  R.trackPct = tr.m? tr.s/tr.m : null;
+  DOMAINS.forEach(d=>d.items.forEach(it=>{
+    if(it.track) return;
+    if(it.sample){
+      const g=S.sample.map(s=>STU.find(x=>x[0]===s.g)).filter(Boolean);
+      const avg=g.length? g.reduce((a,x)=>a+x[1],0)/g.length : null;
+      R.sampleAvg=avg; R.sampleN=g.length;
+      add(d.k,{s:avg??0,m:10,filled:avg!=null,na:false},"sample"); return;
+    }
+    if(it.group){
+      const key=it.group.map(g=>g[0]).join("|");
+      it.group.forEach(([c])=>add(d.k,scoreOf(c,c),key)); return;
+    }
+    add(d.k,scoreOf(it.c,it.c),it.c);
+  }));
+  let s=0,m=0; Object.values(R.dom).forEach(D=>{s+=D.s;m+=D.m;});
+  R.total={s,m,pct:m?s/m:null};
+  const p=R.total.pct==null?null:Math.round(R.total.pct*1000)/10;
+  R.base = p==null?"—": p>=90?"ممتاز": p>=80?"جيد جداً": p>=70?"جيد": p>=60?"مقبول":"دون المستوى";
+  const isq=S.sel.ISQ; R.isq = (isq&&isq!==NA)? LV.ISQ.find(x=>x[0]===isq)[1] : null;
+  R.isqOk = R.isq!=null && R.isq>=7;
+  R.trackOk = R.trackPct!=null && R.trackPct>=0.6;
+  R.capped = R.base==="ممتاز" && !(R.isqOk && R.trackOk);
+  R.final = R.capped? "جيد جداً" : R.base;
+  R.referral = S.sel.NMQ==="لحن جلي";
+  return R;
+}
+
+function update(){
+  const R=compute();
+  document.querySelectorAll("[data-sc]").forEach(el=>{
+    const P=R.parts[el.dataset.sc]; const item=el.closest(".item");
+    if(!P){el.textContent="—";el.classList.add("empty");return;}
+    if(P.na&&P.all){el.textContent=NA;el.classList.add("empty");item.classList.add("na");item.classList.remove("done");return;}
+    item.classList.remove("na");
+    el.textContent=`${fmt(P.s)} / ${fmt(P.m)}`; el.classList.toggle("empty",!P.any); item.classList.toggle("done",P.all);
+  });
+  DOMAINS.forEach(d=>{const D=R.dom[d.k]||{s:0,m:0};
+    $(`[data-dom="${d.k}"]`).textContent=`${fmt(D.s)} / ${fmt(D.m)}`;
+    $(`[data-domr="${d.k}"]`).textContent=D.m?pctF(D.s/D.m):"";});
+  const sa=$("#sAvg"); if(sa) sa.textContent = R.sampleAvg==null?"—":`${fmt(R.sampleAvg)} من 10 (${R.sampleN.toLocaleString("ar-SA")} طلاب)`;
+  const col={a:"var(--navy)",b:"var(--teal)",c:"var(--peach)",d:"var(--red)"};
+  $("#bars").innerHTML = DOMAINS.map(d=>{const D=R.dom[d.k]||{s:0,m:0},p=D.m?D.s/D.m:0;
+    return `<div class="bar"><div class="bar-h">${d.n}. ${d.title}<span>${fmt(D.s)} / ${fmt(D.m)} · ${D.m?pctF(p):"—"}</span></div><div class="track-bg"><i style="width:${p*100}%;background:${col[d.k]}"></i></div></div>`;}).join("");
+  const chk=(l,v,ok)=>`<div class="chk ${ok===true?"ok":ok===false?"bad":""}"><span>${l}</span><b>${v}</b></div>`;
+  $("#checks").innerHTML =
+    chk("درجة الإسقاط (البند 7)", R.isq==null?"—":`${fmt(R.isq)} / ١٠`, R.isq==null?null:R.isqOk)+
+    chk("نسبة مسار المهاري", pctF(R.trackPct), R.trackPct==null?null:R.trackOk)+
+    chk("هل ينطبق شرط حجب «ممتاز»؟", R.capped?"نعم":"لا", R.capped?false:null)+
+    chk("بنود محتسبة لم تُعبّأ بعد", R.unfilled.toLocaleString("ar-SA"), R.unfilled?false:true)+
+    chk("إحالة لاختبار تمكين التلاوة (لحن جلي في البند 13)", R.referral?"نعم":"لا", R.referral?false:null);
+  $("#tPct").textContent=pctF(R.total.pct); $("#tGrade").textContent=R.final;
+  $("#tRaw").textContent=`${fmt(R.total.s)} من ${fmt(R.total.m)} درجة محتسبة`+(R.capped?" · حُجب «ممتاز»":"");
+  $("#dPct").textContent=pctF(R.total.pct); $("#dGrade").textContent=R.final==="—"?"":R.final;
+  $("#dLeft").textContent=R.unfilled?`بنود لم تُعبّأ: ${R.unfilled.toLocaleString("ar-SA")}`:"اكتملت البنود ✓";
+  persist(); return R;
+}
+
+document.addEventListener("click",e=>{
+  const o=e.target.closest(".opt[data-id]");
+  if(o){const id=o.dataset.id,v=o.dataset.v; S.sel[id]= S.sel[id]===v? undefined : v; if(S.sel[id]===undefined) delete S.sel[id];
+    o.parentElement.querySelectorAll(".opt").forEach(b=>b.setAttribute("aria-pressed",S.sel[id]===b.dataset.v)); update(); return;}
+  const st=e.target.closest(".opt[data-stu]");
+  if(st){const i=+st.dataset.stu; S.sample[i].g = S.sample[i].g===st.dataset.v? undefined : st.dataset.v;
+    st.parentElement.querySelectorAll(".opt").forEach(b=>b.setAttribute("aria-pressed",S.sample[i].g===b.dataset.v)); update(); return;}
+  const tb=e.target.closest("[data-track]");
+  if(tb){setTrack(tb.dataset.track); return;}
+  const eb=e.target.closest("[data-ev]");
+  if(eb){const ta=eb.nextElementSibling; ta.hidden=!ta.hidden; if(!ta.hidden) ta.focus(); return;}
+});
+function setTrack(t){
+  if(S.track===t) return;
+  Object.keys(S.sel).filter(k=>/^t\d[kz]$/.test(k)).forEach(k=>delete S.sel[k]);
+  Object.keys(S.ev).filter(k=>/^t\d$/.test(k)).forEach(k=>delete S.ev[k]);
+  S.track=t; const box=$("#trackItem"); box.outerHTML=renderTrack(); update();
+}
+document.addEventListener("input",e=>{
+  const t=e.target;
+  if(t.dataset.info){S.info[t.dataset.info]=t.value;
+    if(t.dataset.info==="level"&&LEVEL_TO_TRACK[t.value]&&!S.track) setTrack(LEVEL_TO_TRACK[t.value]);
+    persist(); return;}
+  if(t.dataset.evt){S.ev[t.dataset.evt]=t.value; t.parentElement.classList.toggle("has",!!t.value); persist(); return;}
+  if(t.dataset.sname!=null){S.sample[+t.dataset.sname].name=t.value; persist(); return;}
+  if(t.dataset.k){S[t.dataset.k]=t.value; persist();}
+});
+document.addEventListener("change",e=>{ if(e.target.dataset.info) e.target.dispatchEvent(new Event("input",{bubbles:true})); });
+
+function toast(m,ms=3200){const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),ms);}
+
+$("#bPrint").onclick=()=>window.print();
+$("#bNew").onclick=()=>{ if(!confirm("بدء تقييم جديد؟ ستُمسح البيانات الحالية من هذا الجهاز.")) return; S=blank(); persist(); boot(); scrollTo(0,0); };
+
+function payload(R){
+  const DOMS=DOMAINS.map(d=>{const D=R.dom[d.k]||{s:0,m:0};return {key:d.n,name:d.title,score:Math.round(D.s*10)/10,max:D.m};});
+  const items=[];
+  const push=(no,item,id,code,ev)=>{const r=scoreOf(id,code);items.push({no,item,level:S.sel[id]||"",score:r.na?null:r.s,max:r.m,evidence:ev||""});};
+  if(S.track) TRACKS[S.track].forEach(([n],i)=>{push("1."+(i+1),n+" – كفاية الشرح",`t${i}k`,"KIF",S.ev["t"+i]);push("1."+(i+1),n+" – الالتزام بالزمن",`t${i}z`,"ZAM");});
+  DOMAINS.forEach(d=>d.items.forEach(it=>{
+    if(it.track) return;
+    if(it.sample){items.push({no:16,item:it.t,level:R.sampleAvg==null?"":"متوسط العيّنة",score:R.sampleAvg==null?0:Math.round(R.sampleAvg*10)/10,max:10,evidence:""});return;}
+    if(it.group) it.group.forEach(([c,l],j)=>push(it.no,it.t+": "+l,c,c,j?"":S.ev["i"+it.no]));
+    else push(it.no,it.t,it.c,it.c,S.ev["i"+it.no]);
+  }));
+  return {info:S.info,track:S.track,domains:DOMS,
+    total:Math.round(R.total.s*10)/10,max:R.total.m,percent:R.total.pct==null?null:Math.round(R.total.pct*1000)/1000,
+    baseGrade:R.base,finalGrade:R.final,isqat:R.isq,trackPercent:R.trackPct==null?null:Math.round(R.trackPct*1000)/1000,
+    capped:R.capped,referral:R.referral,unfilled:R.unfilled,sample:S.sample,sampleAvg:R.sampleAvg,items,
+    positives:S.positives,recommendations:S.recommendations,submittedAt:new Date().toISOString()};
+}
+$("#bSave").onclick=async()=>{
+  const R=update();
+  if(!S.info.teacher){toast("اكتب اسم المعلم/ـة أولاً"); $("#i_teacher").focus(); return;}
+  if(R.unfilled && !confirm(`بقي ${R.unfilled} بنود محتسبة لم تُعبّأ وستُحسب صفراً. هل تريد الحفظ؟`)) return;
+  const data=payload(R);
+  if(!SCRIPT_URL){
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));
+    a.download=`تقييم-${S.info.teacher}-${(S.info.date||"").replace(/\//g,"-")}.json`; a.click();
+    toast("لم يُربط الموقع بالجدول بعد، فنُزّل التقييم ملفاً على الجهاز",4500); return;
+  }
+  const b=$("#bSave"); b.disabled=true; b.textContent="جارٍ الحفظ…";
+  try{
+    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+    toast("تم حفظ التقييم في ورقة «ملخص تقييم معلم بيان» ✓",4500);
+  }catch(err){ toast("تعذّر الإرسال؛ تحقق من الاتصال وأعد المحاولة. المسودة محفوظة على الجهاز.",5000); }
+  finally{ b.disabled=false; b.textContent="حفظ وإرسال الدرجات"; }
+};
+
+function boot(){
+  renderInfo(); renderDomains();
+  $("#pos").value=S.positives||""; $("#rec").value=S.recommendations||"";
+  update();
+}
+load(); boot();
+</script>
+</body>
+</html>
