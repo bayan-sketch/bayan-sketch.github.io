@@ -284,33 +284,33 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEztBEBO5yLaVgpnzL7
 const NA = "لا ينطبق";
 const LV = {
   KIF:[["مكتمل بمصطلحات المنهج مع مشاركة الطلاب",4],["مكتمل دون مشاركة أو بمصطلحات غير دقيقة",3],["ينقصه خطوة أساسية",1],["لم يُشرح",0]],
-  ZAM:[["ضمن المدة ±2 دقيقة",2],["تجاوز أو نقص طفيف",1],["خارج المدة",0]],
+  MZT:[["ضمن 15–20 دقيقة",4],["خارجها بأقل من 5 دقائق",2],["خارجها بـ5 دقائق فأكثر",0]],
   IQR:[["كل الحاضرين بسطرين فأكثر مع تصحيح فوري",4],["أكثر من النصف",3],["أقل من النصف",1],["لم يُقرأ أحد",0]],
   IML:[["أملى المطلوب وصحّح في الكتاب",4],["أملى دون تصحيح",3],["أملى بعض المطلوب",1],["لم يُملِ",0]],
   TKT:[["لكل الطلاب",2],["لبعضهم",1],["لم يلتزم",0]],
-  TMQ:[["5 أسطر فأكثر من المقرر",3],["3–4 أسطر",2],["أقل من 3 أسطر",1],["لا تهجي",0]],
+  TMQ:[["نفّذ مقرر اليوم من جدول التهجي بمقدار مرحلته",3],["أكثر من نصفه",2],["نصفه فأقل أو من خارج الجدول",1],["لا تهجي",0]],
   TMZ:[["10 دقائق ±2",2],["خارج المدة",0]],
-  ISQ:[["كلمتان فأكثر على قاعدة اليوم مع استخراج الطلاب والتصحيح",10],["كلمة على قاعدة اليوم بشرح صحيح",7],["على قاعدة سابقة أو بشرح ناقص",4],["لا إسقاط",0]],
+  ISQ:[["متقن: ينفّذ طريقة مرحلته كاملة بمشاركة الطلاب، ويشرح فقط ما تقرره المرحلة",10],["متوسط: نقصته خطوة، أو شرح مرة ما لم يحن وقته",7],["نامٍ: نفّذ جزءاً من الطريقة، أو قام بما هو على الطلاب، أو أطال في شرح ما لم يحن وقته",4],["غير محقق: اكتفى بقراءة السطر",0]],
   TUH_M:[["مطابقة للخطة",1],["غير مطابقة",0]],
   TUH_T:[["تلقين واضح مع الاستماع لترديد الطلاب",2],["تلقين دون استماع للترديد",1],["لا تلقين",0]],
   TUH_R:[["راجع تراكمياً قبل الجديد",1],["لم يراجع",0]],
-  TUH_Z:[["التزم بـ10 دقائق",1],["لم يلتزم",0]],
+  TUH_Z:[["التزم بـ5 دقائق",1],["لم يلتزم",0]],
   DBT:[["إيماءات غير لفظية فقط دون إيقاف الشرح",5],["توجيهات لفظية سريعة مع استمرار الدرس",4],["إيقاف الشرح متكرراً",2],["رفع الصوت والتوجيه المستمر",1],["تدخل خارجي من الإدارة",0]],
   TFA:[["تحقق من فهم 3 طلاب فأكثر بينهم ضعيف وعدّل شرحه",5],["تحقق من 3 فأكثر دون تعديل",3],["سؤال جماعي عام فقط",1],["لا تحقق",0]],
   TRB:[["استثمر موقفاً فعلياً بتوجيه هادئ مؤثر",5],["استجاب للموقف دون توجيه تربوي",3],["ذكر قيمة عامة غير مرتبطة بموقف",1],["أهمل سلوكاً خاطئاً",0]],
   FSH:[["لا عامية إطلاقاً",5],["عامية 1–3 مرات",3],["عامية 4–5 مرات",1],["عامية 6 مرات فأكثر",0]],
-  NMQ:[["لا أخطاء",5],["خطأ خفي أو خطآن",3],["أخطاء خفية متكررة",1],["لحن جلي",0]],
-  THD:[["مكتمل: الأهداف + توزيع زمن الركائز + كلمات الإسقاط",5],["ينقصه عنصر",3],["عناوين فقط",1],["لا يوجد",0]],
+  THD:[["الأهداف + توزيع زمن الركائز + مقرر التهجي من الجدول",5],["ينقصه عنصر",3],["عناوين فقط",1],["لا يوجد",0]],
   ILJ:[["إجراء مؤرخ خلال أسبوعين لكلا الطالبين",5],["لأحدهما",3],["سجل دون إجراء",1],["لا سجل",0]],
   MWQ:[["مطابق",5],["فرق درس أو درسين",3],["فرق 3–4 دروس",1],["5 دروس فأكثر",0]],
 };
-const STU = [["ممتاز",10],["جيد جداً",8],["جيد",6],["مقبول",4],["ضعيف",2]];
+const STU = [["ممتاز",15],["جيد جداً",12],["جيد",9],["مقبول",6],["ضعيف",3]];
+const STU_MAX = 15;
 const maxOf = c => Math.max(...LV[c].map(x=>x[1]));
 
 const TRACKS = {
-  "الحروف":[["الحروف بالصورة",5],["الحروف المجردة",5],["الحروف بالفتح",5],["العمل الأسبوعي واليومي",10]],
-  "المربعات الأربعة":[["المربع الأول: المراجعة",5],["المربع الثاني: القاعدة الحالية",10],["المربع الثالث: القاعدة بمثال",10],["المربع الرابع: لعبة الوصل",15]],
-  "الخاتمة":[["شرح الدرس كما في الدرس التمهيدي",5],["القراءة الجماعية لكلمات الدرس مع الحكم التطبيقي",5],["القراءة الفردية مع الاستشهاد بالتحفة",5],["كتابة آية دون تشكيل ثم تشكيلها من طالب",5]],
+  "الحروف":["الحروف بالصورة","الحروف المجردة","الحروف بالفتح","العمل الأسبوعي واليومي"],
+  "المربعات الأربعة":["المربع الأول: المراجعة","المربع الثاني: القاعدة الحالية","المربع الثالث: القاعدة بمثال","المربع الرابع: لعبة الوصل"],
+  "الخاتمة":["شرح الدرس كما في الدرس التمهيدي","القراءة الجماعية لكلمات الدرس مع الحكم التطبيقي","القراءة الفردية مع الاستشهاد بالتحفة","كتابة آية دون تشكيل ثم تشكيلها من طالب"],
 };
 const TRACK_HINT = {"الحروف":"لمستوى الحروف","المربعات الأربعة":"لمستوى الحركات والتنوينات","الخاتمة":"لمستوى خاتمة التلاوة"};
 const LEVEL_TO_TRACK = {"التمهيدي":"الحروف","حروف":"الحروف","حركات":"المربعات الأربعة","تنوينات":"المربعات الأربعة","خاتمة التلاوة":"الخاتمة"};
@@ -318,41 +318,40 @@ const LEVEL_TO_TRACK = {"التمهيدي":"الحروف","حروف":"الحرو
 const DOMAINS = [
   {k:"a",n:"أ",title:"الوفاء بمنهجية بيان",sub:"مسار المهاري والإقراء والإملاء والتهجي والإسقاط والتحفة",items:[
     {track:true},
-    {no:2,t:"الإقراء الفردي",d:"10 د",c:"IQR"},
-    {no:3,t:"الإملاء والتصحيح",d:"10 د",c:"IML"},
-    {no:4,t:"التكتيب",d:"10 د",c:"TKT"},
+    {no:2,t:"الإقراء الفردي",d:"20 د",c:"IQR"},
+    {no:3,t:"الإملاء والتصحيح",c:"IML"},
+    {no:4,t:"التكتيب",c:"TKT"},
     {no:5,t:"مقدار التهجي",c:"TMQ"},
     {no:6,t:"زمن التهجي",c:"TMZ"},
-    {no:7,t:"الإسقاط",c:"ISQ",note:"يُشترط 7 فأكثر لتقدير «ممتاز»"},
-    {no:8,t:"التحفة",group:[["TUH_M","مطابقة الأبيات لخطة المرحلة"],["TUH_T","التلقين السليم"],["TUH_R","المراجعة التراكمية"],["TUH_Z","الالتزام بالوقت"]]},
+    {no:7,t:"الإسقاط والشرح حسب المرحلة",c:"ISQ",note:"يُشترط 7 فأكثر لتقدير «ممتاز»"},
+    {no:8,t:"التحفة",group:[["TUH_M","مطابقة الأبيات لخطة المرحلة"],["TUH_T","التلقين السليم"],["TUH_R","المراجعة التراكمية"],["TUH_Z","الالتزام بالوقت (5 د)"]]},
   ]},
-  {k:"b",n:"ب",title:"جودة التدريس والبيئة الصفية",sub:"الإدارة والتفاعل والتوجيه واللغة والنموذج القرائي",items:[
+  {k:"b",n:"ب",title:"جودة التدريس والبيئة الصفية",sub:"الإدارة والتفاعل والتوجيه واللغة",items:[
     {no:9,t:"إدارة الفصل وضبط السلوك",c:"DBT"},
     {no:10,t:"التفاعل والتحقق من الفهم",c:"TFA"},
     {no:11,t:"التوجيه التربوي",c:"TRB"},
     {no:12,t:"التحدث بالفصحى",c:"FSH"},
-    {no:13,t:"صحة النموذج القرائي أثناء التلقين",c:"NMQ",note:"«لحن جلي» يُحيل المعلم/ـة لاختبار تمكين التلاوة"},
   ]},
   {k:"c",n:"ج",title:"التخطيط والمتابعة",sub:"التحضير الكتابي والخطة العلاجية",items:[
-    {no:14,t:"جودة التحضير الكتابي لدرس اليوم",c:"THD"},
-    {no:15,t:"الخطة العلاجية وسجل المتابعة",c:"ILJ"},
+    {no:13,t:"جودة التحضير الكتابي لدرس اليوم",c:"THD"},
+    {no:14,t:"الخطة العلاجية وسجل المتابعة",c:"ILJ"},
   ]},
   {k:"d",n:"د",title:"نواتج التعلّم",sub:"العيّنة العشوائية وموقع الحلقة من الخطة",items:[
-    {no:16,sample:true,t:"مستوى العيّنة العشوائية",d:"5 طلاب فأكثر"},
-    {no:17,t:"موقع الحلقة من الخطة الزمنية",c:"MWQ"},
+    {no:15,sample:true,t:"مستوى العيّنة العشوائية",d:"5 طلاب فأكثر"},
+    {no:16,t:"موقع الحلقة من الخطة الزمنية",c:"MWQ"},
   ]},
 ];
 
 const INFO = [
   ["teacher","اسم المعلم/ـة","text"],["mosque","المسجد / المدرسة","text"],["district","الحي","text"],
-  ["halaqaSup","مشرف/ـة الحلقة","text"],["eduSup","المشرف/ـة التعليمي/ـة","text"],["date","التاريخ (هـ)","text"],
+  ["halaqaSup","مشرف/ـة بيان","text"],["eduSup","المشرف/ـة التعليمي/ـة","text"],["date","التاريخ (هـ)","text"],
   ["term","الفصل الدراسي","select",["الأول","الثاني","الثالث"]],["period","الفترة","select",["الفجر","الصباح","العصر","المغرب"]],
   ["visitType","نوع الزيارة","select",["حضوري","عن بُعد"]],["visitNo","رقم الزيارة في الفصل","select",["الأولى","الثانية","الثالثة","الرابعة"]],
   ["level","المستوى","select",["التمهيدي","حروف","حركات","تنوينات","خاتمة التلاوة"]],["lesson","الدرس الحالي","text"],
   ["students","عدد الطلاب","number"],["present","عدد الحاضرين","number"],
 ];
 
-const KEY = "bayan-teacher-eval-draft-v1";
+const KEY = "bayan-teacher-eval-draft-v2";
 let S = blank();
 function blank(){return {info:{date:hijriToday()},track:"",sel:{},ev:{},sample:[{},{},{},{},{}],positives:"",recommendations:""};}
 function hijriToday(){
@@ -388,16 +387,17 @@ function renderInfo(){
 }
 function renderTrack(){
   const t=S.track;
-  let h = `<div class="item" id="trackItem"><div class="item-h"><div class="num">1</div><div class="item-t">مسار المهاري المطبّق<small>اختر المسار المناسب لمستوى الحلقة؛ تظهر بنوده الفرعية (كفاية الشرح + الالتزام بالزمن)</small></div><div class="sc" data-sc="track"></div></div>
+  let h = `<div class="item" id="trackItem"><div class="item-h"><div class="num">1</div><div class="item-t">مسار المهاري المطبّق<small>اختر المسار المناسب لمستوى الحلقة؛ تظهر مكوّناته (كفاية الشرح لكل مكوّن) وزمن المهاري كله</small></div><div class="sc" data-sc="track"></div></div>
   <div class="track row">${Object.keys(TRACKS).map(k=>`<button type="button" data-track="${k}" aria-pressed="${t===k}">${k}<small>${TRACK_HINT[k]}</small></button>`).join("")}</div>`;
   if(t){
-    h += TRACKS[t].map(([name,min],i)=>{
-      const a=`t${i}k`, b=`t${i}z`;
-      return `<div class="item" style="margin:12px 0 0;border-style:dashed"><div class="item-h"><div class="num">1.${i+1}</div><div class="item-t">${esc(name)}<small>الزمن المقرر ${fmt(min)} د</small></div><div class="sc" data-sc="${a}|${b}"></div></div>
-        <div class="row"><p class="row-l">كفاية الشرح</p>${optButtons(a,"KIF")}</div>
-        <div class="row"><p class="row-l">الالتزام بالزمن (${fmt(min)} د)</p>${optButtons(b,"ZAM")}</div>
+    h += TRACKS[t].map((name,i)=>{
+      const a=`t${i}k`;
+      return `<div class="item" style="margin:12px 0 0;border-style:dashed"><div class="item-h"><div class="num">1.${i+1}</div><div class="item-t">${esc(name)}<small>كفاية الشرح</small></div><div class="sc" data-sc="${a}"></div></div>
+        <div class="row">${optButtons(a,"KIF")}</div>
         ${evBox("t"+i)}</div>`;
     }).join("");
+    h += `<div class="item" style="margin:12px 0 0;border-style:dashed"><div class="item-h"><div class="num">1.${TRACKS[t].length+1}</div><div class="item-t">زمن المهاري كله <span style="color:var(--muted);font-weight:500">(15–20 د)</span></div><div class="sc" data-sc="MZT"></div></div>
+        <div class="row">${optButtons("MZT","MZT")}</div>${evBox("tz")}</div>`;
   }
   return h+`</div>`;
 }
@@ -412,7 +412,7 @@ function renderItem(it){
     <div class="row">${optButtons(it.c,it.c)}</div>${evBox("i"+it.no)}</div>`;
 }
 function renderSample(it){
-  return `<div class="item" data-item="16"><div class="item-h"><div class="num">16</div><div class="item-t">${it.t} <span style="color:var(--muted);font-weight:500">(${it.d})</span><small>يختار المشرف 5 طلاب من كشف الحضور ويقيّمهم بسلّم المرحلة، بما فيه تسميع التحفة؛ ويمكنه إضافة طلاب آخرين بزر «+» إن اتسع الوقت</small></div><div class="sc" data-sc="sample"></div></div>
+  return `<div class="item" data-item="15"><div class="item-h"><div class="num">15</div><div class="item-t">${it.t} <span style="color:var(--muted);font-weight:500">(${it.d})</span><small>يختار المشرف 5 طلاب من كشف الحضور ويقيّمهم بسلّم المرحلة، بما فيه تسميع التحفة؛ ويمكنه إضافة طلاب آخرين بزر «+» إن اتسع الوقت</small></div><div class="sc" data-sc="sample"></div></div>
   <table class="sample"><tbody>${S.sample.map((s,i)=>`<tr><td><div class="num">${i+1}</div></td>
     <td style="width:30%"><input data-sname="${i}" placeholder="اسم الطالب" value="${esc(s.name)}" aria-label="اسم الطالب ${i+1}"></td>
     <td><div class="opts">${STU.map(([l,p])=>`<button type="button" class="opt" data-stu="${i}" data-v="${l}" aria-pressed="${s.g===l}"><span class="pts">${fmt(p)}</span>${l}</button>`).join("")}</div></td><td style="width:30px">${i>=5?`<button type="button" class="rm-stu" data-rmstu="${i}" aria-label="حذف الطالب ${i+1}" title="حذف">×</button>`:""}</td></tr>`).join("")}</tbody></table>
@@ -438,7 +438,8 @@ function compute(){
   const add=(dk,r,key)=>{const D=R.dom[dk]??={s:0,m:0,u:0}; D.s+=r.s; D.m+=r.m; if(!r.filled){R.unfilled++; D.u++;} if(key){const P=R.parts[key]??={s:0,m:0,any:false,all:true,na:true}; P.s+=r.s;P.m+=r.m; if(r.filled)P.any=true; else P.all=false; if(!r.na)P.na=false;}};
   // المسار
   let tr={s:0,m:0};
-  if(S.track){ TRACKS[S.track].forEach((_,i)=>{const a=scoreOf(`t${i}k`,"KIF"), b=scoreOf(`t${i}z`,"ZAM"); add("a",a,"track"); add("a",b,"track"); add("a",{s:0,m:0,filled:true},`t${i}k|t${i}z`); R.parts[`t${i}k|t${i}z`]={s:a.s+b.s,m:a.m+b.m,any:a.filled||b.filled,all:a.filled&&b.filled,na:a.na&&b.na}; tr.s+=a.s+b.s; tr.m+=a.m+b.m;}); }
+  if(S.track){ TRACKS[S.track].forEach((_,i)=>{const a=scoreOf(`t${i}k`,"KIF"); add("a",a,"track"); R.parts[`t${i}k`]={s:a.s,m:a.m,any:a.filled,all:a.filled,na:a.na}; tr.s+=a.s; tr.m+=a.m;});
+    const z=scoreOf("MZT","MZT"); add("a",z,"track"); R.parts.MZT={s:z.s,m:z.m,any:z.filled,all:z.filled,na:z.na}; tr.s+=z.s; tr.m+=z.m; }
   else { R.unfilled++; R.dom.a??={s:0,m:0,u:0}; R.dom.a.u++; }
   R.trackPct = tr.m? tr.s/tr.m : null;
   DOMAINS.forEach(d=>d.items.forEach(it=>{
@@ -447,7 +448,7 @@ function compute(){
       const g=S.sample.map(s=>STU.find(x=>x[0]===s.g)).filter(Boolean);
       const avg=g.length? g.reduce((a,x)=>a+x[1],0)/g.length : null;
       R.sampleAvg=avg; R.sampleN=g.length;
-      add(d.k,{s:avg??0,m:10,filled:avg!=null,na:false},"sample"); return;
+      add(d.k,{s:avg??0,m:STU_MAX,filled:avg!=null,na:false},"sample"); return;
     }
     if(it.group){
       const key=it.group.map(g=>g[0]).join("|");
@@ -464,7 +465,6 @@ function compute(){
   R.trackOk = R.trackPct!=null && R.trackPct>=0.6;
   R.capped = R.base==="ممتاز" && !(R.isqOk && R.trackOk);
   R.final = R.capped? "جيد جداً" : R.base;
-  R.referral = S.sel.NMQ==="لحن جلي";
   return R;
 }
 
@@ -480,7 +480,7 @@ function update(){
   DOMAINS.forEach(d=>{const D=R.dom[d.k]||{s:0,m:0};
     $(`[data-dom="${d.k}"]`).textContent=`${fmt(D.s)} / ${fmt(D.m)}`;
     $(`[data-domr="${d.k}"]`).textContent=D.m?pctF(D.s/D.m):"";});
-  const sa=$("#sAvg"); if(sa) sa.textContent = R.sampleAvg==null?"—":`${fmt(R.sampleAvg)} من 10 (${R.sampleN.toLocaleString("ar-SA")} طلاب)`;
+  const sa=$("#sAvg"); if(sa) sa.textContent = R.sampleAvg==null?"—":`${fmt(R.sampleAvg)} من ${fmt(STU_MAX)} (${R.sampleN.toLocaleString("ar-SA")} طلاب)`;
   const col={a:"var(--navy)",b:"var(--teal)",c:"var(--peach)",d:"var(--red)"};
   $("#bars").innerHTML = DOMAINS.map(d=>{const D=R.dom[d.k]||{s:0,m:0},p=D.m?D.s/D.m:0;
     return `<div class="bar"><div class="bar-h">${d.n}. ${d.title}<span>${fmt(D.s)} / ${fmt(D.m)} · ${D.m?pctF(p):"—"}</span></div><div class="track-bg"><i style="width:${p*100}%;background:${col[d.k]}"></i></div></div>`;}).join("");
@@ -489,8 +489,7 @@ function update(){
     chk("درجة الإسقاط (البند 7)", R.isq==null?"—":`${fmt(R.isq)} / ١٠`, R.isq==null?null:R.isqOk)+
     chk("نسبة مسار المهاري", pctF(R.trackPct), R.trackPct==null?null:R.trackOk)+
     chk("هل ينطبق شرط حجب «ممتاز»؟", R.capped?"نعم":"لا", R.capped?false:null)+
-    chk("بنود محتسبة لم تُعبّأ بعد", R.unfilled.toLocaleString("ar-SA"), R.unfilled?false:true)+
-    chk("إحالة لاختبار تمكين التلاوة (لحن جلي في البند 13)", R.referral?"نعم":"لا", R.referral?false:null);
+    chk("بنود محتسبة لم تُعبّأ بعد", R.unfilled.toLocaleString("ar-SA"), R.unfilled?false:true);
   $("#tPct").textContent=pctF(R.total.pct); $("#tGrade").textContent=R.final;
   $("#tRaw").textContent=`${fmt(R.total.s)} من ${fmt(R.total.m)} درجة محتسبة`+(R.capped?" · حُجب «ممتاز»":"");
   $("#dPct").textContent=pctF(R.total.pct); $("#dGrade").textContent=R.final==="—"?"":R.final;
@@ -516,12 +515,12 @@ document.addEventListener("click",e=>{
 });
 function reSample(){
   const it=DOMAINS.find(d=>d.k==="d").items.find(x=>x.sample);
-  const box=document.querySelector('.item[data-item="16"]'); if(box) box.outerHTML=renderSample(it);
+  const box=document.querySelector('.item[data-item="15"]'); if(box) box.outerHTML=renderSample(it);
   update();
 }
 function setTrack(t){
   if(S.track===t) return;
-  Object.keys(S.sel).filter(k=>/^t\d[kz]$/.test(k)).forEach(k=>delete S.sel[k]);
+  Object.keys(S.sel).filter(k=>/^t\d[kz]$/.test(k)||k==="MZT").forEach(k=>delete S.sel[k]);
   Object.keys(S.ev).filter(k=>/^t\d$/.test(k)).forEach(k=>delete S.ev[k]);
   S.track=t; const box=$("#trackItem"); box.outerHTML=renderTrack(); update();
 }
@@ -545,11 +544,12 @@ function payload(R){
   const DOMS=DOMAINS.map(d=>{const D=R.dom[d.k]||{s:0,m:0};return {key:d.n,name:d.title,score:Math.round(D.s*10)/10,max:D.m};});
   const items=[];
   const push=(no,item,id,code,ev)=>{const r=scoreOf(id,code);items.push({no,item,level:S.sel[id]||"",score:r.na?null:r.s,max:r.m,evidence:ev||""});};
-  if(S.track) TRACKS[S.track].forEach(([n],i)=>{push("1."+(i+1),n+" – كفاية الشرح",`t${i}k`,"KIF",S.ev["t"+i]);push("1."+(i+1),n+" – الالتزام بالزمن",`t${i}z`,"ZAM");});
+  if(S.track){ TRACKS[S.track].forEach((n,i)=>push("1."+(i+1),n+" – كفاية الشرح",`t${i}k`,"KIF",S.ev["t"+i]));
+    push("1."+(TRACKS[S.track].length+1),"زمن المهاري كله (15–20 د)","MZT","MZT",S.ev.tz); }
   DOMAINS.forEach(d=>d.items.forEach(it=>{
     if(it.track) return;
-    if(it.sample){items.push({no:16,item:it.t+` (${(R.sampleN||0).toLocaleString("ar-SA")} طلاب)`,level:R.sampleAvg==null?"":"متوسط العيّنة",score:R.sampleAvg==null?0:Math.round(R.sampleAvg*10)/10,max:10,evidence:""});
-      S.sample.forEach((s,j)=>{const g=STU.find(x=>x[0]===s.g); if(g) items.push({no:"16."+(j+1),item:"طالب: "+(s.name||("رقم "+(j+1))),level:g[0],score:g[1],max:10,evidence:""});});
+    if(it.sample){items.push({no:15,item:it.t+` (${(R.sampleN||0).toLocaleString("ar-SA")} طلاب)`,level:R.sampleAvg==null?"":"متوسط العيّنة",score:R.sampleAvg==null?0:Math.round(R.sampleAvg*10)/10,max:STU_MAX,evidence:""});
+      S.sample.forEach((s,j)=>{const g=STU.find(x=>x[0]===s.g); if(g) items.push({no:"15."+(j+1),item:"طالب: "+(s.name||("رقم "+(j+1))),level:g[0],score:g[1],max:STU_MAX,evidence:""});});
       return;}
     if(it.group) it.group.forEach(([c,l],j)=>push(it.no,it.t+": "+l,c,c,j?"":S.ev["i"+it.no]));
     else push(it.no,it.t,it.c,it.c,S.ev["i"+it.no]);
@@ -557,7 +557,7 @@ function payload(R){
   return {info:S.info,track:S.track,domains:DOMS,
     total:Math.round(R.total.s*10)/10,max:R.total.m,percent:R.total.pct==null?null:Math.round(R.total.pct*1000)/1000,
     baseGrade:R.base,finalGrade:R.final,isqat:R.isq,trackPercent:R.trackPct==null?null:Math.round(R.trackPct*1000)/1000,
-    capped:R.capped,referral:R.referral,unfilled:R.unfilled,sample:S.sample,sampleAvg:R.sampleAvg,items,
+    capped:R.capped,unfilled:R.unfilled,sample:S.sample,sampleAvg:R.sampleAvg,items,
     positives:S.positives,recommendations:S.recommendations,submittedAt:new Date().toISOString()};
 }
 $("#bSave").onclick=async()=>{
