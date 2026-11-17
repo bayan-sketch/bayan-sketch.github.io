@@ -60,6 +60,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[tabindex]:focus:no
 .menu a.on::after{transform:scaleX(1)}
 .hdr.solid .menu a,.hdr.light .menu a{color:var(--muted)}
 .hdr.solid .menu a:hover,.hdr.solid .menu a.on,.hdr.light .menu a.on,.hdr.light .menu a:hover{color:var(--navy)}
+html.menu-lock,html.menu-lock body{overflow:hidden;overscroll-behavior:none}
+html.menu-lock #flyLogo{z-index:59}
 .burger{display:none;margin-inline-start:auto;background:none;border:0;color:#fff;font-size:26px;padding:6px;cursor:pointer}
 .hdr.solid .burger,.hdr.light .burger{color:var(--navy)}
 
@@ -575,7 +577,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .kr{grid-template-columns:48px 1fr 90px 90px}.kr .pc{display:none}
   .ft{grid-template-columns:1fr 1fr}
   .menu,.hdr .btn{display:none}.burger{display:block}
-  .menu.open{display:flex;position:fixed;top:calc(76px + var(--bar));inset-inline:0;flex-direction:column;background:#fff;padding:12px 20px 24px;box-shadow:0 20px 40px rgba(0,0,0,.1);gap:0;animation:viewIn .35s var(--ease)}
+  .menu.open{display:flex;position:fixed;top:calc(76px + var(--bar));inset-inline:0;flex-direction:column;background:#fff;padding:12px 20px 24px;box-shadow:0 20px 40px rgba(0,0,0,.1);gap:0;animation:viewIn .35s var(--ease);box-shadow:0 100vh 0 100vh rgba(10,16,34,.55);max-height:calc(100vh - 76px);overflow:auto;overscroll-behavior:contain}
   .menu.open a{color:var(--navy);padding:14px 6px;border-bottom:1px solid var(--line);font-size:17px}
   .menu.open a::after{display:none}
   .price{position:static}
@@ -1280,7 +1282,7 @@ function route(){
   let v=location.hash.slice(1);const SUB={register:"reg",terms:"terms-sec"},sub=SUB[v];if(sub)v="join";if(!views.includes(v))v="home";
   $$(".view").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
   $$("#menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+v));
-  $("#menu").classList.remove("open");
+  setMenu(false);
   window.scrollTo({top:0,behavior:"instant"});
   G=null;lastDone=null;lastNavy=-1;lastOrn=-1;
   const cur=$("#v-"+v);observe(cur);
@@ -1291,6 +1293,7 @@ function route(){
 addEventListener("hashchange",route);
 
 /* header */
+function setMenu(o){const m=document.getElementById("menu");m.classList.toggle("open",o);document.documentElement.classList.toggle("menu-lock",o);if(o)document.getElementById("hdr").classList.add("solid");else document.getElementById("hdr").classList.toggle("solid",scrollY>40)}
 const hdr=$("#hdr");
 const fly=$("#flyLogo"),fW=fly.querySelector(".fw"),fN=fly.querySelector(".fn"),ROOT=document.documentElement;
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1339,7 +1342,10 @@ addEventListener("load",()=>{G=null;syncRk()});
 $(".brand-h1 .ph-logo img").addEventListener("load",()=>{G=null;syncRk()});
 function onScroll(){hdr.classList.toggle("solid",scrollY>40);syncRk()}
 addEventListener("scroll",onScroll,{passive:true});
-$("#burger").onclick=()=>{$("#menu").classList.toggle("open");hdr.classList.add("solid")};
+// القائمة في الجوال: عند فتحها يتوقف تمرير الصفحة، والنقر خارجها يغلقها
+$("#burger").onclick=e=>{e.stopPropagation();setMenu(!$("#menu").classList.contains("open"))};
+document.addEventListener("click",e=>{if($("#menu").classList.contains("open")&&!e.target.closest("#menu"))setMenu(false)});
+document.addEventListener("touchmove",e=>{if(ROOT.classList.contains("menu-lock")&&!e.target.closest("#menu"))e.preventDefault()},{passive:false});
 
 /* العدادان فوق الشعار: الاختبار القبلي + انطلاق البرنامج (ظاهران معًا) */
 (function(){
