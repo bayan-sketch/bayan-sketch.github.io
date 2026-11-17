@@ -452,6 +452,32 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 .spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(24,38,74,.25);border-top-color:var(--navy-d);animation:spin .8s linear infinite;display:none}
 .btn.busy .spin{display:inline-block}.btn.busy svg{display:none}
 
+
+/* terms */
+.terms{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tcard{background:#fff;border-radius:24px;border:1px solid var(--line);padding:34px}
+.tcard .th{display:flex;gap:14px;align-items:center;margin-bottom:22px}
+.tcard .th .ico{margin:0}
+.tcard .th h3{font-size:22px}
+.tcard .th small{display:block;color:var(--soft);font-size:13.5px}
+.tl2{list-style:none;padding:0;margin:0;display:grid;gap:4px;counter-reset:t}
+.tl2 li{display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;padding:14px 0;border-top:1px dashed var(--line)}
+.tl2 li:first-child{border-top:0}
+.tl2 li::before{counter-increment:t;content:counter(t);width:32px;height:32px;border-radius:10px;background:var(--sand);color:var(--navy);display:grid;place-items:center;font-size:14px}
+.tcard.t .tl2 li::before{background:var(--teal-l);color:var(--teal-d)}
+.tl2 b{font-weight:500;color:var(--navy);display:block}
+.tl2 span{color:var(--muted);font-size:15px}
+.tlink{background:none;border:0;padding:0;font-size:inherit;color:var(--teal);text-decoration:underline;cursor:pointer}
+.modal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.on{display:flex}
+.modal .bk{position:absolute;inset:0;background:rgba(24,38,74,.55);backdrop-filter:blur(4px);animation:fadeIn .3s ease both}
+.modal .box{position:relative;background:var(--bg);border-radius:26px;max-width:920px;width:100%;max-height:88vh;overflow:auto;padding:30px;animation:viewIn .45s var(--ease) both;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal .mh h3{font-size:24px}
+.modal .x{width:42px;height:42px;border-radius:50%;border:0;background:var(--sand);color:var(--navy);display:grid;place-items:center;font-size:20px;cursor:pointer;transition:all .3s}
+.modal .x:hover{background:var(--navy);color:#fff;transform:rotate(90deg)}
+.modal .tcard{padding:24px;border-color:var(--line)}
+
 /* footer */
 footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;font-size:14.5px}
 .ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -478,7 +504,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .sb:nth-child(3)::before{display:none}
   .c3,.c4,.days,.units,.board{grid-template-columns:repeat(2,1fr)}
   .steps{grid-template-columns:repeat(2,1fr);row-gap:44px}.steps .track{display:none}
-  .spot,.join-grid,.score,.reg{grid-template-columns:1fr}
+  .spot,.join-grid,.score,.reg,.terms{grid-template-columns:1fr}
   .reg-side{padding:32px 28px}.rsteps{grid-template-columns:repeat(3,1fr);margin-top:20px}.rsteps li{flex-direction:column;text-align:center;gap:6px;padding:10px 4px;font-size:13px}.rsteps li small,.reg-side .meta{display:none}
   .exams{grid-template-columns:1fr 1fr}.chances{grid-template-columns:1fr}.chances>div+div{border-right:0;border-top:1px solid var(--line)}
   .band{grid-template-columns:1fr;text-align:center;gap:20px;padding:48px 32px}
@@ -505,7 +531,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .spot .sp-main,.spot .sp-side,.cta-band,.sd,.chart-box{padding:28px 22px}
   .count div{min-width:0;flex:1;padding:12px 8px}
   .people{grid-template-columns:repeat(2,1fr)}
-  .fgrid{grid-template-columns:1fr}.reg-main{padding:28px 20px}
+  .fgrid{grid-template-columns:1fr}.reg-main{padding:28px 20px}.tcard{padding:24px 20px}.modal .box{padding:20px 16px}
   .kr{grid-template-columns:44px 1fr 70px;padding:16px 18px;gap:12px}.kr .g{display:none}
   .ft{grid-template-columns:1fr}
   .sq{aspect-ratio:auto;min-height:150px}
@@ -692,10 +718,10 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
 
   <div class="sec" id="exams">
     <div class="wrap">
-      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-file"/></svg>الاختبارات</div><h2>ثلاثة اختبارات في رحلة المتدرب</h2><p>قبلي يقيس مستواك قبل التدريب، ثم تحريري وشفوي بعده يحددان اجتيازك.</p></div>
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-file"/></svg>الاختبارات</div><h2>ثلاثة اختبارات في رحلة المتدرب</h2><p>قبلي في التجويد قبل التدريب، ثم تحريري وشفوي بعده يحددان اجتيازك.</p></div>
       <div class="exams">
-        <div class="exam pre rv"><div class="exam-h"><div class="ico n"><svg class="i"><use href="#i-target"/></svg></div><div class="mark na"><b>لا يُحتسب</b></div><h3>الاختبار القبلي</h3><div class="when"><svg class="i"><use href="#i-cal"/></svg>قبل انطلاق الدورة بأيام</div></div>
-          <div class="exam-b"><div class="pr"><span>التهجي</span><span>قياس مستوى</span></div><div class="pr"><span>المهاري</span><span>قياس مستوى</span></div><p>يعرف به المدرب مستواك قبل التدريب، ولا يدخل في مجموع الدرجات.</p></div></div>
+        <div class="exam pre rv"><div class="exam-h"><div class="ico n"><svg class="i"><use href="#i-target"/></svg></div><div class="mark"><b class="num">80%</b><small>حد القبول</small></div><h3>الاختبار القبلي</h3><div class="when"><svg class="i"><use href="#i-cal"/></svg>قبل انطلاق الدورة بأيام</div></div>
+          <div class="exam-b"><div class="pr"><span>اختبار التجويد</span><span>شرط للشهادة</span></div><div class="pr"><span>مجموع الدرجات</span><span>لا يدخل فيه</span></div><p>من لم يبلغ <span class="num">80%</span> يحضر البرنامج مستمعًا دون أن تُمنح له شهادة.</p></div></div>
         <div class="exam wr rv" style="--d:1"><div class="exam-h"><div class="ico t"><svg class="i"><use href="#i-pen"/></svg></div><div class="mark"><b class="num">20</b><small>درجة</small></div><h3>الاختبار التحريري</h3><div class="when"><svg class="i"><use href="#i-monitor"/></svg>نموذج إلكتروني يُصحَّح آليًا</div></div>
           <div class="exam-b"><div class="pr"><span>اختبار التهجي</span><span><span class="num">10</span> درجات</span></div><div class="pr"><span>اختبار المهاري</span><span><span class="num">10</span> درجات</span></div><p>يُجرى بعد انتهاء الدورة، وتظهر نتيجته مباشرة.</p></div></div>
         <div class="exam or rv" style="--d:2"><div class="exam-h"><div class="ico n"><svg class="i"><use href="#i-mic"/></svg></div><div class="mark"><b class="num">60</b><small>درجة</small></div><h3>الاختبار الشفوي</h3><div class="when"><svg class="i"><use href="#i-users"/></svg>مقابلة فردية مع المقيّم</div></div>
@@ -827,6 +853,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
         <div class="coh" id="cohorts"></div>
         <div class="card rv" style="margin-top:24px"><h3>ما تحتاجه للتسجيل</h3>
           <ul class="list" style="margin-top:16px">
+            <li><svg class="i"><use href="#i-check"/></svg>ألا يقل العمر عن 18 سنة</li>
             <li><svg class="i"><use href="#i-check"/></svg>الالتزام بحضور الأيام الأربعة كاملة</li>
             <li><svg class="i"><use href="#i-check"/></svg>جوال مفعّل فيه واتساب، وبريد إلكتروني</li>
             <li><svg class="i"><use href="#i-check"/></svg>اسم الجهة والحلقة أو المدرسة، واسم المشرف وجواله</li>
@@ -847,7 +874,14 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
     </div>
   </div>
 
-  <div class="sec" id="reg-sec" style="padding-top:0">
+  <div class="sec sand" id="terms-sec" style="scroll-margin-top:40px">
+    <div class="wrap">
+      <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-shield"/></svg>الشروط</div><h2>شروط القبول والاجتياز</h2><p>اطّلع عليها قبل التسجيل.</p></div>
+      <div class="terms rv" data-terms></div>
+    </div>
+  </div>
+
+  <div class="sec" id="reg-sec" style="padding-top:110px">
     <div class="wrap">
       <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-pen"/></svg>نموذج التسجيل</div><h2>سجّل في ركائز <span class="num">34</span></h2><p>ثلاث خطوات قصيرة، وتصل بياناتك مباشرة إلى إدارة البرنامج.</p></div>
       <div class="reg rv" id="reg">
@@ -874,7 +908,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
               <div class="r"><svg class="i"><use href="#i-cal"/></svg><div>الأحد 12 – الأربعاء 15 جمادى الآخرة 1448هـ<small>الموافق 22 – 25 نوفمبر 2026م</small></div></div>
               <div class="r"><svg class="i"><use href="#i-clock"/></svg><div>الفترة المسائية من 3:30 م حتى 8:30 م<small>عن بُعد</small></div></div>
               <div class="r"><svg class="i"><use href="#i-file"/></svg><div>الاختبار القبلي يوم الخميس 9 جمادى الآخرة 1448هـ<small>الموافق 19 نوفمبر 2026م</small></div></div>
-              <div class="r"><svg class="i"><use href="#i-shield"/></svg><div><a href="https://sites.google.com/view/rakaeez/Home/shrot" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">شروط القبول والاجتياز للبرنامج</a></div></div>
+              <div class="r"><svg class="i"><use href="#i-shield"/></svg><div><button type="button" class="tlink" data-open-terms>شروط القبول والاجتياز للبرنامج</button></div></div>
             </div>
             <div class="pay">
               <div><b>رسوم البرنامج <span class="num">300</span> ريال</b><p>تشمل الشهادة عند الاجتياز. سدّد الرسوم من متجر غراس ثم ارجع هنا لإكمال التسجيل، وبياناتك تبقى محفوظة.</p></div>
@@ -923,12 +957,17 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
 
 </main>
 
+<div class="modal" id="termsModal" role="dialog" aria-modal="true" aria-label="شروط القبول والاجتياز">
+  <div class="bk" data-close></div>
+  <div class="box"><div class="mh"><h3>شروط القبول والاجتياز</h3><button class="x" data-close aria-label="إغلاق"><svg class="i"><use href="#i-x"/></svg></button></div><div class="terms" data-terms></div></div>
+</div>
+
 <footer>
   <div class="wrap">
     <div class="ft">
       <div><img src="assets/img/logo-white.png" alt="بيان"><p>برنامج ركائز لإعداد وتأهيل معلمي ومعلمات منهج بيان لتعليم القراءة وإتقان التلاوة.</p></div>
       <div><h4>البرنامج</h4><a href="#program">عن البرنامج</a><a href="#curriculum">منهج بيان</a><a href="#results">النتائج</a></div>
-      <div><h4>التسجيل</h4><a href="#join">الدفعات القادمة</a><a href="#join">الأسئلة الشائعة</a></div>
+      <div><h4>التسجيل</h4><a href="#join">الدفعات القادمة</a><a href="#terms">شروط القبول والاجتياز</a><a href="#join">الأسئلة الشائعة</a></div>
     </div>
     <div class="fb"><span>جمعية غراس لتنمية الطفل</span><span>آخر تحديث للبيانات: <span class="num">2026-11-08</span></span></div>
   </div>
@@ -1128,6 +1167,22 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
   };
 })();
 
+
+/* ===== terms ===== */
+(function(){
+  const T={join:[["العمر","ألا يقل عمر المشارك عن 18 سنة."],["الاختبار القبلي","اجتياز اختبار التجويد القبلي بنسبة لا تقل عن 80%، ومن لم يجتزه يشارك مستمعًا دون أن تُمنح له شهادة."],["تحفة الأطفال","إجادة قراءة متن تحفة الأطفال."],["الرسوم","سداد رسوم حضور البرنامج عبر متجر غراس."]],
+    pass:[["المشاركة الفاعلة","في التطبيقات العملية وحل الواجبات."],["الحضور","بنسبة لا تقل عن 80%، ويُسجَّل عبر ملف التحضير."],["الاختبارات","اجتياز الاختبارات الشفوية والتحريرية بما لا يقل عن 80% في كل ركيزة."],["تحفة الأطفال","حفظ 20 بيتًا من المتن على الأقل بعد المقدمة."],["إعادة الاختبار","يُعطى المشارك فرصة لإعادة الاختبار خلال مدة لا تتجاوز 7 أيام من انتهاء البرنامج."]]};
+  const card=(k,t,s,ic,c)=>`<div class="tcard ${c}"><div class="th"><span class="ico ${c||"n"}">${ic}</span><div><h3>${t}</h3><small>${s}</small></div></div><ol class="tl2">${T[k].map(([a,b])=>`<li><div><b>${a}</b><span>${b}</span></div></li>`).join("")}</ol></div>`;
+  const html=card("join","شروط المشاركة","قبل التسجيل في البرنامج",ic("i-users"),"")+card("pass","شروط الاجتياز","للحصول على الشهادة المعتمدة",ic("i-award"),"t");
+  $$("[data-terms]").forEach(x=>x.innerHTML=html);
+  const m=$("#termsModal");
+  const open=()=>{m.classList.add("on");document.body.style.overflow="hidden";m.querySelector(".x").focus()};
+  const close=()=>{m.classList.remove("on");document.body.style.overflow=""};
+  $$("[data-open-terms]").forEach(b=>b.onclick=open);
+  m.querySelectorAll("[data-close]").forEach(b=>b.onclick=close);
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&m.classList.contains("on"))close()});
+})();
+
 isolateNums(document.body);
 
 /* ===== motion ===== */
@@ -1144,14 +1199,14 @@ function observe(scope){scope.querySelectorAll(".rv,.statbar .in-box,.kpis,.char
 /* ===== router ===== */
 const views=["home","program","curriculum","results","join"];
 function route(){
-  let v=location.hash.slice(1),toReg=v==="register";if(toReg)v="join";if(!views.includes(v))v="home";
+  let v=location.hash.slice(1);const SUB={register:"reg",terms:"terms-sec"},sub=SUB[v];if(sub)v="join";if(!views.includes(v))v="home";
   $$(".view").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
   $$("#menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+v));
   $("#menu").classList.remove("open");
   window.scrollTo({top:0,behavior:"instant"});
   const cur=$("#v-"+v);observe(cur);
   if(v==="results")drawH();
-  if(toReg)setTimeout(()=>{$("#reg").classList.add("in");$("#reg").scrollIntoView({behavior:"smooth"})},120);
+  if(sub)setTimeout(()=>{const t=$("#"+sub);t.classList.add("in");t.querySelectorAll(".rv").forEach(x=>x.classList.add("in"));t.scrollIntoView({behavior:"smooth"})},120);
   onScroll();
 }
 addEventListener("hashchange",route);
