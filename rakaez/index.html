@@ -412,7 +412,8 @@ svg.chart .dotp{opacity:0;animation:fadeIn .4s ease forwards}
 .fld{display:flex;flex-direction:column;gap:8px}.fld.full{grid-column:1/-1}
 .fld label{color:var(--navy);font-size:15px}
 .fld label .req{color:var(--coral);margin-inline-start:3px}
-.fld .help{font-size:12.5px;color:var(--soft);margin-top:-4px}
+.fld .help{font-size:12.5px;color:var(--soft);margin-top:-2px}
+.fgrid{align-items:start}
 .inp{font-family:inherit;font-weight:500;font-size:15.5px;color:var(--ink);background:var(--sand);border:1.5px solid transparent;border-radius:14px;padding:13px 16px;outline:none;transition:all .25s;width:100%}
 .inp:focus{background:#fff;border-color:var(--teal);box-shadow:0 0 0 4px rgba(69,124,138,.12)}
 .inp.ltr{direction:ltr;text-align:right}
@@ -1095,17 +1096,17 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
   const years=[];for(let y=1430;y>=1385;y--)years.push(String(y));
   const Q={1:[
     {id:"1195533031",l:"الاسم الرباعي",t:"text",req:1,help:"كما سيظهر في الشهادة عند الاجتياز",full:1},
-    {id:"1269426607",l:"رقم الجوال (مفعّل فيه واتساب)",t:"tel",req:1,help:"مثال: 9665XXXXXXXX"},
+    {id:"1269426607",l:"رقم الجوال (مفعّل فيه واتساب)",t:"tel",req:1},
     {id:"1014171028",l:"البريد الإلكتروني",t:"email",req:1},
     {id:"2087013886",l:"الجنسية",t:"chips",req:1,o:["سعودي","مصري","سوري","يمني","سوداني"],other:1,full:1},
     {id:"394116917",l:"سنة الميلاد (هجري)",t:"select",req:1,o:years},
     {id:"1223525125",l:"الجنس",t:"chips",req:1,o:["ذكر","أنثى"]},
     {id:"663902187",l:"المدينة",t:"chips",req:1,o:["الرّياض"],other:1,full:1},
     {id:"188302055",l:"الجهة التي تتبع لها",t:"chips",req:1,o:["برنامج فنار التابع لجمعية غراس","جمعية مكنون","جمعية تعلم","جمعية الأمير سلطان"],other:1,full:1},
-    {id:"517829165",l:"اسم المسجد أو الحلقة أو المدرسة أو الدار",t:"text",req:1,full:1},
+    {id:"517829165",l:"اسم المسجد أو الحلقة أو المدرسة",t:"text",req:1},
     {id:"1776718571",l:"عدد طلاب الحلقة",t:"number",req:0,help:"للمعلمين الحاليين، إن وُجد"},
     {id:"193727486",l:"اسم مشرف/ـة الجهة",t:"text",req:1},
-    {id:"1420964261",l:"رقم جوال مشرف/ـة الجهة",t:"tel",req:0,help:"مثال: 9665XXXXXXXX"}],
+    {id:"1420964261",l:"رقم جوال مشرف/ـة الجهة",t:"tel",req:0}],
    2:[
     {id:"276815078",l:"هل لديك إجازة في القرآن الكريم؟",t:"chips",req:1,o:["نعم","لا"],full:1},
     {id:"1411684015",l:"هل لديك شهادة بيان أو نور البيان أو التبيان أو برامج شبيهة؟",t:"chips",req:1,o:["نعم","لا"],full:1},
@@ -1116,8 +1117,8 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
     if(q.t==="chips")c=`<div class="chips">${q.o.concat(q.other?[OTHER]:[]).map(o=>`<button type="button" data-v="${o}">${o}</button>`).join("")}</div>`+(q.other?`<input class="inp oth" placeholder="اكتب هنا" hidden>`:"");
     else if(q.t==="select")c=`<select class="inp"><option value="">اختر السنة</option>${q.o.map(o=>`<option>${o}</option>`).join("")}</select>`;
     else if(q.t==="area")c=`<textarea class="inp"></textarea>`;
-    else c=`<input class="inp${q.t==="tel"||q.t==="email"||q.t==="number"?" ltr":""}" type="${q.t==="tel"?"tel":q.t}" ${q.t==="tel"?'inputmode="numeric" placeholder="9665XXXXXXXX"':""} ${q.t==="number"?'min="0" inputmode="numeric"':""}>`;
-    return `<div class="fld${q.full?" full":""}" data-id="${q.id}"><label>${q.l}${r}</label>${h}${c}<span class="emsg"></span></div>`};
+    else c=`<input class="inp${q.t==="tel"||q.t==="email"||q.t==="number"?" ltr":""}" type="${q.t==="tel"?"tel":q.t==="number"?"text":q.t}" ${q.t==="tel"?'inputmode="numeric" placeholder="9665XXXXXXXX"':""} ${q.t==="number"?'min="0" inputmode="numeric"':""}>`;
+    return `<div class="fld${q.full?" full":""}" data-id="${q.id}"><label>${q.l}${r}</label>${c}${h}<span class="emsg"></span></div>`};
   $("#f1").innerHTML=Q[1].map(field).join("");$("#f2").innerHTML=Q[2].map(field).join("");
   const all=[...Q[1],...Q[2]],byId=Object.fromEntries(all.map(q=>[q.id,q]));
   // chips
