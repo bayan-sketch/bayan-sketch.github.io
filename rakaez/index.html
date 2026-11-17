@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ركائز | برنامج إعداد وتأهيل معلمي منهج بيان</title>
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<meta name="description" content="ركائز: برنامج تدريبي لإعداد معلمي ومعلمات منهج بيان لتعليم القراءة وإتقان التلاوة – جمعية غراس لتنمية الطفل">
+<meta name="theme-color" content="#24385F">
+<style>
+@font-face{font-family:"DIN Next Arabic";src:url("assets/fonts/DINNextArabic-Medium.woff2") format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  /* هوية بيان */
+  --navy:#24385F;--navy-d:#18264A;--navy-l:#EDF0F6;
+  --teal:#457C8A;--teal-d:#386673;--teal-l:#E9F1F3;
+  --peach:#D89478;--peach-l:#FBF0EA;--peach-ink:#9A5434;
+  --coral:#C05648;--coral-l:#F8E9E6;
+  --bg:#FFFFFF;--sand:#F8F6F3;--ink:#1A2740;--muted:#5D6A80;--soft:#8C94A1;--line:#ECE9E4;
+  --ease:cubic-bezier(.22,.8,.24,1);
+  --shadow-s:0 1px 2px rgba(24,38,74,.04),0 4px 12px rgba(24,38,74,.04);
+  --shadow-m:0 2px 4px rgba(24,38,74,.04),0 16px 40px rgba(24,38,74,.08);
+  --r:20px;--max:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"DIN Next Arabic",Tahoma,sans-serif;font-weight:500;font-synthesis:none;background:var(--bg);color:var(--ink);line-height:1.85;font-size:16.5px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{font-weight:500;line-height:1.3;margin:0;color:var(--navy)}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;font-weight:500}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+.num{font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+/* ---------- header ---------- */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .35s var(--ease),box-shadow .35s var(--ease)}
+.hdr .wrap{display:flex;align-items:center;height:76px;gap:28px}
+.hdr.solid{background:rgba(255,255,255,.94);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 1px 0 var(--line)}
+.logo{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.logo img{height:38px;display:block}
+.logo .w{display:block}.logo .c{display:none}
+.hdr.solid .logo .w,.hdr.light .logo .w{display:none}.hdr.solid .logo .c,.hdr.light .logo .c{display:block}
+.logo .sep{width:1px;height:26px;background:currentColor;opacity:.2}
+.logo b{font-weight:500;font-size:18px;color:#fff;transition:color .3s}
+.hdr.solid .logo b,.hdr.light .logo b{color:var(--navy)}
+.menu{display:flex;gap:4px;margin-inline-start:auto}
+.menu a{position:relative;padding:8px 14px;font-size:15px;color:rgba(255,255,255,.78);transition:color .25s}
+.menu a::after{content:"";position:absolute;bottom:2px;right:14px;left:14px;height:2px;border-radius:2px;background:var(--peach);transform:scaleX(0);transition:transform .35s var(--ease)}
+.menu a:hover,.menu a.on{color:#fff}
+.menu a.on::after{transform:scaleX(1)}
+.hdr.solid .menu a,.hdr.light .menu a{color:var(--muted)}
+.hdr.solid .menu a:hover,.hdr.solid .menu a.on,.hdr.light .menu a.on,.hdr.light .menu a:hover{color:var(--navy)}
+.burger{display:none;margin-inline-start:auto;background:none;border:0;color:#fff;font-size:26px;padding:6px;cursor:pointer}
+.hdr.solid .burger,.hdr.light .burger{color:var(--navy)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:999px;font-size:15.5px;border:1.5px solid transparent;cursor:pointer;transition:transform .3s var(--ease),background .3s,box-shadow .3s,color .3s,border-color .3s;white-space:nowrap}
+.btn svg.i{font-size:18px;transition:transform .35s var(--ease)}
+.btn:hover svg.i{transform:translateX(-4px)}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--peach);color:var(--navy-d)}.btn-p:hover{box-shadow:0 10px 24px rgba(216,148,120,.35)}
+.btn-t{background:var(--teal);color:#fff}.btn-t:hover{background:var(--teal-d);box-shadow:0 10px 24px rgba(69,124,138,.3)}
+.btn-n{background:var(--navy);color:#fff}.btn-n:hover{box-shadow:0 10px 24px rgba(36,56,95,.3)}
+.btn-o{border-color:rgba(255,255,255,.3);color:#fff}.btn-o:hover{background:rgba(255,255,255,.08)}
+.btn-l{border-color:var(--line);color:var(--navy);background:#fff}.btn-l:hover{border-color:var(--navy)}
+.hdr .btn{padding:10px 20px;font-size:14.5px}
+
+/* ---------- views ---------- */
+.view{display:none}
+.view.on{display:block;animation:viewIn .6s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--navy-d);color:#fff;overflow:hidden;padding:150px 0 140px}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 500px at 15% 40%,rgba(69,124,138,.35),transparent 65%),radial-gradient(600px 400px at 100% 0%,rgba(216,148,120,.12),transparent 60%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:rgba(255,255,255,.82);padding:7px 16px 7px 12px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.tag .dot{width:8px;height:8px;border-radius:50%;background:var(--peach);box-shadow:0 0 0 0 rgba(216,148,120,.6);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(216,148,120,0)}100%{box-shadow:0 0 0 0 rgba(216,148,120,0)}}
+.hero h1{color:#fff;font-size:clamp(38px,5.2vw,64px);line-height:1.2;margin:26px 0 20px;letter-spacing:-.3px}
+.hero h1 em{font-style:normal;color:var(--peach)}
+.hero p.lead{font-size:clamp(16.5px,1.5vw,19px);color:rgba(255,255,255,.72);max-width:520px}
+.hero .cta{display:flex;gap:12px;margin-top:38px;flex-wrap:wrap}
+.visual{position:relative;aspect-ratio:1;max-width:440px;justify-self:center;width:100%}
+.visual .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.09)}
+.visual .ring:nth-child(2){inset:12%;border-color:rgba(255,255,255,.07)}
+.visual .ring:nth-child(3){inset:24%;border-style:dashed;border-color:rgba(216,148,120,.25);animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.visual .emb{position:absolute;inset:26% 30%;animation:float 7s ease-in-out infinite}
+.visual .emb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.95;filter:drop-shadow(0 20px 40px rgba(0,0,0,.25))}
+@keyframes float{50%{transform:translateY(-12px)}}
+.chipf{position:absolute;display:flex;align-items:center;gap:10px;background:#fff;color:var(--navy);padding:10px 16px 10px 14px;border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,.2);font-size:14px;white-space:nowrap;animation:float 6s ease-in-out infinite}
+.chipf .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:18px}
+.chipf small{display:block;color:var(--soft);font-size:11.5px;line-height:1.2}
+.chipf b{font-weight:500;display:block;line-height:1.3}
+.chipf.a{top:8%;right:-4%;animation-delay:-1s}.chipf.a .ic{background:var(--teal-l);color:var(--teal)}
+.chipf.b{bottom:16%;right:-8%;animation-delay:-3s}.chipf.b .ic{background:var(--peach-l);color:var(--peach-ink)}
+.chipf.c{top:44%;left:-8%;animation-delay:-4.5s}.chipf.c .ic{background:var(--navy-l);color:var(--navy)}
+
+.statbar{position:relative;z-index:2;margin-top:-64px}
+.statbar .in-box{background:#fff;border-radius:24px;box-shadow:var(--shadow-m);display:grid;grid-template-columns:repeat(4,1fr);padding:10px}
+.sb{padding:24px 28px;position:relative}
+.sb+.sb::before{content:"";position:absolute;right:0;top:24%;bottom:24%;width:1px;background:var(--line)}
+.sb .v{font-size:clamp(28px,3vw,38px);color:var(--navy);line-height:1.1}
+.sb .l{font-size:14px;color:var(--muted);margin-top:6px;display:flex;align-items:center;gap:8px}
+.sb .l svg{color:var(--teal);font-size:16px}
+
+/* ---------- sections ---------- */
+.sec{padding:120px 0}
+.sec.sand{background:var(--sand)}
+.sec.tight{padding:88px 0}
+.head{max-width:620px;margin-bottom:56px}
+.head.c{margin-inline:auto;text-align:center}
+.eyb{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--teal);margin-bottom:14px}
+.eyb svg{font-size:16px}
+.head h2{font-size:clamp(28px,3.4vw,42px);letter-spacing:-.2px}
+.head p{color:var(--muted);margin-top:14px;font-size:17px}
+.grid{display:grid;gap:24px}
+.c2{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:#fff;border-radius:var(--r);padding:32px;border:1px solid var(--line);transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .3s}
+.sand .card{border-color:transparent;box-shadow:var(--shadow-s)}
+.card.hov:hover{transform:translateY(-6px);box-shadow:var(--shadow-m);border-color:transparent}
+.ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:26px;margin-bottom:22px;transition:transform .45s var(--ease)}
+.card.hov:hover .ico{transform:scale(1.08) rotate(-4deg)}
+.ico.t{background:var(--teal-l);color:var(--teal)}.ico.n{background:var(--navy-l);color:var(--navy)}.ico.p{background:var(--peach-l);color:var(--peach-ink)}
+.card h3{font-size:21px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:15.5px}
+.pts{display:inline-flex;align-items:baseline;gap:6px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);width:100%;color:var(--soft);font-size:14px}
+.pts b{font-weight:500;font-size:28px;color:var(--navy);line-height:1}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
+.steps .track{position:absolute;top:31px;right:12.5%;left:12.5%;height:2px;background:var(--line);overflow:hidden}
+.steps .track i{position:absolute;inset:0;background:linear-gradient(to left,var(--teal),var(--peach));transform:scaleX(0);transform-origin:right;transition:transform 1.6s var(--ease) .3s}
+.steps.in .track i{transform:scaleX(1)}
+.step{text-align:center;position:relative}
+.step .bub{width:64px;height:64px;margin:0 auto 22px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;font-size:26px;color:var(--navy);position:relative;z-index:1;transition:all .5s var(--ease)}
+.steps.in .step .bub{border-color:var(--teal);color:var(--teal)}
+.step:last-child .bub{background:var(--navy);border-color:var(--navy)!important;color:#fff!important}
+.step .k{font-size:13px;color:var(--soft)}
+.step h3{font-size:19px;margin:2px 0 8px}
+.step p{font-size:14.5px;color:var(--muted);max-width:220px;margin:0 auto}
+
+/* cohort spotlight */
+.spot{display:grid;grid-template-columns:1fr 1fr;border-radius:28px;overflow:hidden;background:var(--navy);color:#fff;box-shadow:var(--shadow-m)}
+.spot .sp-main{padding:52px;position:relative}
+.spot .sp-main h2{color:#fff;font-size:clamp(28px,3vw,38px)}
+.spot .sp-main p{color:rgba(255,255,255,.7);margin-top:12px}
+.count{display:flex;gap:12px;margin:32px 0}
+.count div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 18px;min-width:84px;text-align:center}
+.count b{font-weight:500;display:block;font-size:32px;line-height:1.1;color:#fff}
+.count small{font-size:12.5px;color:rgba(255,255,255,.6)}
+.spot .sp-side{background:#fff;color:var(--ink);padding:40px 44px;display:flex;flex-direction:column;gap:6px}
+.tl-row{display:flex;gap:16px;align-items:flex-start;padding:14px 0;position:relative}
+.tl-row:not(:last-child)::after{content:"";position:absolute;right:19px;top:52px;bottom:-6px;width:2px;background:var(--line)}
+.tl-row .d{width:40px;height:40px;border-radius:12px;background:var(--sand);color:var(--navy);display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.tl-row.hl .d{background:var(--teal);color:#fff}
+.tl-row .t{font-size:13px;color:var(--soft)}
+.tl-row .v{color:var(--navy);font-size:16px}
+
+/* impact band */
+.band{background:var(--sand);border-radius:28px;padding:64px;display:grid;grid-template-columns:auto 1fr auto;gap:48px;align-items:center}
+.band .big{font-size:clamp(56px,7vw,92px);line-height:1;color:var(--teal)}
+.band p{font-size:clamp(18px,1.8vw,22px);color:var(--navy);max-width:520px}
+.band small{display:block;color:var(--muted);font-size:14.5px;margin-top:8px}
+
+.cta-band{background:var(--teal);border-radius:28px;padding:64px;color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-band::before,.cta-band::after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
+.cta-band::before{top:-170px;right:-120px}.cta-band::after{bottom:-200px;left:-80px;border-color:rgba(216,148,120,.35)}
+.cta-band h2{color:#fff;font-size:clamp(28px,3.2vw,40px)}
+.cta-band p{color:rgba(255,255,255,.8);margin:12px auto 30px;max-width:520px}
+
+/* page header */
+.ph{background:var(--navy-d);color:#fff;padding:150px 0 72px;position:relative;overflow:hidden}
+.ph::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 360px at 10% 120%,rgba(69,124,138,.35),transparent 65%)}
+.ph .wrap{position:relative}
+.ph .crumb{font-size:14px;color:rgba(255,255,255,.55);display:flex;gap:8px;align-items:center}
+.ph h1{color:#fff;font-size:clamp(34px,4.4vw,52px);margin:12px 0 10px}
+.ph p{color:rgba(255,255,255,.7);max-width:600px;font-size:17.5px}
+.ph .emb-bg{position:absolute;left:4%;top:50%;transform:translateY(-50%);height:260px;opacity:.06}
+
+/* program */
+.vm{padding:40px;border-radius:24px;color:#fff;position:relative;overflow:hidden}
+.vm.n{background:var(--navy)}.vm.t{background:var(--teal)}
+.vm .ico{background:rgba(255,255,255,.12);color:#fff}
+.vm h3{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:10px}
+.vm p{font-size:21px;line-height:1.75}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+.fact{display:flex;gap:16px;align-items:center;padding:26px 28px;border-bottom:1px solid var(--line);border-left:1px solid var(--line)}
+.fact:nth-child(3n){border-left:0}.fact:nth-last-child(-n+3){border-bottom:0}
+.fact .ico{width:46px;height:46px;font-size:21px;margin:0;border-radius:13px}
+.fact small{display:block;color:var(--soft);font-size:13px}
+.fact b{font-weight:500;color:var(--navy);font-size:16.5px}
+
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.day{background:#fff;border-radius:var(--r);padding:28px;border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.day:hover{transform:translateY(-6px);box-shadow:var(--shadow-m)}
+.day .no{position:absolute;left:20px;top:10px;font-size:64px;line-height:1;color:var(--sand)}
+.day .ico{position:relative}
+.day small{color:var(--soft);font-size:13px}
+.day h3{font-size:20px;margin:2px 0 8px}
+.day p{color:var(--muted);font-size:14.5px}
+
+.score{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:center}
+.ringchart{position:relative;width:280px;height:280px;margin:0 auto}
+.ringchart svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ringchart .mid{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ringchart .mid b{font-weight:500;font-size:52px;color:var(--navy);line-height:1;display:block}
+.ringchart .mid small{color:var(--muted);font-size:14px}
+.leg{display:grid;gap:4px}
+.leg-row{display:grid;grid-template-columns:14px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.leg-row:last-child{border:0}
+.leg-row i{width:14px;height:14px;border-radius:4px}
+.leg-row b{font-weight:500;color:var(--navy)}
+.leg-row small{display:block;color:var(--soft);font-size:13.5px}
+.leg-row .v{font-size:22px;color:var(--navy)}
+.note{display:flex;gap:14px;align-items:flex-start;background:var(--peach-l);color:var(--peach-ink);border-radius:16px;padding:18px 22px;font-size:15px}
+.note svg{font-size:20px;margin-top:4px}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.list li{display:flex;gap:12px;align-items:flex-start;color:var(--ink);font-size:15.5px}
+.list li svg{color:var(--teal);font-size:19px;margin-top:5px}
+.list.x li svg{color:var(--coral)}
+
+.people{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.person{text-align:center}
+.av{width:84px;height:84px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;font-size:30px;color:#fff;background:var(--navy);position:relative;transition:transform .45s var(--ease)}
+.person:hover .av{transform:translateY(-4px)}
+.av::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px dashed var(--line)}
+.person.t .av{background:var(--teal)}
+.person h4{font-size:17px}
+.person p{font-size:14px;color:var(--muted)}
+
+/* curriculum */
+.stg{display:flex;gap:0;position:relative;margin-bottom:28px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.stg::-webkit-scrollbar{display:none}
+.stg button{flex:1;min-width:110px;background:none;border:0;cursor:pointer;padding:0 6px 18px;position:relative;color:var(--muted);transition:color .3s}
+.stg button::after{content:"";position:absolute;bottom:0;right:0;left:0;height:3px;background:var(--line)}
+.stg button::before{content:"";position:absolute;bottom:0;right:0;left:0;height:3px;background:var(--teal);transform:scaleX(0);transition:transform .45s var(--ease);z-index:1}
+.stg button.on::before{transform:scaleX(1)}
+.stg .g{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 10px;border-radius:18px;background:var(--sand);font-size:24px;color:var(--navy);transition:all .4s var(--ease)}
+.stg button:hover .g{transform:translateY(-3px)}
+.stg button.on .g{background:var(--teal);color:#fff;box-shadow:0 10px 24px rgba(69,124,138,.3)}
+.stg b{font-weight:500;display:block;font-size:16px}
+.stg button.on b{color:var(--navy)}
+.stg small{font-size:12.5px;color:var(--soft)}
+.sd{background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px;min-height:240px}
+.sd .anim{animation:viewIn .5s var(--ease) both}
+.sd-h{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.sd-h h3{font-size:28px}
+.sd-h p{color:var(--teal);margin-top:4px}
+.dur{display:flex;align-items:center;gap:10px;background:var(--sand);padding:10px 18px;border-radius:14px;color:var(--navy)}
+.dur svg{color:var(--teal);font-size:20px}
+.rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.rule{background:var(--sand);border-radius:16px;padding:20px}
+.rule .rh{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.rule b{font-weight:500;color:var(--navy)}
+.rule .pill{font-size:12.5px;background:#fff;color:var(--teal);padding:3px 12px;border-radius:999px;white-space:nowrap}
+.rule p{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.75}
+
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:b}
+.sq{aspect-ratio:1/.9;border-radius:22px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;border:2px solid var(--navy);background:#fff;transition:all .45s var(--ease)}
+.sq:hover{background:var(--navy);color:#fff}
+.sq:hover h4{color:#fff}.sq:hover p{color:rgba(255,255,255,.7)}
+.sq .n{font-size:44px;line-height:1;color:var(--peach)}
+.sq h4{font-size:20px;transition:color .3s}
+.sq p{font-size:14.5px;color:var(--muted);margin-top:4px;transition:color .3s}
+.units{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.unit{display:flex;gap:14px;align-items:center;padding:18px 20px;background:#fff;border-radius:16px;border:1px solid var(--line);transition:all .35s var(--ease)}
+.unit:hover{border-color:var(--teal);transform:translateY(-3px)}
+.unit .n{width:38px;height:38px;border-radius:11px;background:var(--teal-l);color:var(--teal);display:grid;place-items:center;flex-shrink:0}
+.unit b{font-weight:500;color:var(--navy);font-size:15.5px}
+
+/* results */
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.kpc{background:#fff;border-radius:var(--r);padding:28px;border:1px solid var(--line)}
+.kpc .ico{width:46px;height:46px;font-size:21px;border-radius:13px;margin-bottom:18px}
+.kpc .v{font-size:38px;line-height:1.1;color:var(--navy)}
+.kpc .l{color:var(--muted);font-size:14.5px;margin-top:6px}
+.chart-box{background:#fff;border-radius:24px;padding:36px;border:1px solid var(--line)}
+.ch-h{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:8px}
+.ch-h h3{font-size:22px}
+.ch-h p{color:var(--soft);font-size:14px}
+.seg{display:inline-flex;background:var(--sand);border-radius:999px;padding:4px;position:relative}
+.seg button{position:relative;z-index:1;border:0;background:none;padding:8px 18px;font-size:14px;color:var(--muted);cursor:pointer;border-radius:999px;transition:color .3s}
+.seg button.on{color:var(--navy);background:#fff;box-shadow:0 2px 6px rgba(24,38,74,.08)}
+.lg{display:flex;gap:18px;font-size:13.5px;color:var(--muted);margin:18px 0 6px;flex-wrap:wrap}
+.lg span{display:inline-flex;align-items:center;gap:8px}
+.lg i{width:12px;height:12px;border-radius:4px;display:inline-block}
+svg.chart{width:100%;height:auto;display:block;overflow:visible}
+svg.chart text{font-family:"DIN Next Arabic",Tahoma,sans-serif;font-weight:500}
+svg.chart .bar{transform-box:fill-box;transform-origin:bottom;animation:rise .9s var(--ease) both}
+@keyframes rise{from{transform:scaleY(0)}}
+svg.chart .ln{stroke-dasharray:3000;stroke-dashoffset:3000;animation:draw 1.6s var(--ease) .5s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+svg.chart .dotp{opacity:0;animation:fadeIn .4s ease forwards}
+@keyframes fadeIn{to{opacity:1}}
+.hb{margin-top:18px}
+.hb .top{display:flex;justify-content:space-between;font-size:15px}
+.hb .top span:last-child{color:var(--navy)}
+.hb .tr{height:8px;border-radius:999px;background:var(--sand);margin-top:8px;position:relative;overflow:hidden}
+.hb .tr i{position:absolute;inset:0 0 0 auto;border-radius:999px;width:0;transition:width 1.4s var(--ease)}
+.in .hb .tr i{width:var(--w)}
+.hb .tr em{position:absolute;top:0;bottom:0;width:2px;background:var(--peach-ink);opacity:.6}
+.donut{position:relative;width:170px;height:170px;flex-shrink:0}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+.donut circle.arc{transition:stroke-dashoffset 1.6s var(--ease)}
+.donut .mid{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.donut b{font-weight:500;font-size:34px;color:var(--navy);line-height:1;display:block}
+.donut small{font-size:12.5px;color:var(--soft)}
+.kpis{display:grid;gap:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.kr{display:grid;grid-template-columns:56px 1fr 120px 120px 1.2fr;gap:20px;align-items:center;padding:20px 28px;border-bottom:1px solid var(--line)}
+.kr:last-child{border:0}
+.kr.h{background:var(--sand);padding:14px 28px;font-size:13px;color:var(--soft)}
+.kr.h span{font-size:13px!important;color:var(--soft)!important}
+.kr .code{width:44px;height:30px;border-radius:9px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px}
+.kr .t{color:var(--navy)}
+.kr .b,.kr .g{font-size:18px}
+.kr .g{color:var(--teal)}
+.kr .pb{height:8px;border-radius:999px;background:var(--sand);overflow:hidden;position:relative}
+.kr .pb i{position:absolute;inset:0 0 0 auto;border-radius:999px;width:0;transition:width 1.4s var(--ease)}
+.in .kr .pb i{width:var(--w)}
+.kr .na{font-size:13.5px;color:var(--soft)}
+
+/* join */
+.join-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:start}
+.price{background:var(--navy);color:#fff;border-radius:24px;padding:36px;position:sticky;top:100px}
+.price .p{font-size:56px;line-height:1}
+.price .p small{font-size:18px;color:rgba(255,255,255,.6)}
+.price ul{list-style:none;padding:0;margin:24px 0;display:grid;gap:14px}
+.price li{display:flex;gap:12px;align-items:center;color:rgba(255,255,255,.85);font-size:15px}
+.price li svg{color:var(--peach);font-size:19px}
+.price .btn{width:100%}
+.coh{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.cc{background:#fff;border-radius:var(--r);border:1px solid var(--line);padding:28px;transition:all .45s var(--ease)}
+.cc:hover{box-shadow:var(--shadow-m);transform:translateY(-4px);border-color:transparent}
+.cc-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.cc-h h3{font-size:24px}
+.badge{font-size:12.5px;padding:5px 14px;border-radius:999px}
+.badge.live{background:var(--peach-l);color:var(--peach-ink)}.badge.plan{background:var(--sand);color:var(--muted)}
+.cc-r{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.cc-r span:first-child{color:var(--soft);display:flex;align-items:center;gap:8px}
+.cc-r span:first-child svg{color:var(--teal)}
+.cc-r span:last-child{color:var(--navy)}
+.faq{max-width:780px;margin:0 auto}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;background:none;border:0;padding:24px 0;font-size:18px;color:var(--navy);cursor:pointer;text-align:right}
+.qa button .pm{width:34px;height:34px;border-radius:50%;background:var(--sand);display:grid;place-items:center;flex-shrink:0;transition:all .4s var(--ease);color:var(--teal);font-size:18px}
+.qa.open button .pm{transform:rotate(45deg);background:var(--teal);color:#fff}
+.qa .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.qa.open .a{grid-template-rows:1fr}
+.qa .a>div{overflow:hidden}
+.qa .a p{color:var(--muted);padding-bottom:24px;font-size:16px}
+
+
+
+/* exams */
+.exams{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.exam{background:#fff;border-radius:24px;border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.exam:hover{transform:translateY(-6px);box-shadow:var(--shadow-m);border-color:transparent}
+.exam-h{padding:28px 28px 22px;position:relative}
+.exam-h .ico{margin-bottom:18px}
+.exam-h h3{font-size:22px}
+.exam-h .when{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14.5px;margin-top:6px}
+.exam-h .when svg{color:var(--teal)}
+.exam-h .mark{position:absolute;left:24px;top:28px;text-align:center;line-height:1}
+.exam-h .mark b{font-weight:500;font-size:34px;color:var(--navy);display:block}
+.exam-h .mark small{font-size:12px;color:var(--soft)}
+.exam-h .mark.na b{font-size:15px;color:var(--soft);background:var(--sand);padding:8px 12px;border-radius:10px}
+.exam-b{padding:6px 28px 26px;flex:1}
+.exam-b .pr{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px dashed var(--line);font-size:15px}
+.exam-b .pr span:last-child{color:var(--navy);white-space:nowrap}
+.exam-b p{color:var(--muted);font-size:15px;padding-top:12px;border-top:1px dashed var(--line)}
+.exam.pre .exam-h{background:var(--sand)}
+.exam.wr .exam-h{background:var(--teal-l)}
+.exam.or .exam-h{background:var(--navy-l)}
+.chances{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.chances>div{display:flex;gap:14px;align-items:center;padding:22px 26px}
+.chances>div+div{border-right:1px solid var(--line)}
+.chances .ico{width:44px;height:44px;font-size:20px;border-radius:12px;margin:0}
+.chances small{display:block;color:var(--soft);font-size:13px}
+.chances b{font-weight:500;color:var(--navy)}
+
+/* footer */
+footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;font-size:14.5px}
+.ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ft img{height:46px;margin-bottom:18px}
+.ft h4{color:#fff;font-size:15px;margin-bottom:14px}
+.ft a{display:flex;align-items:center;gap:8px;padding:4px 0;transition:color .25s}
+.ft a:hover{color:#fff}
+.fb{display:flex;justify-content:space-between;gap:20px;padding-top:28px;font-size:13.5px;flex-wrap:wrap}
+
+.tip{position:fixed;pointer-events:none;background:var(--navy-d);color:#fff;font-size:13.5px;padding:10px 14px;border-radius:10px;opacity:0;transition:opacity .15s;z-index:100;line-height:1.7;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--d,0) * 90ms)}
+.rv.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0ms!important}
+  .rv{opacity:1;transform:none}
+}
+@media (max-width:1000px){
+  .hero .wrap{grid-template-columns:1fr}.visual{display:none}
+  .hero{padding:130px 0 120px}
+  .statbar .in-box,.kp{grid-template-columns:repeat(2,1fr)}
+  .sb:nth-child(3)::before{display:none}
+  .c3,.c4,.days,.units,.board{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr);row-gap:44px}.steps .track{display:none}
+  .spot,.join-grid,.score{grid-template-columns:1fr}
+  .exams{grid-template-columns:1fr 1fr}.chances{grid-template-columns:1fr}.chances>div+div{border-right:0;border-top:1px solid var(--line)}
+  .band{grid-template-columns:1fr;text-align:center;gap:20px;padding:48px 32px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .fact:nth-child(3n){border-left:1px solid var(--line)}.fact:nth-child(2n){border-left:0}.fact:nth-last-child(-n+3){border-bottom:1px solid var(--line)}.fact:nth-last-child(-n+2){border-bottom:0}
+  .people{grid-template-columns:repeat(3,1fr);row-gap:32px}
+  .kr{grid-template-columns:48px 1fr 90px 90px}.kr .pc{display:none}
+  .ft{grid-template-columns:1fr 1fr}
+  .menu,.hdr .btn{display:none}.burger{display:block}
+  .menu.open{display:flex;position:fixed;top:76px;inset-inline:0;flex-direction:column;background:#fff;padding:12px 20px 24px;box-shadow:0 20px 40px rgba(0,0,0,.1);gap:0;animation:viewIn .35s var(--ease)}
+  .menu.open a{color:var(--navy);padding:14px 6px;border-bottom:1px solid var(--line);font-size:17px}
+  .menu.open a::after{display:none}
+  .price{position:static}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .sec{padding:80px 0}
+  .head{margin-bottom:40px}
+  .c2,.c3,.c4,.days,.units,.coh,.board,.facts,.exams{grid-template-columns:1fr}
+  .fact{border-left:0!important;border-bottom:1px solid var(--line)!important}.fact:last-child{border-bottom:0!important}
+  .steps{grid-template-columns:1fr 1fr}
+  .sb{padding:18px}
+  .spot .sp-main,.spot .sp-side,.cta-band,.sd,.chart-box{padding:28px 22px}
+  .count div{min-width:0;flex:1;padding:12px 8px}
+  .people{grid-template-columns:repeat(2,1fr)}
+  .kr{grid-template-columns:44px 1fr 70px;padding:16px 18px;gap:12px}.kr .g{display:none}
+  .ft{grid-template-columns:1fr}
+  .sq{aspect-ratio:auto;min-height:150px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+ <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+ <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 12.9 17 22l-5-3-5 3 1.5-9.1"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="m9 11 3 3L22 4"/></symbol>
+ <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></symbol>
+ <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+ <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+ <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
+ <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+ <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+ <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+ <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/><path d="M19 17v4M17 19h4"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.8 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+ <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+ <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+ <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+ <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+ <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+ <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></symbol>
+ <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+ <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4a1 1 0 0 1 1-1h12l-2 4 2 4H5"/></symbol>
+ <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"/></symbol>
+ <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+</svg>
+<div class="tip" id="tip"></div>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a href="#home" class="logo" aria-label="ركائز – الرئيسية">
+      <img class="w" src="assets/img/logo-white.png" alt="بيان">
+      <img class="c" src="assets/img/logo.png" alt="بيان">
+      <span class="sep"></span><b>ركائز</b>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#home">الرئيسية</a>
+      <a href="#program">البرنامج</a>
+      <a href="#curriculum">المنهج</a>
+      <a href="#results">النتائج</a>
+      <a href="#join">التسجيل</a>
+    </nav>
+    <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">سجّل في ركائز 34 <svg class="i"><use href="#i-arrow"/></svg></a>
+    <button class="burger" id="burger" aria-label="القائمة"><svg class="i"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main>
+<!-- ======================= HOME ======================= -->
+<section class="view" id="v-home" data-view="home">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="tag rv"><span class="dot"></span>التسجيل مفتوح · ركائز 34 تنطلق 22 نوفمبر</span>
+        <h1 class="rv" style="--d:1">نُعِدّ <em>معلّم بيان</em><br>المتقن والمعتمد</h1>
+        <p class="lead rv" style="--d:2">برنامج تدريبي مكثّف يؤهّل معلمي ومعلمات الحلقات على منهج بيان لتعليم القراءة وإتقان التلاوة، وينتهي بشهادة معتمدة مرقّمة.</p>
+        <div class="cta rv" style="--d:3">
+          <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">سجّل الآن <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a href="#program" class="btn btn-o">تعرّف على البرنامج</a>
+        </div>
+      </div>
+      <div class="visual rv" style="--d:2" aria-hidden="true">
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="emb"><img src="assets/img/emblem-white.png" alt=""></div>
+        <div class="chipf a"><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><span><small>مدة الدورة</small><b>16 ساعة تدريبية</b></span></div>
+        <div class="chipf b"><span class="ic"><svg class="i"><use href="#i-award"/></svg></span><span><small>المخرج</small><b>شهادة معتمدة</b></span></div>
+        <div class="chipf c"><span class="ic"><svg class="i"><use href="#i-monitor"/></svg></span><span><small>النمط</small><b>عن بُعد</b></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="statbar">
+    <div class="wrap">
+      <div class="in-box rv">
+        <div class="sb"><div class="v num" data-count="1239">0</div><div class="l"><svg class="i"><use href="#i-users"/></svg>متدرب ومتدربة</div></div>
+        <div class="sb"><div class="v num" data-count="875">0</div><div class="l"><svg class="i"><use href="#i-award"/></svg>معلم معتمد</div></div>
+        <div class="sb"><div class="v num" data-count="32">0</div><div class="l"><svg class="i"><use href="#i-layers"/></svg>دورة منذ 1443هـ</div></div>
+        <div class="sb"><div class="v num" data-count="9.02" data-dec="2">0</div><div class="l"><svg class="i"><use href="#i-heart"/></svg>رضا المتدربين /10</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-layers"/></svg>ركائز التأهيل</div><h2>ثلاث ركائز يُبنى عليها المعلّم</h2><p>يتقن المتدرب في أربعة أيام ما يحتاجه ليقود حلقة بيان بثقة.</p></div>
+      <div class="grid c3">
+        <div class="card hov rv" style="--d:0"><div class="ico t"><svg class="i"><use href="#i-mic"/></svg></div><h3>التهجي</h3><p>تحليل الكلمات إلى حروفها والتعرف على أحكامها، ثم إعادة تجميعها، تفصيليًا وإجماليًا.</p><div class="pts"><b class="num">30</b> درجة · شفوي وتحريري</div></div>
+        <div class="card hov rv" style="--d:1"><div class="ico n"><svg class="i"><use href="#i-grid"/></svg></div><h3>المهاري</h3><p>شرح حصة كاملة بمنهجية بيان: المراحل بترتيبها، وأركان الحصة الأربعة، ورسم السبورة.</p><div class="pts"><b class="num">40</b> درجة · شرح وتحديد مستوى</div></div>
+        <div class="card hov rv" style="--d:2"><div class="ico p"><svg class="i"><use href="#i-book"/></svg></div><h3>تحفة الأطفال</h3><p>حفظ أبيات أحكام النون الساكنة والتنوين والميم الساكنة حفظًا ذاتيًا قبل الاختبار.</p><div class="pts"><b class="num">10</b> درجات · شفوي</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sand">
+    <div class="wrap">
+      <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-flag"/></svg>رحلة المتدرب</div><h2>من التسجيل إلى الشهادة</h2></div>
+      <div class="steps rv" id="homeSteps">
+        <div class="track"><i></i></div>
+        <div class="step"><div class="bub"><svg class="i"><use href="#i-pen"/></svg></div><div class="k">الخطوة 1</div><h3>سجّل</h3><p>عبّئ نموذج التسجيل وسدّد الرسوم أو أدخل كود جهتك الشريكة.</p></div>
+        <div class="step"><div class="bub"><svg class="i"><use href="#i-monitor"/></svg></div><div class="k">الخطوة 2</div><h3>تدرّب</h3><p>أربعة أيام × أربع ساعات عن بُعد، مع واجب يومي قصير.</p></div>
+        <div class="step"><div class="bub"><svg class="i"><use href="#i-file"/></svg></div><div class="k">الخطوة 3</div><h3>اختبر</h3><p>قبلي قبل التدريب، ثم تحريري وشفوي بعده، ولك فرصتان.</p></div>
+        <div class="step"><div class="bub"><svg class="i"><use href="#i-award"/></svg></div><div class="k">الخطوة 4</div><h3>اعتُمد</h3><p>تصلك شهادة ركائز المعتمدة برقم اعتماد خلال أسبوع.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="spot rv">
+        <div class="sp-main">
+          <span class="tag"><span class="dot"></span>الدفعة القادمة</span>
+          <h2 style="margin-top:20px">ركائز 34</h2>
+          <p>رجال ونساء · عن بُعد · مكثّف</p>
+          <div class="count" id="countdown"><div><b class="num" data-k="d">0</b><small>يوم</small></div><div><b class="num" data-k="h">0</b><small>ساعة</small></div><div><b class="num" data-k="m">0</b><small>دقيقة</small></div></div>
+          <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">احجز مقعدك <svg class="i"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="sp-side">
+          <div class="tl-row"><span class="d"><svg class="i"><use href="#i-file"/></svg></span><div><div class="t">الاختبار القبلي</div><div class="v">الأربعاء 18 نوفمبر</div></div></div>
+          <div class="tl-row hl"><span class="d"><svg class="i"><use href="#i-monitor"/></svg></span><div><div class="t">أيام التدريب</div><div class="v">22 – 25 نوفمبر</div></div></div>
+          <div class="tl-row"><span class="d"><svg class="i"><use href="#i-pen"/></svg></span><div><div class="t">الاختبار النهائي</div><div class="v">29 نوفمبر · والفرصة الثانية 6 ديسمبر</div></div></div>
+          <div class="tl-row"><span class="d"><svg class="i"><use href="#i-award"/></svg></span><div><div class="t">إصدار الشهادات</div><div class="v">قبل 13 ديسمبر</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec tight" style="padding-top:0">
+    <div class="wrap">
+      <div class="band rv">
+        <div class="big num" data-count="86.7" data-dec="1" data-suf="%">0</div>
+        <div><p>من طلاب المعلمين المعتمدين بلغوا حد الإتقان في القراءة بعد ستة أشهر من التدريب.</p><small>المؤشر K8 · عينة من 15 طالبًا قيّمها مقيّم معتمد</small></div>
+        <a href="#results" class="btn btn-l">شاهد النتائج <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band rv">
+        <h2>معلّم مؤهّل في كل حلقة</h2>
+        <p>انضم إلى أكثر من 875 معلمًا ومعلمة اعتمدهم برنامج ركائز.</p>
+        <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">ابدأ التسجيل <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROGRAM ======================= -->
+<section class="view" id="v-program" data-view="program">
+  <div class="ph"><img class="emb-bg" src="assets/img/emblem-white.png" alt=""><div class="wrap">
+    <div class="crumb rv">الرئيسية <svg class="i"><use href="#i-arrow"/></svg> البرنامج</div>
+    <h1 class="rv" style="--d:1">عن برنامج ركائز</h1>
+    <p class="rv" style="--d:2">برنامج تدريبي انطلق عام 1443هـ لإعداد معلمي ومعلمات منهج بيان لتعليم القراءة وإتقان التلاوة.</p>
+  </div></div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="grid c2">
+        <div class="vm n rv"><div class="ico"><svg class="i"><use href="#i-eye"/></svg></div><h3>الرؤية</h3><p>معلم مؤهل معتمد في كل حلقة، يُخرّج طلابًا يقرؤون كتاب الله قراءة صحيحة متقنة.</p></div>
+        <div class="vm t rv" style="--d:1"><div class="ico"><svg class="i"><use href="#i-target"/></svg></div><h3>الرسالة</h3><p>تأهيل معلمي الحلقات على منهج بيان معرفيًا ومهاريًا، واعتمادهم وفق معايير واضحة، ومتابعة تجديد اعتمادهم.</p></div>
+      </div>
+      <div class="facts rv" style="margin-top:24px" id="facts"></div>
+    </div>
+  </div>
+
+  <div class="sec sand">
+    <div class="wrap">
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-cal"/></svg>الدورة التدريبية</div><h2>أربعة أيام مركّزة</h2><p>يومان للتهجي ويومان للمهاري، أربع ساعات يوميًا، مع سؤالين واجبًا كل يوم.</p></div>
+      <div class="days" id="days"></div>
+    </div>
+  </div>
+
+  <div class="sec" id="exams">
+    <div class="wrap">
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-file"/></svg>الاختبارات</div><h2>ثلاثة اختبارات في رحلة المتدرب</h2><p>قبلي يقيس مستواك قبل التدريب، ثم تحريري وشفوي بعده يحددان اجتيازك.</p></div>
+      <div class="exams">
+        <div class="exam pre rv"><div class="exam-h"><div class="ico n"><svg class="i"><use href="#i-target"/></svg></div><div class="mark na"><b>لا يُحتسب</b></div><h3>الاختبار القبلي</h3><div class="when"><svg class="i"><use href="#i-cal"/></svg>الأربعاء السابق لانطلاق الدورة</div></div>
+          <div class="exam-b"><div class="pr"><span>التهجي</span><span>قياس مستوى</span></div><div class="pr"><span>المهاري</span><span>قياس مستوى</span></div><p>يعرف به المدرب مستواك قبل التدريب، ولا يدخل في مجموع الدرجات.</p></div></div>
+        <div class="exam wr rv" style="--d:1"><div class="exam-h"><div class="ico t"><svg class="i"><use href="#i-pen"/></svg></div><div class="mark"><b class="num">20</b><small>درجة</small></div><h3>الاختبار التحريري</h3><div class="when"><svg class="i"><use href="#i-monitor"/></svg>نموذج إلكتروني يُصحَّح آليًا</div></div>
+          <div class="exam-b"><div class="pr"><span>اختبار التهجي</span><span><span class="num">10</span> درجات</span></div><div class="pr"><span>اختبار المهاري</span><span><span class="num">10</span> درجات</span></div><p>يُجرى بعد انتهاء الدورة، وتظهر نتيجته مباشرة.</p></div></div>
+        <div class="exam or rv" style="--d:2"><div class="exam-h"><div class="ico n"><svg class="i"><use href="#i-mic"/></svg></div><div class="mark"><b class="num">60</b><small>درجة</small></div><h3>الاختبار الشفوي</h3><div class="when"><svg class="i"><use href="#i-users"/></svg>مقابلة فردية مع المقيّم</div></div>
+          <div class="exam-b"><div class="pr"><span>التهجي</span><span><span class="num">20</span> درجة</span></div><div class="pr"><span>شرح سير قاعدة</span><span><span class="num">20</span> درجة</span></div><div class="pr"><span>تحديد مستوى طالب</span><span><span class="num">10</span> درجات</span></div><div class="pr"><span>تحفة الأطفال</span><span><span class="num">10</span> درجات</span></div></div></div>
+      </div>
+      <div class="chances rv">
+        <div><span class="ico t"><svg class="i"><use href="#i-flag"/></svg></span><div><small>الفرصة الأولى</small><b>بداية الأسبوع التالي للدورة</b></div></div>
+        <div><span class="ico p"><svg class="i"><use href="#i-refresh"/></svg></span><div><small>الفرصة الثانية</small><b>بداية الأسبوع الثاني بعدها</b></div></div>
+        <div><span class="ico n"><svg class="i"><use href="#i-check"/></svg></span><div><small>شرط دخول الاختبار</small><b>حضور <span class="num">80%</span> من الدورة</b></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sand">
+    <div class="wrap">
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-shield"/></svg>التقييم والاعتماد</div><h2>100 درجة، والاجتياز من 80</h2><p>يُشترط بلوغ <span class="num">80%</span> في كل جزء، والحضور بنسبة <span class="num">80%</span> شرط لدخول الاختبار.</p></div>
+      <div class="score rv">
+        <div class="ringchart" id="scoreRing"></div>
+        <div class="leg" id="scoreLeg"></div>
+      </div>
+      <div class="grid c2" style="margin-top:56px">
+        <div class="card rv"><div class="ico p"><svg class="i"><use href="#i-x"/></svg></div><h3>صفات مانعة من الاجتياز</h3>
+          <ul class="list x" id="bans"></ul></div>
+        <div class="card rv" style="--d:1"><div class="ico t"><svg class="i"><use href="#i-award"/></svg></div><h3>الشهادة المعتمدة</h3>
+          <ul class="list"><li><svg class="i"><use href="#i-check"/></svg>صالحة سنة واحدة للاعتماد الأول</li><li><svg class="i"><use href="#i-refresh"/></svg>تُجدَّد 3 سنوات بشهادة ممارسة من الجهة المشغّلة</li><li><svg class="i"><use href="#i-file"/></svg>تصدر آليًا برقم اعتماد خلال أسبوع من الاختبار</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======================= CURRICULUM ======================= -->
+<section class="view" id="v-curriculum" data-view="curriculum">
+  <div class="ph"><img class="emb-bg" src="assets/img/emblem-white.png" alt=""><div class="wrap">
+    <div class="crumb rv">الرئيسية <svg class="i"><use href="#i-arrow"/></svg> المنهج</div>
+    <h1 class="rv" style="--d:1">منهج بيان</h1>
+    <p class="rv" style="--d:2">سبع مراحل متدرّجة تنقل الطفل من الحرف إلى التلاوة المتقنة.</p>
+  </div></div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-layers"/></svg>المراحل</div><h2>اختر مرحلة لعرض قواعدها</h2></div>
+      <div class="stg rv" id="stages"></div>
+      <div class="sd rv" id="stageDetail"></div>
+    </div>
+  </div>
+
+  <div class="sec sand">
+    <div class="wrap">
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-grid"/></svg>رسم السبورة</div><h2>أربعة مربعات لكل حصة</h2><p>بنية ثابتة تتكرر في كل حصة، ثم يأتي التطبيق: أقرأ وأجمّع، والماضي القريب، وأشكّل، والإملاء.</p></div>
+      <div class="board" id="board"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-mic"/></svg>حقيبة التهجي</div><h2>ثماني وحدات للتهجي</h2><p>التهجي وسيلة لا غاية: يحلّل الكلمة إلى حروفها وأحكامها ثم يعيد بناءها.</p></div>
+      <div class="units" id="units"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RESULTS ======================= -->
+<section class="view" id="v-results" data-view="results">
+  <div class="ph"><img class="emb-bg" src="assets/img/emblem-white.png" alt=""><div class="wrap">
+    <div class="crumb rv">الرئيسية <svg class="i"><use href="#i-arrow"/></svg> النتائج</div>
+    <h1 class="rv" style="--d:1">الحصاد والأثر</h1>
+    <p class="rv" style="--d:2">أرقام البرنامج من 32 دورة معتمدة منذ 1443هـ.</p>
+  </div></div>
+
+  <div class="sec" style="padding-bottom:60px">
+    <div class="wrap">
+      <div class="kp">
+        <div class="kpc rv"><div class="ico n"><svg class="i"><use href="#i-users"/></svg></div><div class="v num" data-count="1239">0</div><div class="l">متدرب ومتدربة</div></div>
+        <div class="kpc rv" style="--d:1"><div class="ico t"><svg class="i"><use href="#i-award"/></svg></div><div class="v num" data-count="875">0</div><div class="l">معلم ومعلمة معتمدون</div></div>
+        <div class="kpc rv" style="--d:2"><div class="ico p"><svg class="i"><use href="#i-trend"/></svg></div><div class="v num" data-count="70.6" data-dec="1" data-suf="%">0</div><div class="l">نسبة الاجتياز العامة</div></div>
+        <div class="kpc rv" style="--d:3"><div class="ico t"><svg class="i"><use href="#i-target"/></svg></div><div class="v num" data-count="86.7" data-dec="1" data-suf="%">0</div><div class="l">إتقان طلاب المعتمدين</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sand" style="padding-top:80px">
+    <div class="wrap">
+      <div class="chart-box rv">
+        <div class="ch-h"><div><h3 id="hTitle">المشاركون والمجتازون حسب السنة</h3><p>مرّر المؤشر على الأعمدة لعرض التفاصيل</p></div>
+          <div class="seg" id="hSeg"><button class="on" data-v="year">حسب السنة</button><button data-v="course">حسب الدورة</button></div></div>
+        <div class="lg"><span><i style="background:var(--navy)"></i>المشاركون</span><span><i style="background:var(--teal)"></i>المجتازون</span><span><i style="background:var(--peach);height:3px"></i>نسبة الاجتياز</span><span><i style="height:0;width:16px;border-top:2px dashed var(--peach);border-radius:0"></i>المستهدف <span class="num">80%</span></span></div>
+        <div id="hChart"></div>
+      </div>
+      <div class="grid c2" style="margin-top:24px">
+        <div class="chart-box rv">
+          <div class="ch-h"><div><h3>رضا المتدربين</h3><p>متوسط موزون من 176 ردًا</p></div></div>
+          <div style="display:flex;gap:32px;align-items:center;margin-top:20px;flex-wrap:wrap">
+            <div class="donut" data-val=".902" data-col="var(--teal)"><div class="mid"><div><b class="num">9.02</b><small>من 10</small></div></div></div>
+            <div style="flex:1;min-width:220px" id="satBars"></div>
+          </div>
+        </div>
+        <div class="chart-box rv" style="--d:1">
+          <div class="ch-h"><div><h3>قياس الأثر K8</h3><p>متوسط عينة الطلاب في كل معيار</p></div></div>
+          <div style="display:flex;gap:32px;align-items:center;margin-top:20px;flex-wrap:wrap">
+            <div class="donut" data-val=".867" data-col="var(--peach)"><div class="mid"><div><b class="num">86.7%</b><small>13 من 15 طالبًا</small></div></div></div>
+            <div style="flex:1;min-width:220px" id="k8Bars"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-chart"/></svg>مؤشرات الأداء</div><h2>أين نحن من مستهدفات 1448هـ؟</h2></div>
+      <div class="kpis rv" id="kpis"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= JOIN ======================= -->
+<section class="view" id="v-join" data-view="join">
+  <div class="ph"><img class="emb-bg" src="assets/img/emblem-white.png" alt=""><div class="wrap">
+    <div class="crumb rv">الرئيسية <svg class="i"><use href="#i-arrow"/></svg> التسجيل</div>
+    <h1 class="rv" style="--d:1">انضم إلى ركائز</h1>
+    <p class="rv" style="--d:2">لمعلمي الحلقات في المساجد، ومعلمات المدارس ودور التحفيظ، ومرشحي الجهات الشريكة.</p>
+  </div></div>
+
+  <div class="sec">
+    <div class="wrap join-grid">
+      <div>
+        <div class="head rv" style="margin-bottom:28px"><h2 style="font-size:30px">الدفعات المتاحة</h2></div>
+        <div class="coh" id="cohorts"></div>
+        <div class="card rv" style="margin-top:24px"><h3>ما تحتاجه للتسجيل</h3>
+          <ul class="list" style="margin-top:16px">
+            <li><svg class="i"><use href="#i-check"/></svg>الالتزام بحضور الأيام الأربعة كاملة</li>
+            <li><svg class="i"><use href="#i-check"/></svg>جوال مفعّل فيه واتساب، وبريد إلكتروني</li>
+            <li><svg class="i"><use href="#i-check"/></svg>اسم الجهة والحلقة أو المدرسة، واسم المشرف وجواله</li>
+            <li><svg class="i"><use href="#i-check"/></svg>حفظ أبيات تحفة الأطفال قبل الاختبار</li>
+          </ul></div>
+      </div>
+      <aside class="price rv" style="--d:1">
+        <small style="color:rgba(255,255,255,.6)">رسوم الدورة</small>
+        <div class="p"><span class="num">300</span> <small>ريال</small></div>
+        <ul>
+          <li><svg class="i"><use href="#i-heart"/></svg>مجانًا لمرشحي الجهات الشريكة</li>
+          <li><svg class="i"><use href="#i-wallet"/></svg>السداد عبر متجر غراس</li>
+          <li><svg class="i"><use href="#i-users"/></svg>مسار للرجال ومسار للنساء</li>
+          <li><svg class="i"><use href="#i-award"/></svg>شهادة معتمدة مرقّمة</li>
+        </ul>
+        <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p" id="regBtn">نموذج التسجيل <svg class="i"><use href="#i-arrow"/></svg></a>
+      </aside>
+    </div>
+  </div>
+
+  <div class="sec sand">
+    <div class="wrap">
+      <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-msg"/></svg>أسئلة شائعة</div><h2>قبل أن تسجّل</h2></div>
+      <div class="faq rv" id="faq"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div><img src="assets/img/logo-white.png" alt="بيان"><p>برنامج ركائز لإعداد وتأهيل معلمي ومعلمات منهج بيان لتعليم القراءة وإتقان التلاوة.</p></div>
+      <div><h4>البرنامج</h4><a href="#program">عن البرنامج</a><a href="#curriculum">منهج بيان</a><a href="#results">النتائج</a></div>
+      <div><h4>التسجيل</h4><a href="#join">الدفعات القادمة</a><a href="#join">الأسئلة الشائعة</a></div>
+    </div>
+    <div class="fb"><span>جمعية غراس لتنمية الطفل</span><span>آخر تحديث للبيانات: <span class="num">2026-11-08</span></span></div>
+  </div>
+</footer>
+
+<script>
+/* ===== DATA – وثيقة مشروع برنامج ركائز v2 ===== */
+const D={
+facts:[["i-cal","سنة الانطلاق","1443هـ","n"],["i-clock","مدة الدورة","16 ساعة في 4 أيام","t"],["i-monitor","النمط","عن بُعد غالبًا","p"],["i-users","المسارات","رجال · نساء","n"],["i-wallet","الرسوم","300 ريال · مجانًا للشركاء","t"],["i-award","المخرج","شهادة معتمدة مرقّمة","p"]],
+days:[["i-mic","t","التهجي (1)","الحروف والحركات والمدود والتنوينات، والتعريفات الأساسية."],["i-mic","t","التهجي (2)","السكون والشدات، وكيفية شرح التهجي والإسقاط في كل مرحلة."],["i-grid","n","المهاري (1)","المربعات وآلية تشغيلها، ومراحل الحروف والحركات والمدود."],["i-grid","n","المهاري (2)","بقية المراحل، وتحديد مستوى الطلاب، ومعالجة إشكالات الحلقة."]],
+score:[["التهجي","شفوي 20 · تحريري 10",30,"var(--navy)"],["المهاري","شرح قاعدة 20 · تحديد مستوى 10 · تحريري 10",40,"var(--teal)"],["الواجبات","8 أسئلة خلال الأيام الأربعة",20,"var(--peach)"],["تحفة الأطفال","اختبار شفوي",10,"#9FB8C0"]],
+bans:["أكثر من لحن جلي أثناء التلاوة","الخلط بين أنواع المدود أو مقاديرها","الخلط بين أحكام النون الساكنة","لثغة مانعة من التدريس"],
+stages:[
+ {n:"0",g:"✦",t:"التمهيدي",d:"أسبوع",goal:"تهيئة الطفل وبث روح الألفة بينه وبين المعلم وزملائه",r:[["أسبوع الاستقبال","7 أيام","يغلب الجانب الترفيهي على التعليمي"]]},
+ {n:"1",g:"أ ب",t:"الحروف",d:"9 أسابيع",goal:"قراءة الحروف الهجائية وكتابتها",r:[["تمهيدي الحروف","9 أسابيع","الحروف بالصور ثم المجردة، وتمكين حرف كل يوم، مع الكتابة"],["مواضع الحروف","","الحرف في أول الكلمة ووسطها وآخرها، والتمييز بالنقاط"]]},
+ {n:"2",g:"بَ",t:"الحركات",d:"35 يومًا",goal:"قراءة كلمات وجمل بالحركات الثلاث",r:[["قاعدة الفتح","15 يومًا","مقاطع من حرفين، ثم كلمات ثلاثية، ثم جمل، ثم الاختبار"],["قاعدة الكسر","10 أيام","مقاطع، كلمات ثلاثية ورباعية، جمل، ثم الاختبار"],["قاعدة الضم","10 أيام","مقاطع، كلمات ثلاثية ورباعية، جمل، ثم الاختبار"]]},
+ {n:"3",g:"بَا",t:"المدود",d:"27 يومًا",goal:"قراءة كلمات وجمل بحروف المد",r:[["المد بالألف","9 أيام","كلمات ثلاثية ورباعية وجمل؛ ويشمل مد البدل والمتصل"],["المد بالياء","9 أيام","بالتوزيع نفسه"],["المد بالواو","9 أيام","بالتوزيع نفسه"]]},
+ {n:"4",g:"بً",t:"التنوينات",d:"22 يومًا",goal:"قراءة كلمات وجمل منوّنة",r:[["التنوين بالفتح","8 أيام","الفرق بين الممدود والمنوّن، والتنوين مع التاء المربوطة"],["التنوين بالكسر","7 أيام",""],["التنوين بالضم","7 أيام",""]]},
+ {n:"5",g:"بْ",t:"السكون",d:"11 يومًا",goal:"قراءة كلمات وجمل بالسكون",r:[["السكون","11 يومًا","كلمات ثانيها ساكن، وتدريبات، وجمل؛ واللام القمرية في اليوم الأخير"]]},
+ {n:"6",g:"بّ",t:"الشدات",d:"28 يومًا",goal:"قراءة كلمات وجمل بالشدة، ثم الخاتمة بالتلاوة",r:[["الشدة مع الحركات","19 يومًا","مع الفتح والكسر والضم، واللام الشمسية"],["الشدة مع التنوين","9 أيام","3 أيام لكل قاعدة: تحضيري، كلمات، جمل"],["المشدد الموقوف عليه","","مع الهمس والقلقلة، وبغنة حركتين"],["الخاتمة: التلاوة","","تطبيق القواعد كلها على التلاوة"]]}],
+board:[["المراجعة","مراجعة ما سبق من حروف أو قواعد"],["القاعدة","عرض القاعدة الجديدة على الحروف"],["القاعدة بمثال","تطبيقها على كلمات بالتدرج"],["لعبة الوصل","تركيب الكلمات من مقاطعها تفاعليًا"]],
+units:["تهجي الحركات","تهجي السكون","تهجي الشدات","تهجي المدود","الميم الساكنة","النون الساكنة","همزة الوصل","التهجي وقفًا"],
+years:[[1443,109,81,3],[1444,143,115,4],[1445,167,95,3],[1446,193,155,7],[1447,401,283,10],[1448,226,146,5]],
+courses:[[1,"",62,44],[2,"1443/04/22",30,23],[3,"1443/07/04",17,14],[4,"1444/01/29",87,71],[5,"2022/08/17",38,32],[6,"1444/08/06",6,5],[7,"1444/08/19",12,7],[8,"2023/07/23",63,43],[9,"2023/10/22",46,24],[10,"2024/02/05",58,28],[11,"2024/08/08",39,30],[12,"2024/08/31",8,6],[13,"2024/11/09",51,45],[14,"2025/02/09",22,20],[15,"2025/03/13",17,10],[16,"2025/04/14",30,26],[17,"2025/06/17",26,18],[18,"2025/08/24",92,72],[19,"2025/10/11",54,45],[20,"2025/11/23",42,20],[21,"2025/12/06",30,13],[22,"2026/01/12",39,24],[23,"2026/01/19",28,18],[24,"2026/02/05",18,14],[25,"2026/03/01",20,19],[26,"2026/04/18",35,24],[27,"2026/06/09",43,34],[28,"2026/08/09",87,50],[29,"2026/08/16",22,14],[30,"2026/08/23",79,59],[31,"2026/09/06",32,20],[32,"2026/09/01",6,3]],
+sat:[["أداء المدرب",4.73],["أسلوب المدرب",4.67],["التوصية بالدورة",4.66],["الفائدة العامة",4.62],["عناصر الجذب",4.29]],
+k8:[["مخارج الحروف",22.2,25],["قواعد منهج بيان",26.3,30],["الأحكام الأساسية",22.5,25],["طلاقة القراءة",17.1,20]],
+kpis:[["K1","عدد المجتازين سنويًا",283,288,"",""],["K2","نسبة الاجتياز السنوية",70.6,80,"%",""],["K4","متوسط الرضا العام",9.02,9,"/10",""],["K5","الاستجابة لاستبيان الرضا",21,60,"%",""],["K8","إتقان طلاب المعتمدين",86.7,85,"%",""],["K6","المعتمدون الممارسون بعد 6 أشهر",null,null,"","يُقاس أول مرة في أبريل 2027"],["K7","تجديد الاعتماد قبل انتهائه",null,null,"","يُقاس أول مرة في 1448هـ"]],
+cohorts:[{n:34,live:1,st:"التسجيل مفتوح",train:"22 – 25 نوفمبر",exam:"29 نوفمبر",mode:"عن بُعد · مكثّف",cap:20},{n:35,live:0,st:"قريبًا",train:"29 نوفمبر – 2 ديسمبر",exam:"6 ديسمبر",mode:"عن بُعد · مكثّف",cap:20}],
+faq:[["هل الدورة حضورية أم عن بُعد؟","تُنفَّذ عن بُعد غالبًا، وتُقام بعض الدفعات حضوريًا."],["ماذا لو لم أجتز الاختبار؟","لك فرصتان. وبعدهما يمكنك إعادة الدورة مع دفعة لاحقة، أو طلب اختبار برسوم 100 ريال عبر متجر غراس."],["هل تُدرَّس تحفة الأطفال في الدورة؟","لا، يحفظها المتدرب ذاتيًا، وهي شرط للاجتياز (10 درجات ضمن الاختبار الشفوي)."],["كم مدة صلاحية الشهادة؟","سنة واحدة للاعتماد الأول، ثم 3 سنوات عند التجديد بشهادة ممارسة من الجهة المشغّلة."],["هل يوجد تسجيل مجاني؟","نعم، لمرشحي الجهات الشريكة عبر كود تسجيل خاص بالجهة."]],
+};
+
+/* ===== helpers ===== */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const fmt=(n,d=0)=>Number(n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct=(a,b)=>b?a/b*100:0;
+const ic=id=>`<svg class="i"><use href="#${id}"/></svg>`;
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const tip=$("#tip");
+function showTip(e,h){tip.innerHTML=h;isolateNums(tip);tip.style.opacity=1;tip.style.left=Math.min(e.clientX+16,innerWidth-tip.offsetWidth-10)+"px";tip.style.top=(e.clientY-tip.offsetHeight-14)+"px"}
+function hideTip(){tip.style.opacity=0}
+function isolateNums(root){
+  const re=/(\d{4}-\d{2}-\d{2}|\d[\d,.]*%)/g;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest("svg,script,style,.num"))return 2;re.lastIndex=0;return re.test(n.nodeValue)?1:2}});
+  const L=[];while(w.nextNode())L.push(w.currentNode);
+  L.forEach(n=>{const f=document.createDocumentFragment();n.nodeValue.split(re).forEach((s,i)=>{if(i%2){const e=document.createElement("span");e.className="num";e.textContent=s;f.appendChild(e)}else if(s)f.appendChild(document.createTextNode(s))});n.replaceWith(f)});
+}
+
+/* ===== render: program ===== */
+$("#facts").innerHTML=D.facts.map(([i,k,v,c])=>`<div class="fact"><span class="ico ${c}">${ic(i)}</span><div><small>${k}</small><b>${v}</b></div></div>`).join("");
+$("#days").innerHTML=D.days.map(([i,c,t,p],k)=>`<div class="day rv" style="--d:${k}"><span class="no num">${k+1}</span><div class="ico ${c}">${ic(i)}</div><small>اليوم ${["الأول","الثاني","الثالث","الرابع"][k]} · 4 ساعات</small><h3>${t}</h3><p>${p}</p></div>`).join("");
+(function(){
+  const r=110,C=2*Math.PI*r,gap=6;let off=0;
+  const arcs=D.score.map(([n,d,v,col])=>{const len=C*v/100-gap;const s=`<circle cx="140" cy="140" r="${r}" fill="none" stroke="${col}" stroke-width="26" stroke-dasharray="0 ${C}" data-len="${len}" data-off="${-off}" stroke-dashoffset="${-off}" style="transition:stroke-dasharray 1.2s var(--ease)"/>`;off+=C*v/100;return s}).join("");
+  $("#scoreRing").innerHTML=`<svg viewBox="0 0 280 280"><circle cx="140" cy="140" r="${r}" fill="none" stroke="${css("--sand")}" stroke-width="26"/>${arcs}</svg><div class="mid"><div><b class="num">100</b><small>درجة · الاجتياز 80</small></div></div>`;
+  $("#scoreLeg").innerHTML=D.score.map(([n,d,v,col])=>`<div class="leg-row"><i style="background:${col}"></i><div><b>${n}</b><small>${d}</small></div><span class="v num">${v}</span></div>`).join("");
+})();
+$("#bans").innerHTML=D.bans.map(b=>`<li>${ic("i-x")}${b}</li>`).join("");
+
+/* ===== curriculum ===== */
+$("#stages").innerHTML=D.stages.map((s,i)=>`<button data-i="${i}"><span class="g">${s.g}</span><b>${s.t}</b><small>${s.d}</small></button>`).join("");
+function stage(i){
+  $$("#stages button").forEach((b,j)=>b.classList.toggle("on",j===i));
+  const s=D.stages[i];
+  $("#stageDetail").innerHTML=`<div class="anim"><div class="sd-h"><div><small style="color:var(--soft)">المرحلة ${s.n}</small><h3>${s.t}</h3><p>${s.goal}</p></div><div class="dur">${ic("i-clock")}<span>${s.d} في الحلقة</span></div></div><div class="rules">${s.r.map(([a,b,c],k)=>`<div class="rule" style="animation:viewIn .5s var(--ease) ${k*70}ms both"><div class="rh"><b>${a}</b>${b?`<span class="pill">${b}</span>`:""}</div>${c?`<p>${c}</p>`:""}</div>`).join("")}</div></div>`;
+}
+$$("#stages button").forEach(b=>b.onclick=()=>stage(+b.dataset.i));stage(2);
+$("#board").innerHTML=D.board.map(([t,p],k)=>`<div class="sq rv" style="--d:${k}"><span class="n num">${k+1}</span><div><h4>${t}</h4><p>${p}</p></div></div>`).join("");
+$("#units").innerHTML=D.units.map((u,k)=>`<div class="unit rv" style="--d:${k%4}"><span class="n num">${k+1}</span><b>${u}</b></div>`).join("");
+
+/* ===== results ===== */
+const NS="http://www.w3.org/2000/svg";
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+function barChart(host,rows,o){
+  host.innerHTML="";
+  const W=1040,H=360,m={t:34,r:10,b:44,l:44},iw=W-m.l-m.r,ih=H-m.t-m.b;
+  const mv=Math.max(...rows.map(r=>r.a)),stp=mv>200?100:mv>100?50:20,max=Math.ceil(mv/stp)*stp;
+  const y=v=>m.t+ih-v/max*ih,yp=v=>m.t+ih-v/100*ih;
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,class:"chart"},host);
+  for(let v=0;v<=max;v+=stp){el("line",{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),stroke:css("--line")},svg);const t=el("text",{x:m.l-12,y:y(v)+4,"text-anchor":"end","font-size":12,fill:css("--soft")},svg);t.textContent=fmt(v)}
+  const n=rows.length,band=iw/n,bw=Math.min(o.bw,band*.36),g=Math.max(2,bw*.15),pts=[];
+  rows.forEach((r,i)=>{
+    const cx=W-m.r-band*(i+.5),d=Math.min(i*(n>12?25:90),900);
+    const G=el("g",{},svg);el("rect",{x:cx-band/2,y:m.t,width:band,height:ih,fill:"transparent"},G);
+    const A=el("rect",{class:"bar",x:cx+g/2,y:y(r.a),width:bw,height:m.t+ih-y(r.a),rx:Math.min(5,bw/3),fill:css("--navy"),style:`animation-delay:${d}ms`},G);
+    const B=el("rect",{class:"bar",x:cx-g/2-bw,y:y(r.b),width:bw,height:m.t+ih-y(r.b),rx:Math.min(5,bw/3),fill:css("--teal"),style:`animation-delay:${d+80}ms`},G);
+    const t=el("text",{x:cx,y:H-m.b+24,"text-anchor":"middle","font-size":o.fs,fill:css("--muted")},svg);t.textContent=r.label;
+    const rt=pct(r.b,r.a);pts.push([cx,yp(rt),rt]);
+    G.addEventListener("mousemove",e=>{A.style.opacity=B.style.opacity=.82;showTip(e,`<b>${o.pre}${r.label}</b><br>المشاركون: ${fmt(r.a)}<br>المجتازون: ${fmt(r.b)}<br>نسبة الاجتياز: ${rt.toFixed(1)}%${r.x||""}`)});
+    G.addEventListener("mouseleave",()=>{A.style.opacity=B.style.opacity=1;hideTip()});
+  });
+  el("line",{x1:m.l,x2:W-m.r,y1:yp(80),y2:yp(80),stroke:css("--peach"),"stroke-dasharray":"5 6",opacity:.7},svg);
+  el("polyline",{class:"ln",points:pts.map(p=>p[0]+","+p[1]).join(" "),fill:"none",stroke:css("--peach"),"stroke-width":2.5,"stroke-linejoin":"round","pointer-events":"none"},svg);
+  pts.forEach((p,i)=>{el("circle",{class:"dotp",cx:p[0],cy:p[1],r:n>12?3:5,fill:"#fff",stroke:css("--peach"),"stroke-width":2.5,style:`animation-delay:${1200+i*40}ms`,"pointer-events":"none"},svg);
+    if(n<=12){const t=el("text",{class:"dotp",x:p[0],y:p[1]-14,"text-anchor":"middle","font-size":13,fill:css("--peach-ink"),stroke:"#fff","stroke-width":4,"paint-order":"stroke",style:`animation-delay:${1300+i*60}ms`,"pointer-events":"none"},svg);t.textContent=p[2].toFixed(1)+"%"}});
+}
+const HR={year:D.years.map(([l,a,b,c])=>({label:l+"هـ",a,b,x:`<br>عدد الدورات: ${c}`})),course:D.courses.map(([l,d,a,b])=>({label:l,a,b,x:d?`<br>التاريخ: ${d}`:""}))};
+let hMode="year";
+function drawH(){ $("#hTitle").textContent=hMode==="year"?"المشاركون والمجتازون حسب السنة":"المشاركون والمجتازون حسب الدورة"; barChart($("#hChart"),HR[hMode],hMode==="year"?{bw:46,fs:13.5,pre:""}:{bw:12,fs:11,pre:"ركائز "}) }
+$$("#hSeg button").forEach(b=>b.onclick=()=>{$$("#hSeg button").forEach(x=>x.classList.toggle("on",x===b));hMode=b.dataset.v;drawH()});
+const hbar=(k,v,full,col,mark)=>`<div class="hb"><div class="top"><span>${k}</span><span class="num">${v}${full?" / "+full:""}</span></div><div class="tr"><i style="--w:${v/full*100}%;background:${col}"></i>${mark?`<em style="right:80%"></em>`:""}</div></div>`;
+$("#satBars").innerHTML=D.sat.map(([k,v])=>hbar(k,v.toFixed(2),5,"var(--navy)")).join("");
+$("#k8Bars").innerHTML=D.k8.map(([k,v,f])=>hbar(k,v,f,"var(--teal)",1)).join("");
+$$(".donut").forEach(d=>{const r=72,C=2*Math.PI*r;d.insertAdjacentHTML("afterbegin",`<svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="${r}" fill="none" stroke="${css("--sand")}" stroke-width="14"/><circle class="arc" cx="85" cy="85" r="${r}" fill="none" stroke="${d.dataset.col}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-c="${C}"/></svg>`)});
+$("#kpis").innerHTML=`<div class="kr h"><span>الرمز</span><span>المؤشر</span><span>المتحقق</span><span class="g">المستهدف</span><span class="pc">التقدم نحو المستهدف</span></div>`+D.kpis.map(([c,t,b,g,u,na])=>{
+  if(b===null)return `<div class="kr"><span class="code">${c}</span><span class="t">${t}</span><span class="na" style="grid-column:span 3">${na}</span></div>`;
+  const p=Math.min(100,b/g*100),ok=b>=g;
+  return `<div class="kr"><span class="code">${c}</span><span class="t">${t}</span><span class="b num">${b}${u}</span><span class="g num">${g}${u}</span><span class="pc"><div class="pb"><i style="--w:${p}%;background:${ok?"var(--teal)":"var(--peach)"}"></i></div></span></div>`}).join("");
+
+/* ===== join ===== */
+$("#cohorts").innerHTML=D.cohorts.map((c,k)=>`<div class="cc rv" style="--d:${k}"><div class="cc-h"><h3>ركائز ${c.n}</h3><span class="badge ${c.live?"live":"plan"}">${c.st}</span></div>
+<div class="cc-r"><span>${ic("i-cal")}التدريب</span><span>${c.train}</span></div>
+<div class="cc-r"><span>${ic("i-file")}الاختبار</span><span>${c.exam}</span></div>
+<div class="cc-r"><span>${ic("i-monitor")}النمط</span><span>${c.mode}</span></div>
+<div class="cc-r"><span>${ic("i-users")}المقاعد</span><span>${c.cap} متدربًا</span></div></div>`).join("");
+$("#faq").innerHTML=D.faq.map(([q,a])=>`<div class="qa"><button>${q}<span class="pm">${ic("i-plus")}</span></button><div class="a"><div><p>${a}</p></div></div></div>`).join("");
+$$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList.contains("open");$$(".qa").forEach(x=>x.classList.remove("open"));if(!o)q.classList.add("open")});
+
+isolateNums(document.body);
+
+/* ===== motion ===== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target;t.classList.add("in");
+  t.querySelectorAll?.("[data-count]").forEach(count);if(t.dataset.count)count(t);
+  t.querySelectorAll?.(".donut .arc").forEach(a=>a.setAttribute("stroke-dashoffset",a.dataset.c*(1-a.closest(".donut").dataset.val)));
+  if(t.id==="scoreRing"||t.querySelector?.("#scoreRing"))ringIn();
+  io.unobserve(t)}),{threshold:.15,rootMargin:"0px 0px -40px 0px"});
+function count(n){if(n.dataset.done)return;n.dataset.done=1;const to=+n.dataset.count,dc=+(n.dataset.dec||0),suf=n.dataset.suf||"",t0=performance.now(),dur=1600;
+  const f=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,4);n.textContent=fmt(to*e,dc)+suf;if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+function ringIn(){$$("#scoreRing circle[data-len]").forEach((c,i)=>setTimeout(()=>c.setAttribute("stroke-dasharray",`${c.dataset.len} 9999`),i*180))}
+function observe(scope){scope.querySelectorAll(".rv,.statbar .in-box,.kpis,.chart-box,.score,.card").forEach(x=>io.observe(x))}
+
+/* ===== router ===== */
+const views=["home","program","curriculum","results","join"];
+function route(){
+  let v=location.hash.slice(1);if(!views.includes(v))v="home";
+  $$(".view").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
+  $$("#menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+v));
+  $("#menu").classList.remove("open");
+  window.scrollTo({top:0,behavior:"instant"});
+  const cur=$("#v-"+v);observe(cur);
+  if(v==="results")drawH();
+  onScroll();
+}
+addEventListener("hashchange",route);
+
+/* header */
+const hdr=$("#hdr");
+function onScroll(){hdr.classList.toggle("solid",scrollY>40)}
+addEventListener("scroll",onScroll,{passive:true});
+$("#burger").onclick=()=>{$("#menu").classList.toggle("open");hdr.classList.add("solid")};
+
+/* countdown to ركائز 34 */
+(function(){const target=new Date("2026-11-22T16:00:00+03:00");const box=$("#countdown");
+  const tick=()=>{let s=Math.max(0,(target-new Date())/1000);const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
+    box.querySelector('[data-k="d"]').textContent=d;box.querySelector('[data-k="h"]').textContent=h;box.querySelector('[data-k="m"]').textContent=m};
+  tick();setInterval(tick,30000)})();
+
+route();
+</script>
+</body>
+</html>
