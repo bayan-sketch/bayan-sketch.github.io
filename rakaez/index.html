@@ -1127,7 +1127,7 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
     if(q.t==="chips")c=`<div class="chips">${q.o.concat(q.other?[OTHER]:[]).map(o=>`<button type="button" data-v="${o}">${o}</button>`).join("")}</div>`+(q.other?othInp:"");
     else if(q.t==="select")c=`<select class="inp"><option value="">${q.ph||"اختر"}</option>${q.o.concat(q.other?[OTHER]:[]).map(o=>`<option>${o}</option>`).join("")}</select>`+(q.other?othInp:"");
     else if(q.t==="area")c=`<textarea class="inp"></textarea>`;
-    else if(q.t==="tel")c=`<input class="inp ltr" type="tel" inputmode="numeric" maxlength="12" placeholder="05XXXXXXXX" autocomplete="tel">`;
+    else if(q.t==="tel")c=`<input class="inp ltr" type="tel" inputmode="numeric" maxlength="12" placeholder="966XXXXXXXXX" autocomplete="tel">`;
     else c=`<input class="inp${q.t==="email"||q.t==="number"?" ltr":""}" type="${q.t==="number"?"text":q.t}" ${q.t==="number"?'inputmode="numeric" maxlength="4"':""}>`;
     return `<div class="fld${q.full?" full":""}" data-id="${q.id}"><label>${q.l}${r}</label>${c}${h}<span class="emsg"></span></div>`};
   $("#f1").innerHTML=Q[1].map(field).join("");$("#f2").innerHTML=Q[2].map(field).join("");
@@ -1150,7 +1150,7 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
   const check=q=>{const f=$(`.fld[data-id="${q.id}"]`),v=val(q),m=f.querySelector(".emsg");let e="";
     if(q.req&&(!v||(typeof v==="object"&&!v.other)))e=typeof v==="object"?"اكتب الإجابة في الخانة":q.t==="chips"||q.t==="select"?"يرجى الاختيار":"هذا الحقل مطلوب";
     else if(v&&q.t==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))e="البريد الإلكتروني غير صحيح";
-    else if(q.t==="tel"&&raw(q)&&!phoneOk(raw(q)))e="اكتب 10 أرقام تبدأ بـ 0 (مثل 0500000000) أو 12 رقمًا تبدأ بـ 966";
+    else if(q.t==="tel"&&raw(q)&&!phoneOk(raw(q)))e="اكتب 12 رقمًا تبدأ بـ 966 (مثل 966500000000) أو 10 أرقام تبدأ بـ 0";
     m.textContent=e;f.classList.toggle("err",!!e);return !e};
   $$("#regForm .inp").forEach(i=>i.addEventListener("input",()=>{i.closest(".fld").classList.remove("err");save()}));
   // يقبل الأرقام فقط في الجوال وعدد الطلاب (ويحوّل الأرقام العربية)
