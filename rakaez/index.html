@@ -528,6 +528,14 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 .cd-u small{font-size:11px;color:rgba(255,255,255,.55);margin-top:1px}
 .cd-u>div:last-child b{color:var(--peach)}
 .cd.gone{display:none}
+.cd-tabs{display:inline-flex;background:rgba(255,255,255,.06);border-radius:999px;padding:3px;gap:2px}
+.cd-tabs button{border:0;background:none;color:rgba(255,255,255,.6);font-size:13px;padding:5px 12px;border-radius:999px;cursor:pointer;transition:background .35s var(--ease),color .35s;white-space:nowrap}
+.cd-tabs button:hover{color:#fff}
+.cd-tabs button.on{background:rgba(216,148,120,.22);color:#fff}
+.cd-tabs button[hidden]{display:none}
+.cd-u.swap{animation:cdSwap .5s var(--ease)}
+@keyframes cdSwap{from{opacity:0;transform:translateY(6px)}}
+
 /* footer */
 footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;font-size:14.5px}
 .ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -651,7 +659,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
     <div class="wrap">
       <div>
         <div class="cd" id="cd" role="timer" aria-live="off">
-          <div class="cd-l"><span class="dot"></span>بقي على انطلاق <b>ركائز <span class="num">34</span></b></div>
+          <div class="cd-l"><span class="dot"></span><span>بقي على</span><span class="cd-tabs" role="tablist"><button type="button" data-ev="pre" role="tab">الاختبار القبلي</button><button type="button" data-ev="start" role="tab">انطلاق ركائز <span class="num">34</span></button></span></div>
           <div class="cd-u"><div><b data-k="d">0</b><small>يوم</small></div><div><b data-k="h">00</b><small>ساعة</small></div><div><b data-k="m">00</b><small>دقيقة</small></div><div><b data-k="s">00</b><small>ثانية</small></div></div>
         </div>
         <h1 class="brand-h1"><span class="ph-logo"><img src="assets/img/rakaez-white.svg" alt="ركائز"></span><img class="orn" src="assets/img/rakaez-orn.svg" alt=""><span class="sr">ركائز – برنامج إعداد معلمي منهج بيان</span></h1>
@@ -1325,14 +1333,28 @@ function onScroll(){hdr.classList.toggle("solid",scrollY>40);syncRk()}
 addEventListener("scroll",onScroll,{passive:true});
 $("#burger").onclick=()=>{$("#menu").classList.toggle("open");hdr.classList.add("solid")};
 
-/* countdown to ركائز 34 (فوق الشعار) */
-(function(){const target=new Date("2026-11-22T15:30:00+03:00"),box=$("#cd");
-  const set=(k,v)=>{const el=box.querySelector(`[data-k="${k}"]`);if(el.textContent!==v){el.textContent=v;el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick")}};
+/* العدادات فوق الشعار: الاختبار القبلي + انطلاق البرنامج */
+(function(){
+  const EV={pre:new Date("2026-11-19T16:00:00+03:00"),start:new Date("2026-11-22T15:30:00+03:00")};
+  const box=$("#cd"),u=box.querySelector(".cd-u"),tabs=[...box.querySelectorAll(".cd-tabs button")];
+  let cur=null,auto=true,rot=0;
   const pad=n=>String(n).padStart(2,"0");
-  const tick=()=>{const s=Math.floor((target-new Date())/1000);
-    if(s<=0){box.classList.add("gone");G=null;syncRk();return false}
-    set("d",String(Math.floor(s/86400)));set("h",pad(Math.floor(s%86400/3600)));set("m",pad(Math.floor(s%3600/60)));set("s",pad(s%60));return true};
-  if(tick()){const id=setInterval(()=>{if(!tick())clearInterval(id)},1000)}})();
+  const set=(k,v,anim)=>{const el=u.querySelector(`[data-k="${k}"]`);if(el.textContent!==v){el.textContent=v;if(anim){el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick")}}};
+  const live=()=>Object.keys(EV).filter(k=>EV[k]>new Date());
+  function select(k,swap){cur=k;tabs.forEach(b=>{const on=b.dataset.ev===k;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});
+    if(swap){u.classList.remove("swap");void u.offsetWidth;u.classList.add("swap")}render(!swap)}
+  function render(anim){const ks=live();
+    if(!ks.length){box.classList.add("gone");G=null;syncRk();return false}
+    tabs.forEach(b=>b.hidden=!ks.includes(b.dataset.ev));
+    if(!ks.includes(cur)){select(ks[0],true);return true}
+    const s=Math.floor((EV[cur]-new Date())/1000);
+    set("d",String(Math.floor(s/86400)),anim);set("h",pad(Math.floor(s%86400/3600)),anim);set("m",pad(Math.floor(s%3600/60)),anim);set("s",pad(s%60),anim);return true}
+  tabs.forEach(b=>b.onclick=()=>{auto=false;if(b.dataset.ev!==cur)select(b.dataset.ev,true)});
+  box.addEventListener("mouseenter",()=>auto=false);
+  select(live()[0]||"start",false);
+  const id=setInterval(()=>{if(!render(true)){clearInterval(id);return}
+    if(auto&&live().length>1&&++rot%6===0){const ks=live();select(ks[(ks.indexOf(cur)+1)%ks.length],true)}},1000);
+})();
 
 route();
 </script>
