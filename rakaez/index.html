@@ -80,7 +80,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[tabindex]:focus:no
 @keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ---------- hero ---------- */
-.hero{position:relative;background:var(--navy-d);color:#fff;overflow:hidden;padding:calc(150px + var(--bar)) 0 140px}
+.hero{position:relative;background:var(--navy-d);color:#fff;overflow:hidden;padding:calc(130px + var(--bar)) 0 130px}
 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 500px at 15% 40%,rgba(69,124,138,.35),transparent 65%),radial-gradient(600px 400px at 100% 0%,rgba(216,148,120,.12),transparent 60%)}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:110px;align-items:center}
 .tag{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:rgba(255,255,255,.82);padding:7px 16px 7px 12px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
@@ -513,20 +513,21 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 .modal .tcard{padding:24px;border-color:var(--line)}
 
 
-/* top bar countdown */
-:root{--bar:38px}
-.no-bar{--bar:0px}.no-bar .topbar{display:none}
-.topbar{position:fixed;inset:0 0 auto 0;height:var(--bar);z-index:62;background:#121d3b;color:rgba(255,255,255,.82);font-size:13px;border-bottom:1px solid rgba(255,255,255,.07)}
-.topbar .wrap{height:100%;display:flex;align-items:center;gap:14px}
-.tb-l{display:flex;align-items:center;gap:7px;white-space:nowrap}
-.tb-l svg{color:var(--peach);font-size:15px}
-.tb-l b{color:#fff;font-weight:500}
-.tb-l .sm{display:none}
-.tb-c{display:flex;align-items:center;gap:6px}
-.tb-c .u{display:inline-flex;align-items:baseline;gap:4px;background:rgba(255,255,255,.08);border-radius:7px;padding:1px 9px}
-.tb-c .u b{font-weight:500;color:var(--peach);font-size:14px;font-variant-numeric:tabular-nums;min-width:1.2em;text-align:center}
-.tb-c .u small{font-size:11px;color:rgba(255,255,255,.6)}
-
+/* hero countdown */
+:root{--bar:0px}
+.cd{display:flex;align-items:center;gap:22px;margin:0 auto 18px;padding:12px 14px 12px 22px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px)}
+.cd-l{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.72);white-space:nowrap}
+.cd-l b{font-weight:500;color:#fff}
+.cd-l .dot{width:8px;height:8px;border-radius:50%;background:var(--peach);box-shadow:0 0 0 0 rgba(216,148,120,.6);animation:ping 2s infinite;flex-shrink:0}
+.cd-u{display:flex;align-items:center;direction:rtl}
+.cd-u>div{display:flex;flex-direction:column;align-items:center;min-width:58px;padding:4px 8px;background:rgba(255,255,255,.06);border-radius:12px}
+.cd-u>div+div{margin-inline-start:6px}
+.cd-u b{font-weight:500;font-size:24px;line-height:1.15;color:#fff;font-variant-numeric:tabular-nums;display:block;overflow:hidden}
+.cd-u b.tick{animation:tick .45s var(--ease)}
+@keyframes tick{from{transform:translateY(-40%);opacity:0}}
+.cd-u small{font-size:11px;color:rgba(255,255,255,.55);margin-top:1px}
+.cd-u>div:last-child b{color:var(--peach)}
+.cd.gone{display:none}
 /* footer */
 footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;font-size:14.5px}
 .ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -582,7 +583,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .count div{min-width:0;flex:1;padding:12px 8px}
   .people{grid-template-columns:repeat(2,1fr)}
   .fgrid{grid-template-columns:1fr}.reg-main{padding:28px 20px}
-  .topbar{font-size:12.5px}.tb-l .lg{display:none}.tb-l .sm{display:inline}.topbar .wrap{gap:10px;justify-content:space-between}.tb-c{gap:4px}.tb-c .u{padding:1px 7px}.tcard{padding:24px 20px}.modal .box{padding:20px 16px}
+  .cd{flex-direction:column;gap:10px;padding:12px 12px 10px}.cd-u>div{min-width:52px}.cd-u b{font-size:21px}.tcard{padding:24px 20px}.modal .box{padding:20px 16px}
   .kr{grid-template-columns:44px 1fr 70px;padding:16px 18px;gap:12px}.kr .g{display:none}
   .ft{grid-template-columns:1fr}
   .sq{aspect-ratio:auto;min-height:150px}
@@ -624,12 +625,6 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
 </svg>
 <div class="tip" id="tip"></div>
 
-<div class="topbar" id="topbar" role="status">
-  <div class="wrap">
-    <span class="tb-l"><svg class="i"><use href="#i-clock"/></svg><span class="lg">بقي على البرنامج القادم:</span><span class="sm">بقي على</span><b>ركائز <span class="num">34</span></b></span>
-    <span class="tb-c" id="tbCount"><span class="u"><b data-k="d">0</b><small>يوم</small></span><span class="u"><b data-k="h">0</b><small>ساعة</small></span><span class="u"><b data-k="m">0</b><small>دقيقة</small></span></span>
-  </div>
-</div>
 <header class="hdr" id="hdr">
   <div class="wrap">
     <a href="#home" class="logo" aria-label="ركائز – الرئيسية">
@@ -655,6 +650,10 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   <div class="hero">
     <div class="wrap">
       <div>
+        <div class="cd" id="cd" role="timer" aria-live="off">
+          <div class="cd-l"><span class="dot"></span>بقي على انطلاق <b>ركائز <span class="num">34</span></b></div>
+          <div class="cd-u"><div><b data-k="d">0</b><small>يوم</small></div><div><b data-k="h">00</b><small>ساعة</small></div><div><b data-k="m">00</b><small>دقيقة</small></div><div><b data-k="s">00</b><small>ثانية</small></div></div>
+        </div>
         <h1 class="brand-h1"><span class="ph-logo"><img src="assets/img/rakaez-white.svg" alt="ركائز"></span><img class="orn" src="assets/img/rakaez-orn.svg" alt=""><span class="sr">ركائز – برنامج إعداد معلمي منهج بيان</span></h1>
         <p class="lead rv" style="--d:2">برنامج لتأهيل العاملين مع الناشئة وتمكينهم من مهارات تعليم القراءة والكتابة لدى الصغار بمنهجية (بيان)، وينتهي بشهادة معتمدة من برنامج بيان.</p>
         <div class="cta rv" style="--d:3">
@@ -1326,13 +1325,14 @@ function onScroll(){hdr.classList.toggle("solid",scrollY>40);syncRk()}
 addEventListener("scroll",onScroll,{passive:true});
 $("#burger").onclick=()=>{$("#menu").classList.toggle("open");hdr.classList.add("solid")};
 
-/* countdown to ركائز 34 (الشريط العلوي) */
-(function(){const target=new Date("2026-11-22T15:30:00+03:00"),box=$("#tbCount");
-  const set=(k,v)=>{const el=box.querySelector(`[data-k="${k}"]`);if(el.textContent!==String(v))el.textContent=v};
-  const tick=()=>{const s=(target-new Date())/1000;
-    if(s<=0){ROOT.classList.add("no-bar");G=null;syncRk();return false}
-    set("d",Math.floor(s/86400));set("h",Math.floor(s%86400/3600));set("m",Math.floor(s%3600/60));return true};
-  if(tick()){const id=setInterval(()=>{if(!tick())clearInterval(id)},15000)}})();
+/* countdown to ركائز 34 (فوق الشعار) */
+(function(){const target=new Date("2026-11-22T15:30:00+03:00"),box=$("#cd");
+  const set=(k,v)=>{const el=box.querySelector(`[data-k="${k}"]`);if(el.textContent!==v){el.textContent=v;el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick")}};
+  const pad=n=>String(n).padStart(2,"0");
+  const tick=()=>{const s=Math.floor((target-new Date())/1000);
+    if(s<=0){box.classList.add("gone");G=null;syncRk();return false}
+    set("d",String(Math.floor(s/86400)));set("h",pad(Math.floor(s%86400/3600)));set("m",pad(Math.floor(s%3600/60)));set("s",pad(s%60));return true};
+  if(tick()){const id=setInterval(()=>{if(!tick())clearInterval(id)},1000)}})();
 
 route();
 </script>
