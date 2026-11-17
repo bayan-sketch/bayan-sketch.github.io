@@ -736,16 +736,6 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
     <p class="rv" style="--d:2">هو برنامج لتأهيل العاملين مع الناشئة وتمكينهم من مهارات تعليم القراءة والكتابة لدى الصغار بمنهجية (بيان).</p>
   </div></div>
 
-  <div class="sec">
-    <div class="wrap">
-      <div class="grid c2">
-        <div class="vm n rv"><div class="ico"><svg class="i"><use href="#i-eye"/></svg></div><h3>الرؤية</h3><p>معلم مؤهل معتمد في كل حلقة، يُخرّج طلابًا يقرؤون كتاب الله قراءة صحيحة متقنة.</p></div>
-        <div class="vm t rv" style="--d:1"><div class="ico"><svg class="i"><use href="#i-target"/></svg></div><h3>الرسالة</h3><p>تأهيل معلمي الحلقات على منهج بيان معرفيًا ومهاريًا، واعتمادهم وفق معايير واضحة، ومتابعة تجديد اعتمادهم.</p></div>
-      </div>
-      <div class="facts rv" style="margin-top:24px" id="facts"></div>
-    </div>
-  </div>
-
   <div class="sec sand">
     <div class="wrap">
       <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-cal"/></svg>الدورة التدريبية</div><h2>أربعة أيام مركّزة</h2><p>يومان للتهجي ويومان للمهاري، أربع ساعات يوميًا، مع واجب يومي.</p></div>
@@ -1053,7 +1043,7 @@ function isolateNums(root){
 }
 
 /* ===== render: program ===== */
-$("#facts").innerHTML=D.facts.map(([i,k,v,c])=>`<div class="fact"><span class="ico ${c}">${ic(i)}</span><div><small>${k}</small><b>${v}</b></div></div>`).join("");
+if($("#facts"))$("#facts").innerHTML=D.facts.map(([i,k,v,c])=>`<div class="fact"><span class="ico ${c}">${ic(i)}</span><div><small>${k}</small><b>${v}</b></div></div>`).join("");
 $("#days").innerHTML=D.days.map(([i,c,t,p],k)=>`<div class="day rv" style="--d:${k}"><span class="no num">${k+1}</span><div class="ico ${c}">${ic(i)}</div><small>اليوم ${["الأول","الثاني","الثالث","الرابع"][k]} · 4 ساعات</small><h3>${t}</h3><p>${p}</p></div>`).join("");
 (function(){
   const r=110,C=2*Math.PI*r,gap=6;let off=0;
