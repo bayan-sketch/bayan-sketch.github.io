@@ -516,26 +516,27 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 
 /* hero countdown */
 :root{--bar:0px}
-.cd{display:flex;align-items:center;gap:22px;margin:0 auto 18px;padding:12px 14px 12px 22px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px)}
-.cd-l{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.72);white-space:nowrap}
-.cd-l b{font-weight:500;color:#fff}
-.cd-l .dot{width:8px;height:8px;border-radius:50%;background:var(--peach);box-shadow:0 0 0 0 rgba(216,148,120,.6);animation:ping 2s infinite;flex-shrink:0}
+.cd{width:max-content;max-width:100%;margin:0 auto 22px;padding:8px 18px 6px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px)}
+.cd-h{font-size:12px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.3px;padding:2px 0 4px}
+.cd-row{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:10px 0}
+.cd-row+.cd-row{border-top:1px solid rgba(255,255,255,.08)}
+.cd-row[hidden]{display:none}
+.cd-l{display:flex;align-items:center;gap:11px;white-space:nowrap;min-width:190px}
+.cd-t{display:flex;flex-direction:column;gap:2px;text-align:start}
+.cd-t b{font-weight:500;font-size:15px;color:#fff}
+.cd-t small{font-size:12px;color:rgba(255,255,255,.5)}
+.cd-l .dot{width:8px;height:8px;border-radius:50%;background:#7FB3BF;flex-shrink:0;opacity:.85}
+.cd-row.next .dot{background:var(--peach);opacity:1;box-shadow:0 0 0 0 rgba(216,148,120,.6);animation:ping 2s infinite}
 .cd-u{display:flex;align-items:center;direction:rtl}
-.cd-u>div{display:flex;flex-direction:column;align-items:center;min-width:58px;padding:4px 8px;background:rgba(255,255,255,.06);border-radius:12px}
-.cd-u>div+div{margin-inline-start:6px}
-.cd-u b{font-weight:500;font-size:24px;line-height:1.15;color:#fff;font-variant-numeric:tabular-nums;display:block;overflow:hidden}
+.cd-u>div{display:flex;flex-direction:column;align-items:center;min-width:52px;padding:3px 6px;background:rgba(255,255,255,.06);border-radius:11px}
+.cd-u>div+div{margin-inline-start:5px}
+.cd-u b{font-weight:500;font-size:21px;line-height:1.15;color:#fff;font-variant-numeric:tabular-nums;display:block;overflow:hidden}
 .cd-u b.tick{animation:tick .45s var(--ease)}
+.cd-u small{font-size:10.5px;color:rgba(255,255,255,.5);margin-top:1px}
+.cd-row:not(.next) .cd-u b{color:rgba(255,255,255,.82)}
+.cd-row.next .cd-u>div:last-child b{color:var(--peach)}
 @keyframes tick{from{transform:translateY(-40%);opacity:0}}
-.cd-u small{font-size:11px;color:rgba(255,255,255,.55);margin-top:1px}
-.cd-u>div:last-child b{color:var(--peach)}
 .cd.gone{display:none}
-.cd-tabs{display:inline-flex;background:rgba(255,255,255,.06);border-radius:999px;padding:3px;gap:2px}
-.cd-tabs button{border:0;background:none;color:rgba(255,255,255,.6);font-size:13px;padding:5px 12px;border-radius:999px;cursor:pointer;transition:background .35s var(--ease),color .35s;white-space:nowrap}
-.cd-tabs button:hover{color:#fff}
-.cd-tabs button.on{background:rgba(216,148,120,.22);color:#fff}
-.cd-tabs button[hidden]{display:none}
-.cd-u.swap{animation:cdSwap .5s var(--ease)}
-@keyframes cdSwap{from{opacity:0;transform:translateY(6px)}}
 
 /* footer */
 footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;font-size:14.5px}
@@ -592,7 +593,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .count div{min-width:0;flex:1;padding:12px 8px}
   .people{grid-template-columns:repeat(2,1fr)}
   .fgrid{grid-template-columns:1fr}.reg-main{padding:28px 20px}
-  .cd{flex-direction:column;gap:10px;padding:12px 12px 10px}.cd-u>div{min-width:52px}.cd-u b{font-size:21px}.tcard{padding:24px 20px}.modal .box{padding:20px 16px}
+  .cd{padding:6px 14px 4px;width:100%}.cd-row{flex-direction:column;gap:9px;padding:11px 0}.cd-l{min-width:0;justify-content:center}.cd-t{text-align:center;align-items:center;flex-direction:row;gap:8px;flex-wrap:wrap;justify-content:center}.cd-u>div{min-width:50px}.cd-u b{font-size:19px}.tcard{padding:24px 20px}.modal .box{padding:20px 16px}
   .kr{grid-template-columns:44px 1fr 70px;padding:16px 18px;gap:12px}.kr .g{display:none}
   .ft{grid-template-columns:1fr}
   .sq{aspect-ratio:auto;min-height:150px}
@@ -660,8 +661,9 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
     <div class="wrap">
       <div>
         <div class="cd" id="cd" role="timer" aria-live="off">
-          <div class="cd-l"><span class="dot"></span><span>بقي على</span><span class="cd-tabs" role="tablist"><button type="button" data-ev="pre" role="tab">الاختبار القبلي</button><button type="button" data-ev="start" role="tab">انطلاق ركائز <span class="num">34</span></button></span></div>
-          <div class="cd-u"><div><b data-k="d">0</b><small>يوم</small></div><div><b data-k="h">00</b><small>ساعة</small></div><div><b data-k="m">00</b><small>دقيقة</small></div><div><b data-k="s">00</b><small>ثانية</small></div></div>
+          <div class="cd-h">بقي على</div>
+          <div class="cd-row" data-ev="pre"><div class="cd-l"><span class="dot"></span><span class="cd-t"><b>الاختبار القبلي</b><small>الخميس <span class="num">9</span> جمادى الآخرة · <span class="num">4:00</span> م</small></span></div><div class="cd-u"><div><b data-k="d">0</b><small>يوم</small></div><div><b data-k="h">00</b><small>ساعة</small></div><div><b data-k="m">00</b><small>دقيقة</small></div><div><b data-k="s">00</b><small>ثانية</small></div></div></div>
+          <div class="cd-row" data-ev="start"><div class="cd-l"><span class="dot"></span><span class="cd-t"><b>انطلاق ركائز <span class="num">34</span></b><small>الأحد <span class="num">12</span> جمادى الآخرة · <span class="num">3:30</span> م</small></span></div><div class="cd-u"><div><b data-k="d">0</b><small>يوم</small></div><div><b data-k="h">00</b><small>ساعة</small></div><div><b data-k="m">00</b><small>دقيقة</small></div><div><b data-k="s">00</b><small>ثانية</small></div></div></div>
         </div>
         <h1 class="brand-h1"><span class="ph-logo"><img src="assets/img/rakaez-white.svg" alt="ركائز"></span><img class="orn" src="assets/img/rakaez-orn.svg" alt=""><span class="sr">ركائز – برنامج إعداد معلمي منهج بيان</span></h1>
         <p class="lead rv" style="--d:2">برنامج لتأهيل العاملين مع الناشئة وتمكينهم من مهارات تعليم القراءة والكتابة لدى الصغار بمنهجية (بيان)، وينتهي بشهادة معتمدة من برنامج بيان.</p>
@@ -1339,27 +1341,23 @@ function onScroll(){hdr.classList.toggle("solid",scrollY>40);syncRk()}
 addEventListener("scroll",onScroll,{passive:true});
 $("#burger").onclick=()=>{$("#menu").classList.toggle("open");hdr.classList.add("solid")};
 
-/* العدادات فوق الشعار: الاختبار القبلي + انطلاق البرنامج */
+/* العدادان فوق الشعار: الاختبار القبلي + انطلاق البرنامج (ظاهران معًا) */
 (function(){
   const EV={pre:new Date("2026-11-19T16:00:00+03:00"),start:new Date("2026-11-22T15:30:00+03:00")};
-  const box=$("#cd"),u=box.querySelector(".cd-u"),tabs=[...box.querySelectorAll(".cd-tabs button")];
-  let cur=null,auto=true,rot=0;
+  const box=$("#cd"),rows=[...box.querySelectorAll(".cd-row")];
   const pad=n=>String(n).padStart(2,"0");
-  const set=(k,v,anim)=>{const el=u.querySelector(`[data-k="${k}"]`);if(el.textContent!==v){el.textContent=v;if(anim){el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick")}}};
-  const live=()=>Object.keys(EV).filter(k=>EV[k]>new Date());
-  function select(k,swap){cur=k;tabs.forEach(b=>{const on=b.dataset.ev===k;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});
-    if(swap){u.classList.remove("swap");void u.offsetWidth;u.classList.add("swap")}render(!swap)}
-  function render(anim){const ks=live();
-    if(!ks.length){box.classList.add("gone");G=null;syncRk();return false}
-    tabs.forEach(b=>b.hidden=!ks.includes(b.dataset.ev));
-    if(!ks.includes(cur)){select(ks[0],true);return true}
-    const s=Math.floor((EV[cur]-new Date())/1000);
-    set("d",String(Math.floor(s/86400)),anim);set("h",pad(Math.floor(s%86400/3600)),anim);set("m",pad(Math.floor(s%3600/60)),anim);set("s",pad(s%60),anim);return true}
-  tabs.forEach(b=>b.onclick=()=>{auto=false;if(b.dataset.ev!==cur)select(b.dataset.ev,true)});
-  box.addEventListener("mouseenter",()=>auto=false);
-  select(live()[0]||"start",false);
-  const id=setInterval(()=>{if(!render(true)){clearInterval(id);return}
-    if(auto&&live().length>1&&++rot%6===0){const ks=live();select(ks[(ks.indexOf(cur)+1)%ks.length],true)}},1000);
+  const set=(r,k,v,anim)=>{const el=r.querySelector(`[data-k="${k}"]`);if(el.textContent!==v){el.textContent=v;if(anim){el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick")}}};
+  function render(anim){const now=new Date();let first=true,any=false,changed=false;
+    rows.forEach(r=>{const t=EV[r.dataset.ev],live=t>now;
+      if(r.hidden!==!live){r.hidden=!live;changed=true}
+      if(!live)return;any=true;r.classList.toggle("next",first);first=false;
+      const s=Math.floor((t-now)/1000);
+      set(r,"d",String(Math.floor(s/86400)),anim);set(r,"h",pad(Math.floor(s%86400/3600)),anim);set(r,"m",pad(Math.floor(s%3600/60)),anim);set(r,"s",pad(s%60),anim)});
+    if(!any){box.classList.add("gone");G=null;syncRk();return false}
+    if(changed){G=null;syncRk()}
+    return true}
+  render(false);
+  const id=setInterval(()=>{if(!render(true))clearInterval(id)},1000);
 })();
 
 route();
