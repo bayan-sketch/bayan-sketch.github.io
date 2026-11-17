@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#24385F">
 <link rel="icon" href="assets/favicon.png">
 <title>بطاقة تقييم أداء معلم/ـة بيان</title>
@@ -19,7 +19,11 @@
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{max-width:100%;overscroll-behavior-x:none}
+body{overflow-x:hidden;overflow-x:clip}
+.shell,.wrap,section.block,.item,.f,.row{min-width:0}
+select,input,textarea{max-width:100%;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font:inherit;color:inherit}
 svg.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
@@ -119,7 +123,7 @@ textarea{resize:vertical;min-height:84px;line-height:1.7}
 .ev-btn svg.ic{width:15px;height:15px}
 .ev textarea{min-height:58px;margin-top:6px;font-size:14px;animation:paneIn .25s var(--ease)}
 
-table.sample{width:100%;border-collapse:separate;border-spacing:0 8px;margin-top:6px}
+table.sample{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0 8px;margin-top:6px}
 .sample td{vertical-align:middle;padding:0 4px}
 .sample td:first-child{width:38px}
 .sample input{width:100%;border:1.5px solid var(--line);background:#FAFBFD;border-radius:var(--r-sm);padding:9px 12px;outline:none;transition:border-color .2s}
@@ -183,7 +187,7 @@ section.block > .pager{margin:0;padding:18px 24px 24px;border-top:1px solid var(
   .btn.g span{display:none}
   .dock-in{justify-content:space-between;flex-wrap:nowrap}
 }
-@media (max-width:520px){ .hero .sep{display:none} .btn.s span{display:none} }
+@media (max-width:520px){ .hero .sep{display:none} .btn.s span{display:none} .sample td:nth-child(2){width:44%!important} .sample td:first-child{width:32px} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 @media print{
