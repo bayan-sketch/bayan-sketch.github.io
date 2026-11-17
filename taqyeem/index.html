@@ -83,6 +83,7 @@ textarea{resize:vertical;min-height:70px}
 .item-t{flex:1;font-weight:600;padding-top:3px}
 .item-t small{display:block;font-weight:400;color:var(--muted);font-size:13px}
 .sc{flex:none;font-weight:700;font-size:15px;color:var(--acc);background:var(--acc-t);border-radius:9px;padding:4px 10px;white-space:nowrap}
+.sc.hide{display:none}
 .sc.empty{color:#a1a7b3;background:#F2F0ED}
 .row{margin-top:10px}
 .row-l{font-size:13px;color:var(--muted);font-weight:600;margin:0 0 6px}
@@ -206,7 +207,7 @@ table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
       <div class="mark">بيان</div>
       <div>
         <h1>بطاقة تقييم أداء معلم/ـة بيان</h1>
-        <p>يعبّئها المشرف/ـة التعليمي/ـة لبيان أثناء الزيارة · الدرجات تُحسب تلقائياً</p>
+        <p>يعبّئها المشرف/ـة التعليمي/ـة لبيان أثناء الزيارة</p>
       </div>
     </div>
     <div class="hero-meta">
@@ -230,56 +231,19 @@ table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
 
   <div id="domains"></div>
 
-  <div class="pane" data-pane="res">
-  <!-- النتيجة -->
-  <section class="block c-a" id="result">
-    <div class="block-h"><div class="dom">∑</div><h2>النتيجة<small>تُحسب النسبة من البنود المحتسبة فقط</small></h2></div>
-    <div class="block-b">
-      <div class="res">
-        <div>
-          <div class="bars" id="bars"></div>
-          <div class="checks" id="checks"></div>
-        </div>
-        <div>
-          <div class="total">
-            <div class="lbl">النسبة الكلية</div>
-            <div class="pct" id="tPct">—</div>
-            <div class="grade" id="tGrade">—</div>
-            <div class="raw" id="tRaw"></div>
-          </div>
-          <div class="scale">
-            <b>السلّم:</b> ممتاز 90–100% · جيد جداً 80–89% · جيد 70–79% · مقبول 60–69% · دون المستوى 59% فأقل.<br>
-            <b>شرط «ممتاز»:</b> الإسقاط 7 فأكثر، ونسبة مسار المهاري 60% فأكثر؛ ولا يثبت السقف في التقدير الفصلي إلا إذا تكرّر القصور في زيارتين.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- الإيجابيات والتوصيات -->
-  <section class="block c-b">
+  <!-- الإيجابيات والتوصيات (تُلحق بنهاية مجال د) -->
+  <section class="block c-b" id="notes">
     <div class="block-h"><div class="dom">✎</div><h2>الإيجابيات والتوصيات</h2></div>
     <div class="block-b">
       <div class="f"><label for="pos">الإيجابيات</label><textarea id="pos" data-k="positives" rows="3"></textarea></div>
       <div class="f" style="margin-top:14px"><label for="rec">التوصيات (توصية أو توصيتان تُتابَعان في الزيارة القادمة)</label><textarea id="rec" data-k="recommendations" rows="3"></textarea></div>
     </div>
   </section>
-
-  <!-- التوقيعات -->
-  <section class="block c-c">
-    <div class="block-h"><div class="dom">✓</div><h2>الاعتماد</h2></div>
-    <div class="block-b sig">
-      <div class="box"><h4>المعلم/ـة</h4><div class="line">التوقيع</div></div>
-      <div class="box"><h4>مشرف/ـة الحلقة / المدرسة</h4><div class="line">التوقيع</div></div>
-      <div class="box"><h4>المشرف/ـة التعليمي/ـة لبيان</h4><div class="line">التوقيع</div></div>
-    </div>
-  </section>
-  </div>
 </main>
 
 <div class="dock">
   <div class="dock-in">
-    <div class="live"><b id="dPct">—</b><span class="g" id="dGrade"></span><small id="dLeft"></small></div>
+    <div class="live"><small id="dLeft"></small></div>
     <button class="btn g" id="bNew" type="button">تقييم جديد</button>
     <button class="btn s" id="bPrint" type="button">طباعة / PDF</button>
     <button class="btn p" id="bSave" type="button">حفظ وإرسال الدرجات</button>
@@ -332,7 +296,7 @@ const DOMAINS = [
     {no:4,t:"الكتابة",c:"TKT"},
     {no:5,t:"مقدار التهجي",c:"TMQ"},
     {no:6,t:"زمن التهجي",c:"TMZ"},
-    {no:7,t:"الإسقاط والشرح حسب المرحلة",c:"ISQ",note:"يُشترط 7 فأكثر لتقدير «ممتاز»"},
+    {no:7,t:"الإسقاط والشرح حسب المرحلة",c:"ISQ"},
     {no:8,t:"التحفة",group:[["TUH_M","مطابقة الأبيات لخطة المرحلة"],["TUH_T","التلقين السليم"],["TUH_R","المراجعة التراكمية"],["TUH_Z","الالتزام بالوقت (5 د)"]]},
   ]},
   {k:"b",n:"ب",title:"جودة التدريس والبيئة الصفية",sub:"الإدارة والتفاعل والتوجيه واللغة",items:[
@@ -380,7 +344,7 @@ function optButtons(id, code){
   const st = cur==null?"":(cur===NA?"na":"on");
   return `<div class="dd-w ${st}"><select class="dd" data-id="${id}" aria-label="اختر المستوى">
   <option value="" ${cur==null?"selected":""}>— اختر المستوى —</option>
-  ${LV[code].map(([l,p])=>`<option value="${esc(l)}" ${cur===l?"selected":""}>${esc(l)} — ${p===0?"صفر":p===1?"درجة واحدة":p===2?"درجتان":fmt(p)+(p<=10?" درجات":" درجة")}</option>`).join("")}
+  ${LV[code].map(([l,p])=>`<option value="${esc(l)}" ${cur===l?"selected":""}>${esc(l)}</option>`).join("")}
   <option value="${NA}" ${cur===NA?"selected":""}>${NA} (يُستبعد البند)</option></select></div>`;
 }
 function evBox(id){
@@ -427,13 +391,13 @@ function renderSample(it){
   return `<div class="item" data-item="15"><div class="item-h"><div class="num">15</div><div class="item-t">${it.t} <span style="color:var(--muted);font-weight:500">(${it.d})</span><small>يختار المشرف 5 طلاب من كشف الحضور ويقيّمهم بسلّم المرحلة، بما فيه تسميع التحفة؛ ويمكنه إضافة طلاب آخرين بزر «+» إن اتسع الوقت</small></div><div class="sc" data-sc="sample"></div></div>
   <table class="sample"><tbody>${S.sample.map((s,i)=>`<tr><td><div class="num">${i+1}</div></td>
     <td style="width:30%"><input data-sname="${i}" placeholder="اسم الطالب" value="${esc(s.name)}" aria-label="اسم الطالب ${i+1}"></td>
-    <td><div class="dd-w ${s.g?"on":""}"><select class="dd" data-stu="${i}" aria-label="مستوى الطالب ${i+1}"><option value="" ${s.g?"":"selected"}>— المستوى —</option>${STU.map(([l,p])=>`<option value="${l}" ${s.g===l?"selected":""}>${l} — ${fmt(p)}</option>`).join("")}</select></div></td><td style="width:30px">${i>=5?`<button type="button" class="rm-stu" data-rmstu="${i}" aria-label="حذف الطالب ${i+1}" title="حذف">×</button>`:""}</td></tr>`).join("")}</tbody></table>
+    <td><div class="dd-w ${s.g?"on":""}"><select class="dd" data-stu="${i}" aria-label="مستوى الطالب ${i+1}"><option value="" ${s.g?"":"selected"}>— المستوى —</option>${STU.map(([l,p])=>`<option value="${l}" ${s.g===l?"selected":""}>${l}</option>`).join("")}</select></div></td><td style="width:30px">${i>=5?`<button type="button" class="rm-stu" data-rmstu="${i}" aria-label="حذف الطالب ${i+1}" title="حذف">×</button>`:""}</td></tr>`).join("")}</tbody></table>
   ${S.sample.length<40?`<button type="button" class="add-stu" data-addstu><span class="pl">+</span>إضافة طالب</button>`:""}
-  <div class="avg"><span>متوسط العيّنة</span><span id="sAvg">—</span></div></div>`;
+  </div>`;
 }
 function renderDomains(){
   $("#domains").innerHTML = DOMAINS.map(d=>`<section class="block pane c-${d.k}" data-pane="${d.k}" id="dom-${d.k}">
-    <div class="block-h"><div class="dom">${d.n}</div><h2>${d.title}<small>${d.sub}</small></h2><div class="dscore"><b data-dom="${d.k}">—</b><span data-domr="${d.k}"></span></div></div>
+    <div class="block-h"><div class="dom">${d.n}</div><h2>${d.title}<small>${d.sub}</small></h2></div>
     <div class="block-b">${d.items.map(renderItem).join("")}</div></section>`).join("");
 }
 
@@ -484,27 +448,11 @@ function update(){
   const R=compute();
   document.querySelectorAll("[data-sc]").forEach(el=>{
     const P=R.parts[el.dataset.sc]; const item=el.closest(".item");
-    if(!P){el.textContent="—";el.classList.add("empty");return;}
-    if(P.na&&P.all){el.textContent=NA;el.classList.add("empty");item.classList.add("na");item.classList.remove("done");return;}
+    if(P&&P.na&&P.all){el.textContent=NA;el.classList.add("empty");item.classList.add("na");item.classList.remove("done");return;}
     item.classList.remove("na");
-    el.textContent=`${fmt(P.s)} / ${fmt(P.m)}`; el.classList.toggle("empty",!P.any); item.classList.toggle("done",P.all);
+    const done=!!(P&&P.all);
+    el.textContent=done?"✓":""; el.classList.toggle("empty",!done); el.classList.toggle("hide",!done); item.classList.toggle("done",done);
   });
-  DOMAINS.forEach(d=>{const D=R.dom[d.k]||{s:0,m:0};
-    $(`[data-dom="${d.k}"]`).textContent=`${fmt(D.s)} / ${fmt(D.m)}`;
-    $(`[data-domr="${d.k}"]`).textContent=D.m?pctF(D.s/D.m):"";});
-  const sa=$("#sAvg"); if(sa) sa.textContent = R.sampleAvg==null?"—":`${fmt(R.sampleAvg)} من ${fmt(STU_MAX)} (${R.sampleN.toLocaleString("ar-SA")} طلاب)`;
-  const col={a:"var(--navy)",b:"var(--teal)",c:"var(--peach)",d:"var(--red)"};
-  $("#bars").innerHTML = DOMAINS.map(d=>{const D=R.dom[d.k]||{s:0,m:0},p=D.m?D.s/D.m:0;
-    return `<div class="bar"><div class="bar-h">${d.n}. ${d.title}<span>${fmt(D.s)} / ${fmt(D.m)} · ${D.m?pctF(p):"—"}</span></div><div class="track-bg"><i style="width:${p*100}%;background:${col[d.k]}"></i></div></div>`;}).join("");
-  const chk=(l,v,ok)=>`<div class="chk ${ok===true?"ok":ok===false?"bad":""}"><span>${l}</span><b>${v}</b></div>`;
-  $("#checks").innerHTML =
-    chk("درجة الإسقاط (البند 7)", R.isq==null?"—":`${fmt(R.isq)} / ١٠`, R.isq==null?null:R.isqOk)+
-    chk("نسبة مسار المهاري", pctF(R.trackPct), R.trackPct==null?null:R.trackOk)+
-    chk("هل ينطبق شرط حجب «ممتاز»؟", R.capped?"نعم":"لا", R.capped?false:null)+
-    chk("بنود محتسبة لم تُعبّأ بعد", R.unfilled.toLocaleString("ar-SA"), R.unfilled?false:true);
-  $("#tPct").textContent=pctF(R.total.pct); $("#tGrade").textContent=R.final;
-  $("#tRaw").textContent=`${fmt(R.total.s)} من ${fmt(R.total.m)} درجة محتسبة`+(R.capped?" · حُجب «ممتاز»":"");
-  $("#dPct").textContent=pctF(R.total.pct); $("#dGrade").textContent=R.final==="—"?"":R.final;
   renderTabStatus(R);
   $("#dLeft").textContent=R.unfilled?`بنود لم تُعبّأ: ${R.unfilled.toLocaleString("ar-SA")}`:"اكتملت البنود ✓";
   persist(); return R;
@@ -605,7 +553,6 @@ const TABS=[
   {k:"b",l:"ب",t:"جودة التدريس والبيئة الصفية",c:"var(--teal)"},
   {k:"c",l:"ج",t:"التخطيط والمتابعة",c:"var(--peach)"},
   {k:"d",l:"د",t:"نواتج التعلّم",c:"var(--red)"},
-  {k:"res",l:"∑",t:"النتيجة والاعتماد",c:"#8A93A6"},
 ];
 let CUR="info";
 function renderTabs(){
@@ -615,14 +562,13 @@ function renderTabStatus(R){
   const set=(k,txt,ok)=>{const e=document.querySelector(`[data-ts="${k}"]`); if(e){e.textContent=txt; e.classList.toggle("ok",!!ok);}};
   const need=["teacher","mosque","eduSup","date","level"].filter(k=>!S.info[k]).length;
   set("info", need?`بقي ${need.toLocaleString("ar-SA")} حقول أساسية`:"مكتملة ✓", !need);
-  DOMAINS.forEach(d=>{const D=R.dom[d.k]||{s:0,m:0,u:0};
-    set(d.k, D.u?`${fmt(D.s)} / ${fmt(D.m)} · بقي ${D.u.toLocaleString("ar-SA")}`:`${fmt(D.s)} / ${fmt(D.m)} ✓`, !D.u);});
-  set("res", R.total.pct==null?"—":`${pctF(R.total.pct)} · ${R.final}`, !R.unfilled);
+  DOMAINS.forEach(d=>{const D=R.dom[d.k]||{u:0};
+    set(d.k, D.u?`بقي ${D.u.toLocaleString("ar-SA")} بنود`:"مكتمل ✓", !D.u);});
 }
 function addPagers(){
   document.querySelectorAll(".pager").forEach(p=>p.remove());
   TABS.forEach((t,i)=>{
-    const pane=document.querySelector(`.pane[data-pane="${t.k}"]`); if(!pane) return;
+    const ps=document.querySelectorAll(`.pane[data-pane="${t.k}"]`); const pane=ps[ps.length-1]; if(!pane) return;
     const prev=TABS[i-1], next=TABS[i+1];
     const pg=document.createElement("div"); pg.className="pager";
     pg.innerHTML=(prev?`<button type="button" data-go="${prev.k}">→ ${prev.t}</button>`:"")+(next?`<button type="button" class="nx" data-go="${next.k}">التالي: ${next.t} ←</button>`:"");
@@ -644,7 +590,7 @@ document.addEventListener("click",e=>{
 });
 
 function boot(){
-  renderInfo(); renderDomains(); renderTabs(); addPagers();
+  renderInfo(); renderDomains(); const nt=$("#notes"), pd=document.querySelector('.pane[data-pane="d"]'); if(nt&&pd){pd.after(nt); nt.classList.add("pane"); nt.dataset.pane="d";} renderTabs(); addPagers();
   $("#pos").value=S.positives||""; $("#rec").value=S.recommendations||"";
   update(); showPane((location.hash||"").slice(1)||CUR);
 }
