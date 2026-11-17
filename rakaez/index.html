@@ -542,9 +542,10 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 
 /* footer */
 footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;font-size:14.5px}
-.ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ft{display:flex;flex-direction:column;align-items:center;text-align:center;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08)}
 .ft img{height:46px;margin-bottom:18px}
-.flogos{display:flex;align-items:center;gap:18px;margin-bottom:18px}.flogos img{margin:0}.flogos img.rk{height:54px}.flogos span{width:1px;height:40px;background:rgba(255,255,255,.2)}
+.flogos{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:16px}
+.ft p{margin:0;white-space:nowrap;font-size:15px}.flogos img{margin:0}.flogos img.rk{height:54px}.flogos span{width:1px;height:40px;background:rgba(255,255,255,.2)}
 .ft h4{color:#fff;font-size:15px;margin-bottom:14px}
 .ft a{display:flex;align-items:center;gap:8px;padding:4px 0;transition:color .25s}
 .ft a:hover{color:#fff}
@@ -575,7 +576,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .fact:nth-child(3n){border-left:1px solid var(--line)}.fact:nth-child(2n){border-left:0}.fact:nth-last-child(-n+3){border-bottom:1px solid var(--line)}.fact:nth-last-child(-n+2){border-bottom:0}
   .people{grid-template-columns:repeat(3,1fr);row-gap:32px}
   .kr{grid-template-columns:48px 1fr 90px 90px}.kr .pc{display:none}
-  .ft{grid-template-columns:1fr 1fr}
+  .ft p{white-space:normal;text-wrap:balance}
   .menu,.hdr .btn{display:none}.burger{display:block}
   .menu.open{display:flex;position:fixed;top:calc(76px + var(--bar));inset-inline:0;flex-direction:column;background:#fff;padding:12px 20px 24px;box-shadow:0 20px 40px rgba(0,0,0,.1);gap:0;animation:viewIn .35s var(--ease);box-shadow:0 100vh 0 100vh rgba(10,16,34,.55);max-height:calc(100vh - 76px);overflow:auto;overscroll-behavior:contain}
   .menu.open a{color:var(--navy);padding:14px 6px;border-bottom:1px solid var(--line);font-size:17px}
@@ -597,7 +598,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .fgrid{grid-template-columns:1fr}.reg-main{padding:28px 20px}
   .cd{padding:6px 14px 4px;width:100%}.cd-row{flex-direction:column;gap:9px;padding:11px 0}.cd-l{min-width:0;justify-content:center}.cd-t{text-align:center;align-items:center;flex-direction:row;gap:8px;flex-wrap:wrap;justify-content:center}.cd-u>div{min-width:50px}.cd-u b{font-size:19px}.tcard{padding:24px 20px}.modal .box{padding:20px 16px}
   .kr{grid-template-columns:44px 1fr 70px;padding:16px 18px;gap:12px}.kr .g{display:none}
-  .ft{grid-template-columns:1fr}
+  .ft p{font-size:14px}
   .sq{aspect-ratio:auto;min-height:150px}
 }
 </style>
@@ -985,9 +986,8 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
 <footer>
   <div class="wrap">
     <div class="ft">
-      <div><div class="flogos"><img src="assets/img/logo-white.png" alt="بيان"><span></span><img class="rk" src="assets/img/rakaez-white.svg" alt="ركائز"></div><p>برنامج ركائز لإعداد وتأهيل معلمي ومعلمات منهج بيان لتعليم القراءة وإتقان التلاوة.</p></div>
-      <div><h4>البرنامج</h4><a href="#program">عن البرنامج</a><a href="#curriculum">منهج بيان</a><a href="#results">النتائج</a></div>
-      <div><h4>التسجيل</h4><a href="#join">الدفعات القادمة</a><a href="#terms">شروط القبول والاجتياز</a><a href="#join">الأسئلة الشائعة</a></div>
+      <div class="flogos"><img src="assets/img/logo-white.png" alt="بيان"><span></span><img class="rk" src="assets/img/rakaez-white.svg" alt="ركائز"></div>
+      <p>برنامج ركائز لإعداد وتأهيل معلمي ومعلمات منهج بيان لتعليم القراءة.</p>
     </div>
     <div class="fb"><span>جمعية غراس لتنمية الطفل</span><span>آخر تحديث للبيانات: <span class="num">2026-11-08</span></span></div>
   </div>
