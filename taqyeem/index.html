@@ -144,7 +144,7 @@ section.block > .pager{margin:0;padding:18px 24px 24px;border-top:1px solid var(
 @media (max-width:900px){section.block > .pager{padding:14px 16px 18px}}
 
 /* ---------- Dock ---------- */
-.dock{position:fixed;inset:auto 0 0 0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:20}
+.dock{position:fixed;inset:auto 0 0 0;padding-bottom:env(safe-area-inset-bottom);background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:20}
 .dock-in{max-width:1180px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .live{display:flex;align-items:center;gap:10px;margin-inline-end:auto;min-width:200px}
 .live small{color:var(--muted);font-size:13px;white-space:nowrap}
@@ -156,7 +156,9 @@ section.block > .pager{margin:0;padding:18px 24px 24px;border-top:1px solid var(
 .btn.p{background:var(--navy);color:#fff}
 .btn.p:hover{background:#1B2C4C}
 .btn.s{background:var(--line2);color:var(--navy)}
-.btn.g{background:none;color:var(--muted);padding:11px 10px}
+.btn.g{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.g:hover{background:var(--line2)}
+.btn.g svg.ic{stroke-width:2.2}
 .btn:disabled{opacity:.6;cursor:wait}
 .toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:11px 20px;border-radius:12px;opacity:0;transition:.3s var(--ease);z-index:30;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -184,8 +186,9 @@ section.block > .pager{margin:0;padding:18px 24px 24px;border-top:1px solid var(
   .item{padding:14px}
   .dock-in{padding:10px 14px}
   .prog,.live{display:none}
-  .btn.g span{display:none}
-  .dock-in{justify-content:space-between;flex-wrap:nowrap}
+  .dock-in{flex-wrap:nowrap;gap:10px}
+  .dock .btn{flex:1;justify-content:center;padding:12px 10px}
+  .dock .btn.p{flex:1.4}
 }
 @media (max-width:520px){ .hero .sep{display:none} .btn.s span{display:none} .sample td:nth-child(2){width:42%!important} .sample td:first-child{width:32px} .sample td:last-child{width:22px!important} .sample .dd{padding-inline:10px 28px} .sample .dd-w::after{inset-inline-end:11px} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -220,7 +223,7 @@ section.block > .pager{margin:0;padding:18px 24px 24px;border-top:1px solid var(
  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
  <symbol id="i-org" viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></symbol>
  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
- <symbol id="i-new" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8"/><path d="M4 4v4h4"/></symbol>
+ <symbol id="i-new" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
  <symbol id="i-send" viewBox="0 0 24 24"><path d="M20 4 3 11l7 2.5L12.5 21z"/><path d="m10 13.5 4-4"/></symbol>
  <symbol id="i-note" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
