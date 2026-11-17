@@ -94,6 +94,15 @@ textarea{resize:vertical;min-height:70px}
 .opt[aria-pressed="true"] .pts{background:rgba(255,255,255,.2);color:#fff}
 .opt.na-o{color:var(--muted);border-style:dashed}
 .opt.na-o[aria-pressed="true"]{background:#8A8F99;border-color:#8A8F99;border-style:solid;color:#fff}
+.dd-w{position:relative;max-width:560px}
+.dd-w::after{content:"";position:absolute;inset-inline-end:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--acc);border-bottom:2px solid var(--acc);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.dd{width:100%;-webkit-appearance:none;appearance:none;border:1.5px solid var(--line);background:#FDFBF9;border-radius:11px;padding:10px 14px;padding-inline-end:38px;font-size:14.5px;cursor:pointer;outline:none;transition:border-color .15s,background .15s;color:#8A8F99}
+.dd:hover{border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
+.dd:focus{border-color:var(--acc);background:#fff}
+.dd option{color:#1f2937}
+.dd-w.on .dd{border-color:var(--acc);background:var(--acc-t);color:var(--acc);font-weight:600}
+.dd-w.na .dd{border-style:dashed;color:var(--muted);background:#F5F4F1}
+.sample .dd-w{max-width:none}.sample .dd{padding:8px 12px;padding-inline-end:34px;font-size:13.5px}
 .ev{margin-top:10px}
 .ev-btn{background:none;border:0;color:var(--teal);font-size:13px;font-weight:600;cursor:pointer;padding:2px 0}
 .ev textarea{min-height:54px;margin-top:6px;font-size:14px}
@@ -178,7 +187,7 @@ table.sample{width:100%;border-collapse:separate;border-spacing:0 8px}
   .row-l{margin:0;min-width:110px}
   .item-t small{font-size:10.5px}
   .num{min-width:24px;height:24px;font-size:11px}
-  .opt{padding:3px 9px;font-size:11px}
+  .dd{padding:3px 9px;font-size:11px;border-radius:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.dd-w::after{display:none}.dd-w{max-width:none;flex:1}
   .subhead{margin:8px 0 4px}
   .track{margin:0}
   .track button{flex:0 0 auto;padding:4px 12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -287,7 +296,7 @@ const LV = {
   MZT:[["ضمن 15–20 دقيقة",4],["خارجها بأقل من 5 دقائق",2],["خارجها بـ5 دقائق فأكثر",0]],
   IQR:[["كل الحاضرين بسطرين فأكثر مع تصحيح فوري",4],["أكثر من النصف",3],["أقل من النصف",1],["لم يُقرأ أحد",0]],
   IML:[["أملى المطلوب وصحّح في الكتاب",4],["أملى دون تصحيح",3],["أملى بعض المطلوب",1],["لم يُملِ",0]],
-  TKT:[["لكل الطلاب",2],["لبعضهم",1],["لم يلتزم",0]],
+  TKT:[["كتب كل الطلاب",2],["كتب بعضهم",1],["لم يكتب الطلاب",0]],
   TMQ:[["نفّذ مقرر اليوم من جدول التهجي بمقدار مرحلته",3],["أكثر من نصفه",2],["نصفه فأقل أو من خارج الجدول",1],["لا تهجي",0]],
   TMZ:[["10 دقائق ±2",2],["خارج المدة",0]],
   ISQ:[["متقن: ينفّذ طريقة مرحلته كاملة بمشاركة الطلاب، ويشرح فقط ما تقرره المرحلة",10],["متوسط: نقصته خطوة، أو شرح مرة ما لم يحن وقته",7],["نامٍ: نفّذ جزءاً من الطريقة، أو قام بما هو على الطلاب، أو أطال في شرح ما لم يحن وقته",4],["غير محقق: اكتفى بقراءة السطر",0]],
@@ -316,11 +325,11 @@ const TRACK_HINT = {"الحروف":"لمستوى الحروف","المربعات
 const LEVEL_TO_TRACK = {"التمهيدي":"الحروف","حروف":"الحروف","حركات":"المربعات الأربعة","تنوينات":"المربعات الأربعة","خاتمة التلاوة":"الخاتمة"};
 
 const DOMAINS = [
-  {k:"a",n:"أ",title:"الوفاء بمنهجية بيان",sub:"مسار المهاري والإقراء والإملاء والتهجي والإسقاط والتحفة",items:[
+  {k:"a",n:"أ",title:"الالتزام بمنهجية بيان",sub:"مسار المهاري والإقراء والإملاء والكتابة والتهجي والإسقاط والتحفة",items:[
     {track:true},
     {no:2,t:"الإقراء الفردي",d:"20 د",c:"IQR"},
     {no:3,t:"الإملاء والتصحيح",c:"IML"},
-    {no:4,t:"التكتيب",c:"TKT"},
+    {no:4,t:"الكتابة",c:"TKT"},
     {no:5,t:"مقدار التهجي",c:"TMQ"},
     {no:6,t:"زمن التهجي",c:"TMZ"},
     {no:7,t:"الإسقاط والشرح حسب المرحلة",c:"ISQ",note:"يُشترط 7 فأكثر لتقدير «ممتاز»"},
@@ -368,8 +377,11 @@ const pctF = n => n==null ? "—" : (Math.round(n*1000)/10).toLocaleString("ar-S
 
 function optButtons(id, code){
   const cur = S.sel[id];
-  return `<div class="opts">${LV[code].map(([l,p])=>`<button type="button" class="opt" data-id="${id}" data-v="${esc(l)}" aria-pressed="${cur===l}"><span class="pts">${fmt(p)}</span>${esc(l)}</button>`).join("")}
-  <button type="button" class="opt na-o" data-id="${id}" data-v="${NA}" aria-pressed="${cur===NA}">${NA}</button></div>`;
+  const st = cur==null?"":(cur===NA?"na":"on");
+  return `<div class="dd-w ${st}"><select class="dd" data-id="${id}" aria-label="اختر المستوى">
+  <option value="" ${cur==null?"selected":""}>— اختر المستوى —</option>
+  ${LV[code].map(([l,p])=>`<option value="${esc(l)}" ${cur===l?"selected":""}>${esc(l)} — ${p===0?"صفر":p===1?"درجة واحدة":p===2?"درجتان":fmt(p)+(p<=10?" درجات":" درجة")}</option>`).join("")}
+  <option value="${NA}" ${cur===NA?"selected":""}>${NA} (يُستبعد البند)</option></select></div>`;
 }
 function evBox(id){
   const v=S.ev[id]||"";
@@ -388,7 +400,7 @@ function renderInfo(){
 function renderTrack(){
   const t=S.track;
   let h = `<div class="item" id="trackItem"><div class="item-h"><div class="num">1</div><div class="item-t">مسار المهاري المطبّق<small>اختر المسار المناسب لمستوى الحلقة؛ تظهر مكوّناته (كفاية الشرح لكل مكوّن) وزمن المهاري كله</small></div><div class="sc" data-sc="track"></div></div>
-  <div class="track row">${Object.keys(TRACKS).map(k=>`<button type="button" data-track="${k}" aria-pressed="${t===k}">${k}<small>${TRACK_HINT[k]}</small></button>`).join("")}</div>`;
+  <div class="row"><div class="dd-w ${t?"on":""}"><select class="dd" data-trk aria-label="مسار المهاري"><option value="" ${t?"":"selected"}>— اختر المسار —</option>${Object.keys(TRACKS).map(k=>`<option value="${k}" ${t===k?"selected":""}>${k} (${TRACK_HINT[k]})</option>`).join("")}</select></div></div>`;
   if(t){
     h += TRACKS[t].map((name,i)=>{
       const a=`t${i}k`;
@@ -415,7 +427,7 @@ function renderSample(it){
   return `<div class="item" data-item="15"><div class="item-h"><div class="num">15</div><div class="item-t">${it.t} <span style="color:var(--muted);font-weight:500">(${it.d})</span><small>يختار المشرف 5 طلاب من كشف الحضور ويقيّمهم بسلّم المرحلة، بما فيه تسميع التحفة؛ ويمكنه إضافة طلاب آخرين بزر «+» إن اتسع الوقت</small></div><div class="sc" data-sc="sample"></div></div>
   <table class="sample"><tbody>${S.sample.map((s,i)=>`<tr><td><div class="num">${i+1}</div></td>
     <td style="width:30%"><input data-sname="${i}" placeholder="اسم الطالب" value="${esc(s.name)}" aria-label="اسم الطالب ${i+1}"></td>
-    <td><div class="opts">${STU.map(([l,p])=>`<button type="button" class="opt" data-stu="${i}" data-v="${l}" aria-pressed="${s.g===l}"><span class="pts">${fmt(p)}</span>${l}</button>`).join("")}</div></td><td style="width:30px">${i>=5?`<button type="button" class="rm-stu" data-rmstu="${i}" aria-label="حذف الطالب ${i+1}" title="حذف">×</button>`:""}</td></tr>`).join("")}</tbody></table>
+    <td><div class="dd-w ${s.g?"on":""}"><select class="dd" data-stu="${i}" aria-label="مستوى الطالب ${i+1}"><option value="" ${s.g?"":"selected"}>— المستوى —</option>${STU.map(([l,p])=>`<option value="${l}" ${s.g===l?"selected":""}>${l} — ${fmt(p)}</option>`).join("")}</select></div></td><td style="width:30px">${i>=5?`<button type="button" class="rm-stu" data-rmstu="${i}" aria-label="حذف الطالب ${i+1}" title="حذف">×</button>`:""}</td></tr>`).join("")}</tbody></table>
   ${S.sample.length<40?`<button type="button" class="add-stu" data-addstu><span class="pl">+</span>إضافة طالب</button>`:""}
   <div class="avg"><span>متوسط العيّنة</span><span id="sAvg">—</span></div></div>`;
 }
@@ -533,7 +545,16 @@ document.addEventListener("input",e=>{
   if(t.dataset.sname!=null){S.sample[+t.dataset.sname].name=t.value; persist(); return;}
   if(t.dataset.k){S[t.dataset.k]=t.value; persist();}
 });
-document.addEventListener("change",e=>{ if(e.target.dataset.info) e.target.dispatchEvent(new Event("input",{bubbles:true})); });
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.dataset.info){ t.dispatchEvent(new Event("input",{bubbles:true})); return; }
+  if(!t.classList.contains("dd")) return;
+  const w=t.parentElement, v=t.value;
+  if(t.dataset.id){ if(v) S.sel[t.dataset.id]=v; else delete S.sel[t.dataset.id];
+    w.className="dd-w "+(v?(v===NA?"na":"on"):""); update(); return; }
+  if(t.dataset.stu!=null){ S.sample[+t.dataset.stu].g = v||undefined; w.className="dd-w "+(v?"on":""); update(); return; }
+  if(t.hasAttribute("data-trk")){ setTrack(v); return; }
+});
 
 function toast(m,ms=3200){const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),ms);}
 
@@ -580,7 +601,7 @@ $("#bSave").onclick=async()=>{
 
 const TABS=[
   {k:"info",l:"ⓘ",t:"بيانات الزيارة",c:"#5E6E8F"},
-  {k:"a",l:"أ",t:"الوفاء بمنهجية بيان",c:"#3D5A8F"},
+  {k:"a",l:"أ",t:"الالتزام بمنهجية بيان",c:"#3D5A8F"},
   {k:"b",l:"ب",t:"جودة التدريس والبيئة الصفية",c:"var(--teal)"},
   {k:"c",l:"ج",t:"التخطيط والمتابعة",c:"var(--peach)"},
   {k:"d",l:"د",t:"نواتج التعلّم",c:"var(--red)"},
