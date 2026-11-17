@@ -163,14 +163,15 @@ section.block > .pager{margin:0;padding:18px 24px 24px;border-top:1px solid var(
   .tabs{min-width:0}
   .tabs{position:sticky;top:0;z-index:15;border-radius:0;border-width:0 0 1px;padding:8px 10px}
   .tabs-h{display:none}
-  .tabs-in{flex-direction:row;overflow-x:auto;scrollbar-width:none;gap:6px}
+  .tabs-in{flex-direction:row;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;scrollbar-width:none;gap:6px;align-items:stretch}
   .tabs-in::-webkit-scrollbar{display:none}
   .tab{flex:0 0 auto;width:auto;align-items:center;padding:8px 12px 8px 14px}
   .tab .tl{width:32px;height:32px}
   .tab b{font-size:13.5px;white-space:nowrap}
   .tab small{white-space:nowrap}
   .tab .pips{display:none}
-  .tab[aria-selected="true"]::before{inset:auto 12px -8px 12px;width:auto;height:3px;top:auto}
+  .tab{overflow:hidden}
+  .tab[aria-selected="true"]::before{inset:auto 14px 0 14px;width:auto;height:3px;top:auto;border-radius:3px 3px 0 0}
   .wrap{padding:18px 14px 0}
   .hero-in{padding:14px 16px;gap:14px;flex-wrap:wrap}
   .logo{height:38px}
