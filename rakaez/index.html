@@ -384,6 +384,74 @@ svg.chart .dotp{opacity:0;animation:fadeIn .4s ease forwards}
 .chances small{display:block;color:var(--soft);font-size:13px}
 .chances b{font-weight:500;color:var(--navy)}
 
+
+/* registration */
+.reg{display:grid;grid-template-columns:340px 1fr;background:#fff;border-radius:28px;box-shadow:var(--shadow-m);overflow:hidden;scroll-margin-top:110px}
+.reg-side{background:var(--navy);color:#fff;padding:40px 32px;position:relative;overflow:hidden}
+.reg-side::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;border:1px solid rgba(216,148,120,.3);bottom:-130px;left:-90px}
+.reg-side h3{color:#fff;font-size:24px}
+.reg-side>p{color:rgba(255,255,255,.65);font-size:14.5px;margin-top:6px}
+.rsteps{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:6px;position:relative;z-index:1}
+.rsteps li{display:flex;gap:14px;align-items:center;padding:12px 14px;border-radius:14px;color:rgba(255,255,255,.55);transition:all .4s var(--ease)}
+.rsteps li .n{width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);display:grid;place-items:center;font-size:14px;flex-shrink:0;transition:all .4s var(--ease)}
+.rsteps li.on{background:rgba(255,255,255,.08);color:#fff}
+.rsteps li.on .n{background:var(--peach);border-color:var(--peach);color:var(--navy-d)}
+.rsteps li.done .n{background:var(--teal);border-color:var(--teal);color:#fff}
+.rsteps li small{display:block;font-size:12px;color:rgba(255,255,255,.5)}
+.reg-side .meta{margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:grid;gap:12px;font-size:14px;color:rgba(255,255,255,.75);position:relative;z-index:1}
+.reg-side .meta div{display:flex;gap:10px;align-items:center}
+.reg-side .meta svg{color:var(--peach);font-size:17px}
+.reg-main{padding:44px 48px;min-height:560px;display:flex;flex-direction:column}
+.rbar{height:4px;background:var(--sand);border-radius:999px;overflow:hidden;margin-bottom:32px}
+.rbar i{display:block;height:100%;background:linear-gradient(to left,var(--teal),var(--peach));border-radius:999px;transition:width .6s var(--ease)}
+.rstep{display:none;flex:1}.rstep.on{display:block;animation:viewIn .5s var(--ease) both}
+.rstep h4{font-size:22px;margin-bottom:4px}
+.rstep>.sub{color:var(--muted);font-size:15px;margin-bottom:26px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}
+.fld{display:flex;flex-direction:column;gap:8px}.fld.full{grid-column:1/-1}
+.fld label{color:var(--navy);font-size:15px}
+.fld label .req{color:var(--coral);margin-inline-start:3px}
+.fld .help{font-size:12.5px;color:var(--soft);margin-top:-4px}
+.inp{font-family:inherit;font-weight:500;font-size:15.5px;color:var(--ink);background:var(--sand);border:1.5px solid transparent;border-radius:14px;padding:13px 16px;outline:none;transition:all .25s;width:100%}
+.inp:focus{background:#fff;border-color:var(--teal);box-shadow:0 0 0 4px rgba(69,124,138,.12)}
+.inp.ltr{direction:ltr;text-align:right}
+textarea.inp{min-height:110px;resize:vertical;line-height:1.7}
+select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23828B99' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;background-size:18px;padding-left:42px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font-size:14.5px;padding:10px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:all .25s var(--ease)}
+.chips button:hover{border-color:var(--teal);color:var(--navy)}
+.chips button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.chips+.inp{margin-top:8px}
+.fld.err .inp,.fld.err .chips button{border-color:var(--coral)}
+.fld .emsg{display:none;color:var(--coral);font-size:13px}
+.fld.err .emsg{display:block}
+.info-box{background:var(--sand);border-radius:18px;padding:22px 24px;display:grid;gap:14px;margin-bottom:22px}
+.info-box .r{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink);width:auto;height:auto;background:none;border-radius:0}
+.info-box .r svg{color:var(--teal);font-size:19px;margin-top:4px}
+.info-box .r small{display:block;color:var(--soft);font-size:13px}
+.pay{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1.5px dashed var(--peach);background:var(--peach-l);border-radius:18px;padding:20px 24px;margin-bottom:22px}
+.pay p{color:var(--peach-ink);font-size:14.5px;max-width:420px}
+.pay b{font-weight:500;color:var(--navy);display:block;font-size:16px}
+.consent{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border:1.5px solid var(--line);border-radius:16px;cursor:pointer;transition:all .25s}
+.consent:hover{border-color:var(--teal)}
+.consent .box{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--soft);display:grid;place-items:center;flex-shrink:0;margin-top:3px;transition:all .25s;color:#fff;font-size:15px}
+.consent.on{border-color:var(--teal);background:var(--teal-l)}
+.consent.on .box{background:var(--teal);border-color:var(--teal)}
+.consent .box svg{opacity:0;transition:opacity .2s}.consent.on .box svg{opacity:1}
+.consent.err{border-color:var(--coral)}
+.rnav{display:flex;justify-content:space-between;gap:12px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+.rnav .btn[hidden]{display:none}
+.rnav .btn-l svg{transform:scaleX(-1)}
+.rdone{display:none;text-align:center;padding:40px 10px;flex:1;flex-direction:column;align-items:center;justify-content:center}
+.rdone.on{display:flex;animation:viewIn .6s var(--ease) both}
+.rdone .ok{width:96px;height:96px;border-radius:50%;background:var(--teal-l);color:var(--teal);display:grid;place-items:center;font-size:46px;margin-bottom:22px;animation:pop .7s var(--ease) both}
+@keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.rdone h4{font-size:26px}
+.rdone p{color:var(--muted);max-width:440px;margin:10px auto 0}
+.rerr{display:none;margin-top:16px;color:var(--coral);font-size:14px}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(24,38,74,.25);border-top-color:var(--navy-d);animation:spin .8s linear infinite;display:none}
+.btn.busy .spin{display:inline-block}.btn.busy svg{display:none}
+
 /* footer */
 footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;font-size:14.5px}
 .ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -410,7 +478,8 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .sb:nth-child(3)::before{display:none}
   .c3,.c4,.days,.units,.board{grid-template-columns:repeat(2,1fr)}
   .steps{grid-template-columns:repeat(2,1fr);row-gap:44px}.steps .track{display:none}
-  .spot,.join-grid,.score{grid-template-columns:1fr}
+  .spot,.join-grid,.score,.reg{grid-template-columns:1fr}
+  .reg-side{padding:32px 28px}.rsteps{grid-template-columns:repeat(3,1fr);margin-top:20px}.rsteps li{flex-direction:column;text-align:center;gap:6px;padding:10px 4px;font-size:13px}.rsteps li small,.reg-side .meta{display:none}
   .exams{grid-template-columns:1fr 1fr}.chances{grid-template-columns:1fr}.chances>div+div{border-right:0;border-top:1px solid var(--line)}
   .band{grid-template-columns:1fr;text-align:center;gap:20px;padding:48px 32px}
   .facts{grid-template-columns:repeat(2,1fr)}
@@ -436,6 +505,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   .spot .sp-main,.spot .sp-side,.cta-band,.sd,.chart-box{padding:28px 22px}
   .count div{min-width:0;flex:1;padding:12px 8px}
   .people{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr}.reg-main{padding:28px 20px}
   .kr{grid-template-columns:44px 1fr 70px;padding:16px 18px;gap:12px}.kr .g{display:none}
   .ft{grid-template-columns:1fr}
   .sq{aspect-ratio:auto;min-height:150px}
@@ -491,7 +561,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
       <a href="#results">النتائج</a>
       <a href="#join">التسجيل</a>
     </nav>
-    <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">سجّل في ركائز 34 <svg class="i"><use href="#i-arrow"/></svg></a>
+    <a href="#register" class="btn btn-p">سجّل في ركائز 34 <svg class="i"><use href="#i-arrow"/></svg></a>
     <button class="burger" id="burger" aria-label="القائمة"><svg class="i"><use href="#i-menu"/></svg></button>
   </div>
 </header>
@@ -506,7 +576,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
         <h1 class="rv" style="--d:1">نُعِدّ <em>معلّم بيان</em><br>المتقن والمعتمد</h1>
         <p class="lead rv" style="--d:2">برنامج تدريبي مكثّف يؤهّل معلمي ومعلمات الحلقات على منهج بيان لتعليم القراءة وإتقان التلاوة، وينتهي بشهادة معتمدة مرقّمة.</p>
         <div class="cta rv" style="--d:3">
-          <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">سجّل الآن <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a href="#register" class="btn btn-p">سجّل الآن <svg class="i"><use href="#i-arrow"/></svg></a>
           <a href="#program" class="btn btn-o">تعرّف على البرنامج</a>
         </div>
       </div>
@@ -562,10 +632,10 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
           <h2 style="margin-top:20px">ركائز 34</h2>
           <p>رجال ونساء · عن بُعد · مكثّف</p>
           <div class="count" id="countdown"><div><b class="num" data-k="d">0</b><small>يوم</small></div><div><b class="num" data-k="h">0</b><small>ساعة</small></div><div><b class="num" data-k="m">0</b><small>دقيقة</small></div></div>
-          <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">احجز مقعدك <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a href="#register" class="btn btn-p">احجز مقعدك <svg class="i"><use href="#i-arrow"/></svg></a>
         </div>
         <div class="sp-side">
-          <div class="tl-row"><span class="d"><svg class="i"><use href="#i-file"/></svg></span><div><div class="t">الاختبار القبلي</div><div class="v">الأربعاء 18 نوفمبر</div></div></div>
+          <div class="tl-row"><span class="d"><svg class="i"><use href="#i-file"/></svg></span><div><div class="t">الاختبار القبلي</div><div class="v">الخميس 19 نوفمبر</div></div></div>
           <div class="tl-row hl"><span class="d"><svg class="i"><use href="#i-monitor"/></svg></span><div><div class="t">أيام التدريب</div><div class="v">22 – 25 نوفمبر</div></div></div>
           <div class="tl-row"><span class="d"><svg class="i"><use href="#i-pen"/></svg></span><div><div class="t">الاختبار النهائي</div><div class="v">29 نوفمبر · والفرصة الثانية 6 ديسمبر</div></div></div>
           <div class="tl-row"><span class="d"><svg class="i"><use href="#i-award"/></svg></span><div><div class="t">إصدار الشهادات</div><div class="v">قبل 13 ديسمبر</div></div></div>
@@ -589,7 +659,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
       <div class="cta-band rv">
         <h2>معلّم مؤهّل في كل حلقة</h2>
         <p>انضم إلى أكثر من 875 معلمًا ومعلمة اعتمدهم برنامج ركائز.</p>
-        <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p">ابدأ التسجيل <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a href="#register" class="btn btn-p">ابدأ التسجيل <svg class="i"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </div>
@@ -624,7 +694,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
     <div class="wrap">
       <div class="head rv"><div class="eyb"><svg class="i"><use href="#i-file"/></svg>الاختبارات</div><h2>ثلاثة اختبارات في رحلة المتدرب</h2><p>قبلي يقيس مستواك قبل التدريب، ثم تحريري وشفوي بعده يحددان اجتيازك.</p></div>
       <div class="exams">
-        <div class="exam pre rv"><div class="exam-h"><div class="ico n"><svg class="i"><use href="#i-target"/></svg></div><div class="mark na"><b>لا يُحتسب</b></div><h3>الاختبار القبلي</h3><div class="when"><svg class="i"><use href="#i-cal"/></svg>الأربعاء السابق لانطلاق الدورة</div></div>
+        <div class="exam pre rv"><div class="exam-h"><div class="ico n"><svg class="i"><use href="#i-target"/></svg></div><div class="mark na"><b>لا يُحتسب</b></div><h3>الاختبار القبلي</h3><div class="when"><svg class="i"><use href="#i-cal"/></svg>قبل انطلاق الدورة بأيام</div></div>
           <div class="exam-b"><div class="pr"><span>التهجي</span><span>قياس مستوى</span></div><div class="pr"><span>المهاري</span><span>قياس مستوى</span></div><p>يعرف به المدرب مستواك قبل التدريب، ولا يدخل في مجموع الدرجات.</p></div></div>
         <div class="exam wr rv" style="--d:1"><div class="exam-h"><div class="ico t"><svg class="i"><use href="#i-pen"/></svg></div><div class="mark"><b class="num">20</b><small>درجة</small></div><h3>الاختبار التحريري</h3><div class="when"><svg class="i"><use href="#i-monitor"/></svg>نموذج إلكتروني يُصحَّح آليًا</div></div>
           <div class="exam-b"><div class="pr"><span>اختبار التهجي</span><span><span class="num">10</span> درجات</span></div><div class="pr"><span>اختبار المهاري</span><span><span class="num">10</span> درجات</span></div><p>يُجرى بعد انتهاء الدورة، وتظهر نتيجته مباشرة.</p></div></div>
@@ -772,8 +842,74 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
           <li><svg class="i"><use href="#i-users"/></svg>مسار للرجال ومسار للنساء</li>
           <li><svg class="i"><use href="#i-award"/></svg>شهادة معتمدة مرقّمة</li>
         </ul>
-        <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" class="btn btn-p" id="regBtn">نموذج التسجيل <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a href="#register" class="btn btn-p" id="regBtn">نموذج التسجيل <svg class="i"><use href="#i-arrow"/></svg></a>
       </aside>
+    </div>
+  </div>
+
+  <div class="sec" id="reg-sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-pen"/></svg>نموذج التسجيل</div><h2>سجّل في ركائز <span class="num">34</span></h2><p>ثلاث خطوات قصيرة، وتصل بياناتك مباشرة إلى إدارة البرنامج.</p></div>
+      <div class="reg rv" id="reg">
+        <aside class="reg-side">
+          <h3>التسجيل في ركائز <span class="num">34</span></h3>
+          <p>عن بُعد · <span class="num">16</span> ساعة تدريبية</p>
+          <ol class="rsteps" id="rsteps">
+            <li class="on"><span class="n num">1</span><span>الإقرار والسداد<small>اطّلع وأكّد التزامك</small></span></li>
+            <li><span class="n num">2</span><span>بياناتك<small>للتواصل وإصدار الشهادة</small></span></li>
+            <li><span class="n num">3</span><span>مؤهلاتك<small>الإجازة والشهادات</small></span></li>
+          </ol>
+          <div class="meta">
+            <div><svg class="i"><use href="#i-cal"/></svg>الأحد – الأربعاء · 12 – 15 جمادى الآخرة</div>
+            <div><svg class="i"><use href="#i-clock"/></svg>من 3:30 م حتى 8:30 م</div>
+            <div><svg class="i"><use href="#i-file"/></svg>الاختبار القبلي: الخميس 9 جمادى الآخرة</div>
+          </div>
+        </aside>
+        <form class="reg-main" id="regForm" novalidate>
+          <div class="rbar"><i id="rbar" style="width:33%"></i></div>
+
+          <div class="rstep on" data-s="0">
+            <h4>قبل أن تبدأ</h4><p class="sub">اطّلع على تفاصيل الدفعة ثم أكّد التزامك.</p>
+            <div class="info-box">
+              <div class="r"><svg class="i"><use href="#i-cal"/></svg><div>الأحد 12 – الأربعاء 15 جمادى الآخرة 1448هـ<small>الموافق 22 – 25 نوفمبر 2026م</small></div></div>
+              <div class="r"><svg class="i"><use href="#i-clock"/></svg><div>الفترة المسائية من 3:30 م حتى 8:30 م<small>عن بُعد</small></div></div>
+              <div class="r"><svg class="i"><use href="#i-file"/></svg><div>الاختبار القبلي يوم الخميس 9 جمادى الآخرة 1448هـ<small>الموافق 19 نوفمبر 2026م</small></div></div>
+              <div class="r"><svg class="i"><use href="#i-shield"/></svg><div><a href="https://sites.google.com/view/rakaeez/Home/shrot" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline">شروط القبول والاجتياز للبرنامج</a></div></div>
+            </div>
+            <div class="pay">
+              <div><b>رسوم البرنامج <span class="num">300</span> ريال</b><p>تشمل الشهادة عند الاجتياز. سدّد الرسوم من متجر غراس ثم ارجع هنا لإكمال التسجيل، وبياناتك تبقى محفوظة.</p></div>
+              <a class="btn btn-n" href="https://gherassa-store.com/%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC-%D8%B1%D9%83%D8%A7%D8%A6%D8%B2/p1567410302" target="_blank" rel="noopener">السداد من المتجر <svg class="i"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="fld" data-q="consent">
+              <div class="consent" id="consent" role="checkbox" aria-checked="false" tabindex="0"><span class="box"><svg class="i"><use href="#i-check"/></svg></span><span>أُقرّ أنّي اطّلعت على تفاصيل البرنامج وملاحظاته، وألتزم بحضوره كاملًا.<span class="req" style="color:var(--coral)"> *</span></span></div>
+              <span class="emsg">يلزم الإقرار للمتابعة.</span>
+            </div>
+          </div>
+
+          <div class="rstep" data-s="1">
+            <h4>بيانات المشارك</h4><p class="sub">تُستخدم للتواصل معك وفي إصدار الشهادة.</p>
+            <div class="fgrid" id="f1"></div>
+          </div>
+
+          <div class="rstep" data-s="2">
+            <h4>الإجازة والشهادة</h4><p class="sub">آخر خطوة.</p>
+            <div class="fgrid" id="f2"></div>
+          </div>
+
+          <div class="rdone" id="rdone">
+            <div class="ok"><svg class="i"><use href="#i-check"/></svg></div>
+            <h4>تم استلام تسجيلك</h4>
+            <p>شكرًا لك، ستتواصل معك إدارة البرنامج عبر الواتساب بعد التحقق من السداد، وتُضاف إلى مجموعة الدفعة.</p>
+          </div>
+
+          <div class="rnav" id="rnav">
+            <button type="button" class="btn btn-l" id="rPrev" hidden><svg class="i"><use href="#i-arrow"/></svg> السابق</button>
+            <button type="button" class="btn btn-t" id="rNext" style="margin-inline-start:auto">التالي <svg class="i"><use href="#i-arrow"/></svg></button>
+            <button type="button" class="btn btn-p" id="rSend" hidden style="margin-inline-start:auto"><span class="spin"></span>إرسال التسجيل <svg class="i"><use href="#i-arrow"/></svg></button>
+          </div>
+          <p class="rerr" id="rerr">تعذّر الإرسال، تأكّد من الاتصال بالإنترنت وحاول مرة أخرى، أو سجّل عبر <a href="https://forms.gle/tdeU3cjrByWCikb69" target="_blank" rel="noopener" style="text-decoration:underline">النموذج المباشر</a>.</p>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -910,6 +1046,88 @@ $("#cohorts").innerHTML=D.cohorts.map((c,k)=>`<div class="cc rv" style="--d:${k}
 $("#faq").innerHTML=D.faq.map(([q,a])=>`<div class="qa"><button>${q}<span class="pm">${ic("i-plus")}</span></button><div class="a"><div><p>${a}</p></div></div></div>`).join("");
 $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList.contains("open");$$(".qa").forEach(x=>x.classList.remove("open"));if(!o)q.classList.add("open")});
 
+
+/* ===== registration (يُرسل إلى نموذج قوقل نفسه) ===== */
+(function(){
+  const ACTION="https://docs.google.com/forms/d/e/1FAIpQLScKeuQMpNYkPOx9wMMCEbIhghMea1Z1AU2jdPJnyFkFuMOOMg/formResponse";
+  const CONSENT="entry.1115058360";
+  const years=[];for(let y=1430;y>=1385;y--)years.push(String(y));
+  const Q={1:[
+    {id:"1195533031",l:"الاسم الرباعي",t:"text",req:1,help:"كما سيظهر في الشهادة عند الاجتياز",full:1},
+    {id:"1269426607",l:"رقم الجوال (مفعّل فيه واتساب)",t:"tel",req:1,help:"مثال: 9665XXXXXXXX"},
+    {id:"1014171028",l:"البريد الإلكتروني",t:"email",req:1},
+    {id:"2087013886",l:"الجنسية",t:"chips",req:1,o:["سعودي","مصري","سوري","يمني","سوداني"],other:1,full:1},
+    {id:"394116917",l:"سنة الميلاد (هجري)",t:"select",req:1,o:years},
+    {id:"1223525125",l:"الجنس",t:"chips",req:1,o:["ذكر","أنثى"]},
+    {id:"663902187",l:"المدينة",t:"chips",req:1,o:["الرّياض"],other:1,full:1},
+    {id:"188302055",l:"الجهة التي تتبع لها",t:"chips",req:1,o:["برنامج فنار التابع لجمعية غراس","جمعية مكنون","جمعية تعلم","جمعية الأمير سلطان"],other:1,full:1},
+    {id:"517829165",l:"اسم المسجد أو الحلقة أو المدرسة أو الدار",t:"text",req:1,full:1},
+    {id:"1776718571",l:"عدد طلاب الحلقة",t:"number",req:0,help:"للمعلمين الحاليين، إن وُجد"},
+    {id:"193727486",l:"اسم مشرف/ـة الجهة",t:"text",req:1},
+    {id:"1420964261",l:"رقم جوال مشرف/ـة الجهة",t:"tel",req:0,help:"مثال: 9665XXXXXXXX"}],
+   2:[
+    {id:"276815078",l:"هل لديك إجازة في القرآن الكريم؟",t:"chips",req:1,o:["نعم","لا"],full:1},
+    {id:"1411684015",l:"هل لديك شهادة بيان أو نور البيان أو التبيان أو برامج شبيهة؟",t:"chips",req:1,o:["نعم","لا"],full:1},
+    {id:"729993446",l:"ملاحظاتكم واقتراحاتكم",t:"area",req:0,full:1}]};
+  const OTHER="أخرى";
+  const field=q=>{
+    const r=q.req?'<span class="req">*</span>':"",h=q.help?`<span class="help">${q.help}</span>`:"";let c="";
+    if(q.t==="chips")c=`<div class="chips">${q.o.concat(q.other?[OTHER]:[]).map(o=>`<button type="button" data-v="${o}">${o}</button>`).join("")}</div>`+(q.other?`<input class="inp oth" placeholder="اكتب هنا" hidden>`:"");
+    else if(q.t==="select")c=`<select class="inp"><option value="">اختر السنة</option>${q.o.map(o=>`<option>${o}</option>`).join("")}</select>`;
+    else if(q.t==="area")c=`<textarea class="inp"></textarea>`;
+    else c=`<input class="inp${q.t==="tel"||q.t==="email"||q.t==="number"?" ltr":""}" type="${q.t==="tel"?"tel":q.t}" ${q.t==="tel"?'inputmode="numeric" placeholder="9665XXXXXXXX"':""} ${q.t==="number"?'min="0" inputmode="numeric"':""}>`;
+    return `<div class="fld${q.full?" full":""}" data-id="${q.id}"><label>${q.l}${r}</label>${h}${c}<span class="emsg"></span></div>`};
+  $("#f1").innerHTML=Q[1].map(field).join("");$("#f2").innerHTML=Q[2].map(field).join("");
+  const all=[...Q[1],...Q[2]],byId=Object.fromEntries(all.map(q=>[q.id,q]));
+  // chips
+  $$("#regForm .chips button").forEach(b=>b.onclick=()=>{const f=b.closest(".fld");f.querySelectorAll(".chips button").forEach(x=>x.classList.toggle("on",x===b));const o=f.querySelector(".oth");if(o){o.hidden=b.dataset.v!==OTHER;if(!o.hidden)o.focus()}f.classList.remove("err");save()});
+  const cs=$("#consent");const tg=()=>{cs.classList.toggle("on");cs.setAttribute("aria-checked",cs.classList.contains("on"));cs.classList.remove("err");cs.parentElement.classList.remove("err");save()};
+  cs.onclick=tg;cs.onkeydown=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();tg()}};
+  const toEn=s=>s.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+  const phone=s=>{let d=toEn(s).replace(/\D/g,"");if(d.startsWith("00"))d=d.slice(2);if(/^05\d{8}$/.test(d))d="966"+d.slice(1);if(/^5\d{8}$/.test(d))d="966"+d;return d};
+  const val=q=>{const f=$(`.fld[data-id="${q.id}"]`);
+    if(q.t==="chips"){const b=f.querySelector(".chips button.on");if(!b)return "";if(b.dataset.v===OTHER)return {other:f.querySelector(".oth").value.trim()};return b.dataset.v}
+    const v=f.querySelector(".inp").value.trim();return q.t==="tel"&&v?phone(v):q.t==="number"?toEn(v):v};
+  const check=q=>{const f=$(`.fld[data-id="${q.id}"]`),v=val(q),m=f.querySelector(".emsg");let e="";
+    if(q.req&&(!v||(typeof v==="object"&&!v.other)))e=q.t==="chips"||q.t==="select"?"يرجى الاختيار":"هذا الحقل مطلوب";
+    else if(v&&q.t==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))e="البريد الإلكتروني غير صحيح";
+    else if(v&&q.t==="tel"&&!/^\d{9,15}$/.test(v))e="رقم الجوال غير صحيح، اكتبه بالأرقام مثل 9665XXXXXXXX";
+    m.textContent=e;f.classList.toggle("err",!!e);return !e};
+  $$("#regForm .inp").forEach(i=>i.addEventListener("input",()=>{i.closest(".fld").classList.remove("err");save()}));
+  $$('#regForm input[type=tel]').forEach(i=>i.addEventListener("blur",()=>{if(i.value.trim())i.value=phone(i.value)}));
+  // draft (يحفظ في متصفح الزائر فقط إلى أن يُرسل)
+  const KEY="rakaez34-draft";
+  function save(){try{const d={c:cs.classList.contains("on")};all.forEach(q=>{d[q.id]=val(q)});localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+  (function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;if(d.c){cs.classList.add("on");cs.setAttribute("aria-checked","true")}
+    all.forEach(q=>{const v=d[q.id],f=$(`.fld[data-id="${q.id}"]`);if(!v)return;
+      if(q.t==="chips"){const k=typeof v==="object"?OTHER:v;const b=[...f.querySelectorAll(".chips button")].find(x=>x.dataset.v===k);if(b){b.classList.add("on");if(k===OTHER){const o=f.querySelector(".oth");o.hidden=false;o.value=v.other||""}}}
+      else f.querySelector(".inp").value=v})}catch(e){}})();
+  // steps
+  let s=0;const steps=$$(".rstep"),lis=$$("#rsteps li");
+  function go(n){s=n;steps.forEach((x,i)=>x.classList.toggle("on",i===s));lis.forEach((l,i)=>{l.classList.toggle("on",i===s);l.classList.toggle("done",i<s)});
+    $("#rbar").style.width=((s+1)/3*100)+"%";$("#rPrev").hidden=s===0;$("#rNext").hidden=s===2;$("#rSend").hidden=s!==2;
+    const top=$("#reg").getBoundingClientRect().top;if(top<0)$("#reg").scrollIntoView({behavior:"smooth"})}
+  function valid(n){if(n===0){const ok=cs.classList.contains("on");cs.classList.toggle("err",!ok);cs.parentElement.classList.toggle("err",!ok);return ok}
+    const ok=Q[n].map(check).every(Boolean);if(!ok){const e=$(".rstep.on .fld.err");e&&e.scrollIntoView({behavior:"smooth",block:"center"})}return ok}
+  $("#rNext").onclick=()=>{if(valid(s))go(s+1)};
+  $("#rPrev").onclick=()=>go(s-1);
+  $("#rSend").onclick=async()=>{
+    if(!valid(2))return;
+    for(const n of [1]){if(!valid(n)){go(n);return}}
+    const btn=$("#rSend");btn.classList.add("busy");btn.disabled=true;$("#rerr").style.display="none";
+    const fd=new URLSearchParams();fd.append(CONSENT,"نعم");
+    all.forEach(q=>{const v=val(q);if(!v)return;if(typeof v==="object"){fd.append("entry."+q.id,"__other_option__");fd.append("entry."+q.id+".other_option_response",v.other)}else fd.append("entry."+q.id,v)});
+    fd.append("fvv","1");fd.append("pageHistory","0,1,2");
+    try{
+      await fetch(ACTION,{method:"POST",mode:"no-cors",body:fd});
+      try{localStorage.removeItem(KEY)}catch(e){}
+      steps.forEach(x=>x.classList.remove("on"));$("#rnav").style.display="none";$("#rdone").classList.add("on");
+      $("#rbar").style.width="100%";lis.forEach(l=>{l.classList.remove("on");l.classList.add("done")});
+    }catch(e){$("#rerr").style.display="block"}
+    finally{btn.classList.remove("busy");btn.disabled=false}
+  };
+})();
+
 isolateNums(document.body);
 
 /* ===== motion ===== */
@@ -926,13 +1144,14 @@ function observe(scope){scope.querySelectorAll(".rv,.statbar .in-box,.kpis,.char
 /* ===== router ===== */
 const views=["home","program","curriculum","results","join"];
 function route(){
-  let v=location.hash.slice(1);if(!views.includes(v))v="home";
+  let v=location.hash.slice(1),toReg=v==="register";if(toReg)v="join";if(!views.includes(v))v="home";
   $$(".view").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
   $$("#menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+v));
   $("#menu").classList.remove("open");
   window.scrollTo({top:0,behavior:"instant"});
   const cur=$("#v-"+v);observe(cur);
   if(v==="results")drawH();
+  if(toReg)setTimeout(()=>{$("#reg").classList.add("in");$("#reg").scrollIntoView({behavior:"smooth"})},120);
   onScroll();
 }
 addEventListener("hashchange",route);
