@@ -451,6 +451,10 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 @keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
 .rdone h4{font-size:26px}
 .rdone p{color:var(--muted);max-width:440px;margin:10px auto 0}
+.rdone .wa{background:#1FA855;color:#fff;margin-top:26px;padding:16px 30px;font-size:16.5px;box-shadow:0 12px 28px rgba(31,168,85,.3);animation:pop .7s var(--ease) .35s both}
+.rdone .wa:hover{background:#178a45}
+.rdone .wa svg{font-size:20px}.rdone .wa:hover svg{transform:none}
+.wa-note{display:block;color:var(--soft);font-size:13px;margin-top:14px}
 .rerr{display:none;margin-top:16px;color:var(--coral);font-size:14px}
 .spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(24,38,74,.25);border-top-color:var(--navy-d);animation:spin .8s linear infinite;display:none}
 .btn.busy .spin{display:inline-block}.btn.busy svg{display:none}
@@ -937,7 +941,9 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
           <div class="rdone" id="rdone">
             <div class="ok"><svg class="i"><use href="#i-check"/></svg></div>
             <h4>تم استلام تسجيلك</h4>
-            <p>شكرًا لك، ستتواصل معك إدارة البرنامج عبر الواتساب بعد التحقق من السداد، وتُضاف إلى مجموعة الدفعة.</p>
+            <p>خطوة أخيرة: أكّد تسجيلك عبر واتساب، لتصلك رسالة الترحيب وتفاصيل الدفعة، ويُحفظ رقم البرنامج عندك.</p>
+            <a class="btn wa" id="waBtn" href="#" target="_blank" rel="noopener"><svg class="i"><use href="#i-msg"/></svg>أكّد تسجيلك عبر واتساب</a>
+            <small class="wa-note">بعد التحقق من السداد تُضاف إلى مجموعة الدفعة.</small>
           </div>
 
           <div class="rnav" id="rnav">
@@ -1094,6 +1100,8 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
 (function(){
   const ACTION="https://docs.google.com/forms/d/e/1FAIpQLScKeuQMpNYkPOx9wMMCEbIhghMea1Z1AU2jdPJnyFkFuMOOMg/formResponse";
   const CONSENT="entry.1115058360";
+  const WA_NUMBER="966559550064";   // رقم واتساب برنامج بيان
+  const COHORT="34";
   const years=[];for(let y=1430;y>=1385;y--)years.push(String(y));
   const Q={1:[
     {id:"1195533031",l:"الاسم الرباعي",t:"text",req:1,help:"كما سيظهر في الشهادة عند الاجتياز",full:1},
@@ -1164,6 +1172,9 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
     try{
       await fetch(ACTION,{method:"POST",mode:"no-cors",body:fd});
       try{localStorage.removeItem(KEY)}catch(e){}
+      const nm=val(byId["1195533031"]),ph=val(byId["1269426607"]);
+      const txt=`السلام عليكم، سجّلت في برنامج ركائز ${COHORT}.\nالاسم: ${nm}\nالجوال: ${ph}`;
+      $("#waBtn").href=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(txt)}`;
       steps.forEach(x=>x.classList.remove("on"));$("#rnav").style.display="none";$("#rdone").classList.add("on");
       $("#rbar").style.width="100%";lis.forEach(l=>{l.classList.remove("on");l.classList.add("done")});
     }catch(e){$("#rerr").style.display="block"}
