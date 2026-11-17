@@ -41,7 +41,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 .logo img{height:38px;display:block}
 .logo img.rk{height:48px;margin-top:2px}
 .logo .rk-wrap{display:flex;align-items:center;gap:16px;max-width:160px;opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease),max-width .5s var(--ease)}
-.hdr.hide-rk .logo .rk-wrap{opacity:0;transform:translateX(14px);max-width:0;pointer-events:none}
+.hdr.hide-rk .logo .rk-wrap{opacity:0;pointer-events:none}
 a:focus:not(:focus-visible),button:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){outline:none}
 :focus-visible{outline:2px solid var(--peach);outline-offset:3px;border-radius:10px}
 .logo .w{display:block}.logo .c{display:none}
@@ -88,8 +88,21 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[tabindex]:focus:no
 @keyframes ping{70%{box-shadow:0 0 0 10px rgba(216,148,120,0)}100%{box-shadow:0 0 0 0 rgba(216,148,120,0)}}
 .hero h1{color:#fff;font-size:clamp(38px,5.2vw,64px);line-height:1.2;margin:26px 0 20px;letter-spacing:-.3px}
 .hero h1 em{font-style:normal;color:var(--peach)}
-.brand-h1{margin:0 0 26px}
-.brand-h1 img{display:block;width:min(430px,100%);height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.18))}
+.hero .wrap{grid-template-columns:1fr!important;justify-items:center;text-align:center}
+.hero .wrap>div{display:flex;flex-direction:column;align-items:center}
+.hero p.lead{margin:0 auto}
+.hero .cta{justify-content:center}
+.brand-h1{margin:0 0 30px;display:flex;flex-direction:column;align-items:center}
+.brand-h1 .ph-logo{display:block;width:min(400px,78vw)}
+.brand-h1 .ph-logo img{display:block;width:100%;height:auto}
+.fly-on .brand-h1 .ph-logo img{visibility:hidden}
+.brand-h1 .orn{display:block;width:min(370px,72vw);height:auto;margin-top:20px;animation:fadeIn 1.2s ease .5s both}
+#flyLogo{position:fixed;left:0;top:0;z-index:61;pointer-events:none;transform-origin:50% 50%;will-change:transform;display:none}
+#flyLogo .fi{position:absolute;inset:0;animation:flyIn 1.1s var(--ease) both}
+#flyLogo img{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 16px 36px rgba(0,0,0,.18))}
+#flyLogo .fn{opacity:0;filter:none}
+@keyframes flyIn{from{opacity:0;transform:translateY(18px) scale(.94);filter:blur(6px)}}
+.fly-on .logo .rk-wrap{transition:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 .hero p.lead{font-size:clamp(16.5px,1.5vw,19px);color:rgba(255,255,255,.72);max-width:560px;text-wrap:pretty}
@@ -520,7 +533,6 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
 @media (max-width:1000px){
   .hero .wrap{grid-template-columns:1fr}.visual{display:none}
   .hero{padding:130px 0 120px}
-  .brand-h1 img{width:min(340px,82%)}
   .statbar .in-box,.kp{grid-template-columns:repeat(2,1fr)}
   .sb:nth-child(3)::before{display:none}
   .c3,.c4,.days,.units,.board{grid-template-columns:repeat(2,1fr)}
@@ -619,19 +631,12 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   <div class="hero">
     <div class="wrap">
       <div>
-        <h1 class="rv brand-h1" style="--d:1"><img src="assets/img/rakaez-hero.svg" alt="ركائز"><span class="sr">ركائز – برنامج إعداد معلمي منهج بيان</span></h1>
+        <h1 class="brand-h1"><span class="ph-logo"><img src="assets/img/rakaez-white.svg" alt="ركائز"></span><img class="orn" src="assets/img/rakaez-orn.svg" alt=""><span class="sr">ركائز – برنامج إعداد معلمي منهج بيان</span></h1>
         <p class="lead rv" style="--d:2">برنامج لتأهيل العاملين مع الناشئة وتمكينهم من مهارات تعليم القراءة والكتابة لدى الصغار بمنهجية (بيان)، وينتهي بشهادة معتمدة من برنامج بيان.</p>
         <div class="cta rv" style="--d:3">
           <a href="#register" class="btn btn-p">سجّل الآن <svg class="i"><use href="#i-arrow"/></svg></a>
           <a href="#program" class="btn btn-o">تعرّف على البرنامج</a>
         </div>
-      </div>
-      <div class="visual rv" style="--d:2" aria-hidden="true">
-        <div class="ring"></div><div class="ring"></div><div class="ring"></div>
-        <div class="emb"><img src="assets/img/emblem-white.png" alt=""></div>
-        <div class="chipf a"><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><span><small>مدة الدورة</small><b>16 ساعة تدريبية</b></span></div>
-        <div class="chipf b"><span class="ic"><svg class="i"><use href="#i-award"/></svg></span><span><small>المخرج</small><b>شهادة معتمدة</b></span></div>
-        <div class="chipf c"><span class="ic"><svg class="i"><use href="#i-monitor"/></svg></span><span><small>النمط</small><b>عن بُعد</b></span></div>
       </div>
     </div>
   </div>
@@ -982,6 +987,8 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
   <div class="box"><div class="mh"><h3>شروط القبول والاجتياز</h3><button class="x" data-close aria-label="إغلاق"><svg class="i"><use href="#i-x"/></svg></button></div><div class="terms" data-terms></div></div>
 </div>
 
+<div id="flyLogo" aria-hidden="true"><span class="fi"><img class="fw" src="assets/img/rakaez-white.svg" alt=""><img class="fn" src="assets/img/rakaez.svg" alt=""></span></div>
+
 <footer>
   <div class="wrap">
     <div class="ft">
@@ -1251,9 +1258,34 @@ addEventListener("hashchange",route);
 
 /* header */
 const hdr=$("#hdr");
-function syncRk(){const img=$(".brand-h1 img"),home=$("#v-home").classList.contains("on");let vis=false;
-  if(home&&img){const r=img.getBoundingClientRect();vis=r.bottom>hdr.offsetHeight&&r.top<innerHeight}
-  hdr.classList.toggle("hide-rk",vis)}
+const fly=$("#flyLogo"),fW=fly.querySelector(".fw"),fN=fly.querySelector(".fn"),ROOT=document.documentElement;
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let rkRaf=0;
+function syncRk(){cancelAnimationFrame(rkRaf);rkRaf=requestAnimationFrame(flyStep)}
+function flyStep(){
+  const home=$("#v-home").classList.contains("on"),ph=$(".brand-h1 .ph-logo");
+  const off=()=>{fly.style.display="none";ROOT.classList.remove("fly-on")};
+  if(!home||!ph){off();hdr.classList.remove("hide-rk");return}
+  const r=ph.getBoundingClientRect();
+  const tgt=[...document.querySelectorAll(".logo .rk-wrap img.rk")].find(i=>getComputedStyle(i).display!=="none");
+  if(RM||!tgt||!r.width||!r.height){off();hdr.classList.toggle("hide-rk",r.bottom>hdr.offsetHeight);return}
+  // رحلة الشعار: من مكانه في الواجهة إلى مكانه بجانب شعار بيان
+  const t=tgt.getBoundingClientRect(),w0=r.width,h0=r.height,sTop=r.top+scrollY;
+  const D=Math.max(1,sTop-t.top)*1.6+140,p=Math.min(1,Math.max(0,scrollY/D));
+  const e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+  const cx0=r.left+w0/2,cy0=sTop+h0/2,tx=t.left+t.width/2,ty=t.top+t.height/2;
+  const s=1+(t.width/w0-1)*e,cx=cx0+(tx-cx0)*e,cy=cy0+(ty-cy0)*e,rot=Math.sin(Math.PI*e)*-7;
+  Object.assign(fly.style,{display:"block",width:w0+"px",height:h0+"px",left:(cx0-w0/2)+"px",top:(cy0-h0/2)+"px",
+    transform:`translate(${cx-cx0}px,${cy-cy0}px) rotate(${rot}deg) scale(${s})`,opacity:p>=1?0:1});
+  // يتحول من الأبيض إلى الكحلي عند دخوله الشريط الأبيض
+  const curH=h0*s,curTop=cy-curH/2,navy=hdr.classList.contains("solid")?Math.min(1,Math.max(0,(hdr.offsetHeight-curTop)/curH)):0;
+  fN.style.opacity=navy;fW.style.opacity=1-navy;
+  $(".brand-h1 .orn").style.opacity=Math.max(0,1-p*2.4);
+  hdr.classList.toggle("hide-rk",p<1);
+  ROOT.classList.add("fly-on");
+}
+addEventListener("load",syncRk);
+$(".brand-h1 .ph-logo img").addEventListener("load",syncRk);
 function onScroll(){hdr.classList.toggle("solid",scrollY>40);syncRk()}
 addEventListener("resize",syncRk);
 addEventListener("scroll",onScroll,{passive:true});
