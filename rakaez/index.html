@@ -37,8 +37,13 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 .hdr .wrap{display:flex;align-items:center;height:76px;gap:28px}
 .hdr.solid{background:rgba(255,255,255,.94);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 1px 0 var(--line)}
 .logo{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.logo>.rk-wrap{margin-inline-start:-16px;padding-inline-start:16px}
 .logo img{height:38px;display:block}
 .logo img.rk{height:48px;margin-top:2px}
+.logo .rk-wrap{display:flex;align-items:center;gap:16px;max-width:160px;opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease),max-width .5s var(--ease)}
+.hdr.hide-rk .logo .rk-wrap{opacity:0;transform:translateX(14px);max-width:0;pointer-events:none}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){outline:none}
+:focus-visible{outline:2px solid var(--peach);outline-offset:3px;border-radius:10px}
 .logo .w{display:block}.logo .c{display:none}
 .hdr.solid .logo .w,.hdr.light .logo .w{display:none}.hdr.solid .logo .c,.hdr.light .logo .c{display:block}
 .logo .sep{width:1px;height:34px;background:rgba(255,255,255,.28);transition:background .3s}
@@ -594,7 +599,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
     <a href="#home" class="logo" aria-label="ركائز – الرئيسية">
       <img class="w" src="assets/img/logo-white.png" alt="بيان">
       <img class="c" src="assets/img/logo.png" alt="بيان">
-      <span class="sep"></span><img class="w rk" src="assets/img/rakaez-white.svg" alt="ركائز"><img class="c rk" src="assets/img/rakaez.svg" alt="ركائز">
+      <span class="rk-wrap"><span class="sep"></span><img class="w rk" src="assets/img/rakaez-white.svg" alt="ركائز"><img class="c rk" src="assets/img/rakaez.svg" alt="ركائز"></span>
     </a>
     <nav class="menu" id="menu">
       <a href="#home">الرئيسية</a>
@@ -1246,7 +1251,11 @@ addEventListener("hashchange",route);
 
 /* header */
 const hdr=$("#hdr");
-function onScroll(){hdr.classList.toggle("solid",scrollY>40)}
+function syncRk(){const img=$(".brand-h1 img"),home=$("#v-home").classList.contains("on");let vis=false;
+  if(home&&img){const r=img.getBoundingClientRect();vis=r.bottom>hdr.offsetHeight&&r.top<innerHeight}
+  hdr.classList.toggle("hide-rk",vis)}
+function onScroll(){hdr.classList.toggle("solid",scrollY>40);syncRk()}
+addEventListener("resize",syncRk);
 addEventListener("scroll",onScroll,{passive:true});
 $("#burger").onclick=()=>{$("#menu").classList.toggle("open");hdr.classList.add("solid")};
 
