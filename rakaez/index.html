@@ -412,6 +412,8 @@ svg.chart .dotp{opacity:0;animation:fadeIn .4s ease forwards}
 .fld{display:flex;flex-direction:column;gap:8px}.fld.full{grid-column:1/-1}
 .fld label{color:var(--navy);font-size:15px}
 .fld label .req{color:var(--coral);margin-inline-start:3px}
+.fld label .opt{color:var(--soft);font-size:13px;margin-inline-start:6px}
+.fld .oth{margin-top:8px}
 .fld .help{font-size:12.5px;color:var(--soft);margin-top:-2px}
 .fgrid{align-items:start}
 .inp{font-family:inherit;font-weight:500;font-size:15.5px;color:var(--ink);background:var(--sand);border:1.5px solid transparent;border-radius:14px;padding:13px 16px;outline:none;transition:all .25s;width:100%}
@@ -1105,51 +1107,62 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
     {id:"1195533031",l:"الاسم الرباعي",t:"text",req:1,help:"كما سيظهر في الشهادة عند الاجتياز",full:1},
     {id:"1269426607",l:"رقم الجوال (مفعّل فيه واتساب)",t:"tel",req:1},
     {id:"1014171028",l:"البريد الإلكتروني",t:"email",req:1},
-    {id:"2087013886",l:"الجنسية",t:"chips",req:1,o:["سعودي","مصري","سوري","يمني","سوداني"],other:1,full:1},
-    {id:"394116917",l:"سنة الميلاد (هجري)",t:"select",req:1,o:years},
-    {id:"1223525125",l:"الجنس",t:"chips",req:1,o:["ذكر","أنثى"]},
-    {id:"663902187",l:"المدينة",t:"chips",req:1,o:["الرّياض"],other:1,full:1},
-    {id:"188302055",l:"الجهة التي تتبع لها",t:"chips",req:1,o:["برنامج فنار التابع لجمعية غراس","جمعية مكنون","جمعية تعلم","جمعية الأمير سلطان"],other:1,full:1},
+    {id:"2087013886",l:"الجنسية",t:"select",req:1,o:["سعودي","مصري","سوري","يمني","سوداني"],other:1,ph:"اختر الجنسية"},
+    {id:"1223525125",l:"الجنس",t:"select",req:1,o:["ذكر","أنثى"],ph:"اختر"},
+    {id:"394116917",l:"سنة الميلاد (هجري)",t:"select",req:1,o:years,ph:"اختر السنة"},
+    {id:"663902187",l:"المدينة",t:"chips",req:1,o:["الرّياض"],other:1},
+    {id:"188302055",l:"الجهة التي تتبع لها",t:"select",req:1,o:["برنامج فنار التابع لجمعية غراس","جمعية مكنون","جمعية تعلم","جمعية الأمير سلطان"],other:1,ph:"اختر الجهة",full:1},
     {id:"517829165",l:"اسم المسجد أو الحلقة أو المدرسة",t:"text",req:1},
-    {id:"1776718571",l:"عدد طلاب الحلقة",t:"number",req:0,help:"للمعلمين الحاليين، إن وُجد"},
-    {id:"193727486",l:"اسم مشرف/ـة الجهة",t:"text",req:1},
-    {id:"1420964261",l:"رقم جوال مشرف/ـة الجهة",t:"tel",req:0}],
+    {id:"1776718571",l:"عدد طلاب الحلقة",t:"number",req:0,opt:1,help:"للمعلمين الحاليين"},
+    {id:"193727486",l:"اسم مشرف/ـة الجهة",t:"text",req:0,opt:1,blank:"لا يوجد"},
+    {id:"1420964261",l:"رقم جوال مشرف/ـة الجهة",t:"tel",req:0,opt:1}],
    2:[
     {id:"276815078",l:"هل لديك إجازة في القرآن الكريم؟",t:"chips",req:1,o:["نعم","لا"],full:1},
     {id:"1411684015",l:"هل لديك شهادة بيان أو نور البيان أو التبيان أو برامج شبيهة؟",t:"chips",req:1,o:["نعم","لا"],full:1},
     {id:"729993446",l:"ملاحظاتكم واقتراحاتكم؟",t:"area",req:0,full:1}]};
   const OTHER="أخرى";
+  const othInp='<input class="inp oth" placeholder="اكتب هنا" hidden>';
   const field=q=>{
-    const r=q.req?'<span class="req">*</span>':"",h=q.help?`<span class="help">${q.help}</span>`:"";let c="";
-    if(q.t==="chips")c=`<div class="chips">${q.o.concat(q.other?[OTHER]:[]).map(o=>`<button type="button" data-v="${o}">${o}</button>`).join("")}</div>`+(q.other?`<input class="inp oth" placeholder="اكتب هنا" hidden>`:"");
-    else if(q.t==="select")c=`<select class="inp"><option value="">اختر السنة</option>${q.o.map(o=>`<option>${o}</option>`).join("")}</select>`;
+    const r=q.req?'<span class="req">*</span>':q.opt?'<span class="opt">(إن وُجد)</span>':"",h=q.help?`<span class="help">${q.help}</span>`:"";let c="";
+    if(q.t==="chips")c=`<div class="chips">${q.o.concat(q.other?[OTHER]:[]).map(o=>`<button type="button" data-v="${o}">${o}</button>`).join("")}</div>`+(q.other?othInp:"");
+    else if(q.t==="select")c=`<select class="inp"><option value="">${q.ph||"اختر"}</option>${q.o.concat(q.other?[OTHER]:[]).map(o=>`<option>${o}</option>`).join("")}</select>`+(q.other?othInp:"");
     else if(q.t==="area")c=`<textarea class="inp"></textarea>`;
-    else c=`<input class="inp${q.t==="tel"||q.t==="email"||q.t==="number"?" ltr":""}" type="${q.t==="tel"?"tel":q.t==="number"?"text":q.t}" ${q.t==="tel"?'inputmode="numeric" placeholder="9665XXXXXXXX"':""} ${q.t==="number"?'min="0" inputmode="numeric"':""}>`;
+    else if(q.t==="tel")c=`<input class="inp ltr" type="tel" inputmode="numeric" maxlength="12" placeholder="05XXXXXXXX" autocomplete="tel">`;
+    else c=`<input class="inp${q.t==="email"||q.t==="number"?" ltr":""}" type="${q.t==="number"?"text":q.t}" ${q.t==="number"?'inputmode="numeric" maxlength="4"':""}>`;
     return `<div class="fld${q.full?" full":""}" data-id="${q.id}"><label>${q.l}${r}</label>${c}${h}<span class="emsg"></span></div>`};
   $("#f1").innerHTML=Q[1].map(field).join("");$("#f2").innerHTML=Q[2].map(field).join("");
   const all=[...Q[1],...Q[2]],byId=Object.fromEntries(all.map(q=>[q.id,q]));
   // chips
   $$("#regForm .chips button").forEach(b=>b.onclick=()=>{const f=b.closest(".fld");f.querySelectorAll(".chips button").forEach(x=>x.classList.toggle("on",x===b));const o=f.querySelector(".oth");if(o){o.hidden=b.dataset.v!==OTHER;if(!o.hidden)o.focus()}f.classList.remove("err");save()});
+  // select + «أخرى»
+  $$("#regForm select.inp").forEach(s=>s.addEventListener("change",()=>{const o=s.closest(".fld").querySelector(".oth");if(o){o.hidden=s.value!==OTHER;if(!o.hidden)o.focus()}s.closest(".fld").classList.remove("err");save()}));
   const cs=$("#consent");const tg=()=>{cs.classList.toggle("on");cs.setAttribute("aria-checked",cs.classList.contains("on"));cs.classList.remove("err");cs.parentElement.classList.remove("err");save()};
   cs.onclick=tg;cs.onkeydown=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();tg()}};
   const toEn=s=>s.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d));
-  const phone=s=>{let d=toEn(s).replace(/\D/g,"");if(d.startsWith("00"))d=d.slice(2);if(/^05\d{8}$/.test(d))d="966"+d.slice(1);if(/^5\d{8}$/.test(d))d="966"+d;return d};
+  // الجوال: 10 أرقام تبدأ بـ 0، أو 12 رقمًا تبدأ بـ 966 — ويُرسل بصيغة 966
+  const phoneOk=d=>/^0\d{9}$/.test(d)||/^966\d{9}$/.test(d);
+  const phone=d=>d.startsWith("0")?"966"+d.slice(1):d;
+  const raw=q=>toEn($(`.fld[data-id="${q.id}"] .inp`).value).trim();
   const val=q=>{const f=$(`.fld[data-id="${q.id}"]`);
     if(q.t==="chips"){const b=f.querySelector(".chips button.on");if(!b)return "";if(b.dataset.v===OTHER)return {other:f.querySelector(".oth").value.trim()};return b.dataset.v}
-    const v=f.querySelector(".inp").value.trim();return q.t==="tel"&&v?phone(v):q.t==="number"?toEn(v):v};
+    if(q.t==="select"){const v=f.querySelector("select").value;if(v===OTHER)return {other:f.querySelector(".oth").value.trim()};return v}
+    const v=f.querySelector(".inp").value.trim();if(q.t==="tel")return v?phone(toEn(v)):"";return q.t==="number"?toEn(v):v};
   const check=q=>{const f=$(`.fld[data-id="${q.id}"]`),v=val(q),m=f.querySelector(".emsg");let e="";
-    if(q.req&&(!v||(typeof v==="object"&&!v.other)))e=q.t==="chips"||q.t==="select"?"يرجى الاختيار":"هذا الحقل مطلوب";
+    if(q.req&&(!v||(typeof v==="object"&&!v.other)))e=typeof v==="object"?"اكتب الإجابة في الخانة":q.t==="chips"||q.t==="select"?"يرجى الاختيار":"هذا الحقل مطلوب";
     else if(v&&q.t==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))e="البريد الإلكتروني غير صحيح";
-    else if(v&&q.t==="tel"&&!/^\d{9,15}$/.test(v))e="رقم الجوال غير صحيح، اكتبه بالأرقام مثل 9665XXXXXXXX";
+    else if(q.t==="tel"&&raw(q)&&!phoneOk(raw(q)))e="اكتب 10 أرقام تبدأ بـ 0 (مثل 0500000000) أو 12 رقمًا تبدأ بـ 966";
     m.textContent=e;f.classList.toggle("err",!!e);return !e};
   $$("#regForm .inp").forEach(i=>i.addEventListener("input",()=>{i.closest(".fld").classList.remove("err");save()}));
-  $$('#regForm input[type=tel]').forEach(i=>i.addEventListener("blur",()=>{if(i.value.trim())i.value=phone(i.value)}));
+  // يقبل الأرقام فقط في الجوال وعدد الطلاب (ويحوّل الأرقام العربية)
+  $$('#regForm input[type=tel],#regForm .fld[data-id="1776718571"] .inp').forEach(i=>i.addEventListener("input",()=>{const c=toEn(i.value).replace(/\D/g,"");if(c!==i.value)i.value=c}));
   // draft (يحفظ في متصفح الزائر فقط إلى أن يُرسل)
-  const KEY="rakaez34-draft";
+  const KEY="rakaez34-draft-v2";
   function save(){try{const d={c:cs.classList.contains("on")};all.forEach(q=>{d[q.id]=val(q)});localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
   (function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;if(d.c){cs.classList.add("on");cs.setAttribute("aria-checked","true")}
     all.forEach(q=>{const v=d[q.id],f=$(`.fld[data-id="${q.id}"]`);if(!v)return;
       if(q.t==="chips"){const k=typeof v==="object"?OTHER:v;const b=[...f.querySelectorAll(".chips button")].find(x=>x.dataset.v===k);if(b){b.classList.add("on");if(k===OTHER){const o=f.querySelector(".oth");o.hidden=false;o.value=v.other||""}}}
+      else if(q.t==="select"){const s=f.querySelector("select");s.value=typeof v==="object"?OTHER:v;if(typeof v==="object"){const o=f.querySelector(".oth");o.hidden=false;o.value=v.other||""}}
+      else if(q.t==="tel")f.querySelector(".inp").value=String(v).replace(/^966/,"0");
       else f.querySelector(".inp").value=v})}catch(e){}})();
   // steps
   let s=0;const steps=$$(".rstep"),lis=$$("#rsteps li");
@@ -1165,7 +1178,7 @@ $$(".qa button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=q.classList
     for(const n of [1]){if(!valid(n)){go(n);return}}
     const btn=$("#rSend");btn.classList.add("busy");btn.disabled=true;$("#rerr").style.display="none";
     const fd=new URLSearchParams();fd.append(CONSENT,"نعم");
-    all.forEach(q=>{const v=val(q);if(!v)return;if(typeof v==="object"){fd.append("entry."+q.id,"__other_option__");fd.append("entry."+q.id+".other_option_response",v.other)}else fd.append("entry."+q.id,v)});
+    all.forEach(q=>{const v=val(q)||q.blank||"";if(!v)return;if(typeof v==="object"){fd.append("entry."+q.id,"__other_option__");fd.append("entry."+q.id+".other_option_response",v.other)}else fd.append("entry."+q.id,v)});
     fd.append("fvv","1");fd.append("pageHistory","0,1,2");
     try{
       await fetch(ACTION,{method:"POST",mode:"no-cors",body:fd});
