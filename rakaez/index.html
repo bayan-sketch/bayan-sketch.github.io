@@ -895,7 +895,7 @@ $$(".donut").forEach(d=>{const r=72,C=2*Math.PI*r;d.insertAdjacentHTML("afterbeg
 $("#kpis").innerHTML=`<div class="kr h"><span>الرمز</span><span>المؤشر</span><span>المتحقق</span><span class="g">المستهدف</span><span class="pc">التقدم نحو المستهدف</span></div>`+D.kpis.map(([c,t,b,g,u,na])=>{
   if(b===null)return `<div class="kr"><span class="code">${c}</span><span class="t">${t}</span><span class="na" style="grid-column:span 3">${na}</span></div>`;
   const p=Math.min(100,b/g*100),ok=b>=g;
-  return `<div class="kr"><span class="code">${c}</span><span class="t">${t}</span><span class="b num">${b}${u}</span><span class="g num">${g}${u}</span><span class="pc"><div class="pb"><i style="--w:${p}%;background:${ok?"var(--teal)":"var(--peach)"}"></i></div></span></div>`}).join("");
+  return `<div class="kr"><span class="code">${c}</span><span class="t">${t}</span><span class="b"><span class="num">${b}${u}</span></span><span class="g"><span class="num">${g}${u}</span></span><span class="pc"><div class="pb"><i style="--w:${p}%;background:${ok?"var(--teal)":"var(--peach)"}"></i></div></span></div>`}).join("");
 
 /* ===== join ===== */
 $("#cohorts").innerHTML=D.cohorts.map((c,k)=>`<div class="cc rv" style="--d:${k}"><div class="cc-h"><h3>ركائز ${c.n}</h3><span class="badge ${c.live?"live":"plan"}">${c.st}</span></div>
