@@ -120,7 +120,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 .head h2{font-size:clamp(28px,3.4vw,42px);letter-spacing:-.2px}
 .head p{color:var(--muted);margin-top:14px;font-size:17px}
 .grid{display:grid;gap:24px}
-.c2{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.c2{grid-template-columns:repeat(2,1fr)}.pillars{max-width:900px;margin:0 auto}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
 
 .card{background:#fff;border-radius:var(--r);padding:32px;border:1px solid var(--line);transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .3s}
 .sand .card{border-color:transparent;box-shadow:var(--shadow-s)}
@@ -636,11 +636,10 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:72px 0 36px;f
 
   <div class="sec">
     <div class="wrap">
-      <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-layers"/></svg>ركائز التأهيل</div><h2>ثلاث ركائز يُبنى عليها المعلّم</h2><p>يتقن المتدرب في أربعة أيام ما يحتاجه ليقود حلقة بيان بثقة.</p></div>
-      <div class="grid c3">
+      <div class="head c rv"><div class="eyb"><svg class="i"><use href="#i-layers"/></svg>ركائز التأهيل</div><h2>ركيزتان يُبنى عليهما المعلّم</h2><p>يتقن المتدرب في أربعة أيام ما يحتاجه ليقود حلقة بيان بثقة.</p></div>
+      <div class="grid c2 pillars">
         <div class="card hov rv" style="--d:0"><div class="ico t"><svg class="i"><use href="#i-mic"/></svg></div><h3>التهجي</h3><p>تحليل الكلمات إلى حروفها والتعرف على أحكامها، ثم إعادة تجميعها، تفصيليًا وإجماليًا.</p><div class="pts"><b class="num">30</b> درجة · شفوي وتحريري</div></div>
         <div class="card hov rv" style="--d:1"><div class="ico n"><svg class="i"><use href="#i-grid"/></svg></div><h3>المهاري</h3><p>شرح حصة كاملة بمنهجية بيان: المراحل بترتيبها، وأركان الحصة الأربعة، ورسم السبورة.</p><div class="pts"><b class="num">40</b> درجة · شرح وتحديد مستوى</div></div>
-        <div class="card hov rv" style="--d:2"><div class="ico p"><svg class="i"><use href="#i-book"/></svg></div><h3>تحفة الأطفال</h3><p>حفظ أبيات أحكام النون الساكنة والتنوين والميم الساكنة حفظًا ذاتيًا قبل الاختبار.</p><div class="pts"><b class="num">10</b> درجات · شفوي</div></div>
       </div>
     </div>
   </div>
