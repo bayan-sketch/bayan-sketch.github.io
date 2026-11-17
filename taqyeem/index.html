@@ -261,7 +261,6 @@ section.block > .pager{margin:0;padding:18px 24px 24px;border-top:1px solid var(
   <div class="dock-in">
     <div class="live"><div class="prog"><i id="dProg"></i></div><small id="dLeft"></small></div>
     <button class="btn g" id="bNew" type="button"><svg class="ic"><use href="#i-new"/></svg><span>تقييم جديد</span></button>
-    <button class="btn s" id="bPrint" type="button"><svg class="ic"><use href="#i-print"/></svg><span>طباعة / PDF</span></button>
     <button class="btn p" id="bSave" type="button"><svg class="ic"><use href="#i-send"/></svg><span>حفظ وإرسال التقييم</span></button>
   </div>
 </div>
@@ -522,7 +521,7 @@ document.addEventListener("change",e=>{
 
 function toast(m,ms=3200){const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),ms);}
 
-$("#bPrint").onclick=()=>window.print();
+
 $("#bNew").onclick=()=>{ if(!confirm("بدء تقييم جديد؟ ستُمسح البيانات الحالية من هذا الجهاز.")) return; S=blank(); persist(); CUR="info"; history.replaceState(null,"","#info"); boot(); scrollTo(0,0); };
 
 function payload(R){
