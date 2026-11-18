@@ -570,7 +570,8 @@ $("#bSave").onclick=async()=>{
   const b=$("#bSave"); b.disabled=true; b.querySelector("span").textContent="جارٍ الإرسال…";
   try{
     await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
-    toast("تم حفظ التقييم في ورقة «ملخص تقييم معلم بيان» ✓",4500);
+    try{sessionStorage.setItem("taqyeem_sent",S.info.teacher||"");}catch(e){}
+    S=blank(); persist(); try{history.replaceState(null,"","#info");}catch(e){} location.reload(); return;
   }catch(err){ toast("تعذّر الإرسال؛ تحقق من الاتصال وأعد المحاولة. المسودة محفوظة على الجهاز.",5000); }
   finally{ b.disabled=false; b.querySelector("span").textContent="حفظ وإرسال التقييم"; }
 };
@@ -631,6 +632,8 @@ function boot(){
   update(); showPane((location.hash||"").slice(1)||CUR);
 }
 load(); boot();
+(function(){let t=null;try{t=sessionStorage.getItem("taqyeem_sent");sessionStorage.removeItem("taqyeem_sent");}catch(e){}
+  if(t!==null) toast(`تم إرسال تقييم «${t}» بنجاح ✓ وبدأ تقييم جديد`,5000);})();
 </script>
 </body>
 </html>
