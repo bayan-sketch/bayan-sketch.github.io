@@ -90,6 +90,7 @@ section.block{background:var(--card);border:1px solid var(--line);border-radius:
 @media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid>.f,.grid>.f:nth-last-child(2){grid-column:auto}}
 @media (max-width:520px){.grid{grid-template-columns:1fr}}
 .f label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px}
+.req{color:#D63B2F;font-weight:700;margin-inline-start:4px}
 .f input,.f select,textarea{width:100%;border:1.5px solid var(--line);background:#FAFBFD;border-radius:var(--r-sm);padding:10px 13px;outline:none;transition:border-color .2s,background .2s,box-shadow .2s}
 .f input:focus,.f select:focus,textarea:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 4px color-mix(in srgb,var(--teal) 14%,transparent)}
 textarea{resize:vertical;min-height:84px;line-height:1.7}
@@ -349,6 +350,8 @@ const INFO = [
 
 const KEY = "bayan-teacher-eval-draft-v2";
 let S = blank();
+const REQ_INFO=["teacher","mosque","eduSup","date","level"];
+function markReq(){document.querySelectorAll(".item-t").forEach(t=>{if(t.querySelector(".req"))return;const r=document.createElement("span");r.className="req";r.setAttribute("aria-hidden","true");r.textContent="*";const sm=t.querySelector(":scope > small");sm?t.insertBefore(r,sm):t.appendChild(r);});}
 function blank(){return {info:{date:hijriToday()},track:"",sel:{},ev:{},sample:[{},{},{},{},{}],positives:"",recommendations:""};}
 function hijriToday(){
   try{const p=new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn",{year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
@@ -381,7 +384,7 @@ function renderInfo(){
     const ctl = t==="select"
       ? `<select id="i_${k}" data-info="${k}"><option value="">— اختر —</option>${o.map(x=>`<option ${x===v?"selected":""}>${x}</option>`).join("")}</select>`
       : `<input id="i_${k}" data-info="${k}" type="${t==="number"?"number":"text"}" ${t==="number"?'min="0" inputmode="numeric"':""} value="${esc(v)}" ${k==="date"?'placeholder="1448/05/21"':""}>`;
-    return `<div class="f"><label for="i_${k}">${l}</label>${ctl}</div>`;
+    return `<div class="f"><label for="i_${k}">${l}${REQ_INFO.includes(k)?'<span class="req" aria-hidden="true">*</span>':""}</label>${ctl}</div>`;
   }).join("");
 }
 function renderTrack(){
@@ -468,6 +471,7 @@ function compute(){
 }
 
 function update(){
+  markReq();
   const R=compute();
   document.querySelectorAll("[data-sc]").forEach(el=>{
     const P=R.parts[el.dataset.sc]; const item=el.closest(".item");
@@ -530,7 +534,7 @@ document.addEventListener("change",e=>{
 function toast(m,ms=3200){const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),ms);}
 
 
-$("#bNew").onclick=()=>{ if(!confirm("بدء تقييم جديد؟ ستُمسح البيانات الحالية من هذا الجهاز.")) return; S=blank(); persist(); CUR="info"; history.replaceState(null,"","#info"); boot(); scrollTo(0,0); };
+$("#bNew").onclick=()=>{ if(!confirm("بدء تقييم جديد؟ ستُمسح البيانات الحالية من هذا الجهاز.")) return; S=blank(); persist(); CUR="info"; try{history.replaceState(null,"","#info");}catch(e){} location.reload(); };
 
 function payload(R){
   const DOMS=DOMAINS.map(d=>{const D=R.dom[d.k]||{s:0,m:0};return {key:d.n,name:d.title,score:Math.round(D.s*10)/10,max:D.m};});
@@ -583,7 +587,7 @@ function renderTabs(){
 }
 function renderTabStatus(R){
   const set=(k,txt,ok)=>{const e=document.querySelector(`[data-ts="${k}"]`); if(e){e.textContent=txt; e.classList.toggle("ok",!!ok);}};
-  const need=["teacher","mosque","eduSup","date","level"].filter(k=>!S.info[k]).length;
+  const need=REQ_INFO.filter(k=>!S.info[k]).length;
   const pips=(k,tot,done)=>{const e=document.querySelector(`[data-pips="${k}"]`); if(!e) return;
     if(e.children.length!==tot) e.innerHTML=Array.from({length:tot},()=>'<i class="pip"></i>').join("");
     [...e.children].forEach((p,i)=>{const on=i<done; if(p.classList.contains("on")!==on) p.classList.toggle("on",on);});};
