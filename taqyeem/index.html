@@ -350,7 +350,7 @@ const INFO = [
 
 const KEY = "bayan-teacher-eval-draft-v2";
 let S = blank();
-const REQ_INFO=["teacher","mosque","eduSup","date","level"];
+const REQ_INFO=INFO.map(f=>f[0]);
 function markReq(){document.querySelectorAll(".item-t").forEach(t=>{if(t.querySelector(".req"))return;const r=document.createElement("span");r.className="req";r.setAttribute("aria-hidden","true");r.textContent="*";const sm=t.querySelector(":scope > small");sm?t.insertBefore(r,sm):t.appendChild(r);});}
 function blank(){return {info:{date:hijriToday()},track:"",sel:{},ev:{},sample:[{},{},{},{},{}],positives:"",recommendations:""};}
 function hijriToday(){
@@ -558,7 +558,8 @@ function payload(R){
 }
 $("#bSave").onclick=async()=>{
   const R=update();
-  if(!S.info.teacher){toast("اكتب اسم المعلم/ـة أولاً"); $("#i_teacher").focus(); return;}
+  const miss=REQ_INFO.filter(k=>!String(S.info[k]??"").trim());
+  if(miss.length){const lab=INFO.find(f=>f[0]===miss[0])[1]; toast(miss.length>1?`أكمل بيانات الزيارة أولاً: بقي ${miss.length.toLocaleString("ar-SA")} حقول، أولها «${lab}»`:`أكمل بيانات الزيارة أولاً: «${lab}»`); showPane("info",true); setTimeout(()=>{const el=$("#i_"+miss[0]); if(el){el.focus(); el.scrollIntoView({block:"center",behavior:"smooth"});}},250); return;}
   if(R.unfilled && !confirm(`بقي ${R.unfilled} بنود محتسبة لم تُعبّأ وستُحسب صفراً. هل تريد الحفظ؟`)) return;
   const data=payload(R);
   if(!SCRIPT_URL){
@@ -591,7 +592,7 @@ function renderTabStatus(R){
   const pips=(k,tot,done)=>{const e=document.querySelector(`[data-pips="${k}"]`); if(!e) return;
     if(e.children.length!==tot) e.innerHTML=Array.from({length:tot},()=>'<i class="pip"></i>').join("");
     [...e.children].forEach((p,i)=>{const on=i<done; if(p.classList.contains("on")!==on) p.classList.toggle("on",on);});};
-  pips("info",5,5-need); let T=5,D=5-need;
+  const NI=REQ_INFO.length; pips("info",NI,NI-need); let T=NI,D=NI-need;
   DOMAINS.forEach(d=>{const els=[...document.querySelectorAll(`.pane[data-pane="${d.k}"] [data-sc]`)];
     const done=els.filter(e=>{const it=e.closest(".item");return it&&(it.classList.contains("done")||it.classList.contains("na"));}).length;
     pips(d.k,els.length,done); T+=els.length; D+=done;});
