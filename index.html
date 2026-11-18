@@ -222,7 +222,7 @@ h2.title{margin:4px 0 6px;font-size:30px;font-weight:800;text-wrap:balance}
 .mascot .bubble[data-hide="1"]{opacity:1;transform:none}
 .mascot .bubble:empty{visibility:hidden}
 .home .mascot{display:none}
-.pencil{position:relative;flex:none;width:136px;pointer-events:auto;cursor:pointer;--lean:0deg}
+.pencil{position:relative;flex:none;width:136px;pointer-events:none;cursor:default;--lean:0deg}
 .pencil .body{display:block;transform-origin:42% 95%;transform:rotate(var(--lean));transition:transform .5s cubic-bezier(.3,1.4,.6,1)}
 .pencil .float{display:block;transform-origin:42% 95%;animation:p-idle 3.2s ease-in-out infinite}
 .pencil::after{content:"";position:absolute;left:14%;width:52%;bottom:-3px;height:8px;border-radius:50%;background:rgba(38,43,107,.18);animation:p-shadow 3.2s ease-in-out infinite;z-index:-1}
@@ -300,7 +300,7 @@ h2.title{margin:4px 0 6px;font-size:30px;font-weight:800;text-wrap:balance}
 </div>
 
 <div hidden id="guideHome"><div class="mascot" id="mascot">
-    <div class="pencil" id="owl" role="button" tabindex="0" aria-label="قلم بيان"><span class="body"><span class="float"><span class="pc" data-pose="wave" aria-hidden="true"><i class="pp" data-p="wave"></i><i class="pp" data-p="point"></i><i class="pp" data-p="listen"></i><i class="pp" data-p="write"></i><i class="pp" data-p="color"></i><i class="pp" data-p="cheer"></i><i class="pp" data-p="think"></i><i class="pp" data-p="talk"></i></span></span></span><span class="sparks"></span></div>
+    <div class="pencil" id="owl" aria-hidden="true"><span class="body"><span class="float"><span class="pc" data-pose="wave" aria-hidden="true"><i class="pp" data-p="wave"></i><i class="pp" data-p="point"></i><i class="pp" data-p="listen"></i><i class="pp" data-p="write"></i><i class="pp" data-p="color"></i><i class="pp" data-p="cheer"></i><i class="pp" data-p="think"></i><i class="pp" data-p="talk"></i></span></span></span><span class="sparks"></span></div>
     <div class="bubble" id="bubble" data-hide="1" aria-live="polite"></div>
   </div></div>
 <canvas id="confetti" hidden></canvas>
@@ -850,7 +850,7 @@ function screenHome() {
     h("span", { class: "meter", "aria-label": "التقدم " + pct(key, tot) + "%" }, h("i", { style: `width:${pct(key, tot)}%` })));
   view.replaceChildren(
     h("section", { class: "hero" },
-      h("div", { class: "pencil", role: "button", "aria-label": "قلم بيان", onclick: () => { Sound.pop(); Mascot.mood("wave"); sayCheer(); }, html: $("#owl .pc").outerHTML.replace(/data-pose="[a-z]+"/, 'data-pose="wave"') }),
+      h("div", { class: "pencil", "aria-hidden": "true", html: $("#owl .pc").outerHTML.replace(/data-pose="[a-z]+"/, 'data-pose="wave"') }),
       h("div", { class: "ht" }, h("h2", {}, h("span", {}, "أهلًا بك في كتاب"), h("span", {}, "بيان للحروف")), h("p", {}, "اختر وحدة لنبدأ اللعب والتعلم معًا"))),
     h("div", { class: "units" },
       unit("u1", "الوحدة الأولى", DATA.unit1.title, "ألوّن الأشكال وأتتبع الخطوط", "<svg viewBox='0 0 48 48' width='48'><circle cx='24' cy='24' r='15' fill='none' stroke='#fff' stroke-width='5'/></svg>", "u1:", total1, "u1"),
@@ -1280,8 +1280,6 @@ function resolveStrokes(d) {
   $("#homeBtn").onclick = () => go("home");
   $("#starBtn").onclick = () => go("rewards");
   $("#soundBtn").onclick = () => { Sound.on = !Sound.on; store.set("bayan.sound", Sound.on); paintSoundBtn(); if (!Sound.on) Voice.stop(); };
-  GUIDE.owl.onclick = () => { Sound.pop(); sayCheer(); };
-  GUIDE.owl.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); GUIDE.owl.click(); } };
   paintSoundBtn();
   try { DATA = resolveStrokes(await loadData()); }
   catch (e) {
