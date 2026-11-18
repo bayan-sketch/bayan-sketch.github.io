@@ -316,12 +316,12 @@ const DOMAINS = [
   {k:"a",n:"أ",title:"الالتزام بمنهجية بيان",sub:"مسار المهاري والإقراء والإملاء والكتابة والتهجي والإسقاط والتحفة",items:[
     {track:true},
     {no:2,t:"الإقراء الفردي",d:"20 د",c:"IQR"},
-    {no:3,t:"الإملاء والتصحيح",c:"IML"},
-    {no:4,t:"الكتابة",c:"TKT"},
-    {no:5,t:"مقدار التهجي",c:"TMQ"},
-    {no:6,t:"زمن التهجي",c:"TMZ"},
-    {no:7,t:"الإسقاط والشرح حسب المرحلة",c:"ISQ"},
-    {no:8,t:"التحفة",group:[["TUH_M","مطابقة الأبيات لخطة المرحلة"],["TUH_T","التلقين السليم"],["TUH_R","المراجعة التراكمية"],["TUH_Z","الالتزام بالوقت (5 د)"]]},
+    {no:3,t:"الإملاء والتصحيح",d:"مع الكتابة والتشكيل 10 د",c:"IML"},
+    {no:4,t:"الكتابة",d:"مع الإملاء والتشكيل 10 د",c:"TKT"},
+    {no:5,t:"مقدار التهجي",d:"ضمن 10 د",c:"TMQ"},
+    {no:6,t:"زمن التهجي",d:"10 د",c:"TMZ"},
+    {no:7,t:"الإسقاط والشرح حسب المرحلة",d:"داخل وقت التهجي",c:"ISQ"},
+    {no:8,t:"التحفة",d:"5 د",group:[["TUH_M","مطابقة الأبيات لخطة المرحلة"],["TUH_T","التلقين السليم"],["TUH_R","المراجعة التراكمية"],["TUH_Z","الالتزام بالوقت (5 د)"]]},
   ]},
   {k:"b",n:"ب",title:"جودة التدريس والبيئة الصفية",sub:"الإدارة والتفاعل والتوجيه واللغة",items:[
     {no:9,t:"إدارة الفصل وضبط السلوك",c:"DBT"},
@@ -389,7 +389,7 @@ function renderInfo(){
 }
 function renderTrack(){
   const t=S.track;
-  let h = `<div class="item" id="trackItem"><div class="item-h"><div class="num">1</div><div class="item-t">مسار المهاري المطبّق<small>اختر المسار المناسب لمستوى الحلقة؛ تظهر مكوّناته (كفاية الشرح لكل مكوّن) وزمن المهاري كله</small></div><div class="sc" data-sc="track"></div></div>
+  let h = `<div class="item" id="trackItem"><div class="item-h"><div class="num">1</div><div class="item-t">مسار المهاري المطبّق <span style="color:var(--muted);font-weight:500">(15–20 د)</span><small>اختر المسار المناسب لمستوى الحلقة؛ تظهر مكوّناته (كفاية الشرح لكل مكوّن) وزمن المهاري كله</small></div><div class="sc" data-sc="track"></div></div>
   <div class="row"><div class="dd-w ${t?"on":""}"><select class="dd" data-trk aria-label="مسار المهاري"><option value="" ${t?"":"selected"}>— اختر المسار —</option>${Object.keys(TRACKS).map(k=>`<option value="${k}" ${t===k?"selected":""}>${k} (${TRACK_HINT[k]})</option>`).join("")}</select></div></div>`;
   if(t){
     h += TRACKS[t].map((name,i)=>{
@@ -407,7 +407,7 @@ function renderItem(it){
   if(it.track) return renderTrack();
   if(it.sample) return renderSample(it);
   if(it.group){
-    return `<div class="item" data-item="${it.no}"><div class="item-h"><div class="num">${it.no}</div><div class="item-t">${it.t}<small>أربعة بنود فرعية</small></div><div class="sc" data-sc="${it.group.map(g=>g[0]).join("|")}"></div></div>
+    return `<div class="item" data-item="${it.no}"><div class="item-h"><div class="num">${it.no}</div><div class="item-t">${it.t}${it.d?` <span style="color:var(--muted);font-weight:500">(${it.d})</span>`:""}<small>أربعة بنود فرعية</small></div><div class="sc" data-sc="${it.group.map(g=>g[0]).join("|")}"></div></div>
       ${it.group.map(([c,l])=>`<div class="row"><p class="row-l">${l}</p>${optButtons(c,c)}</div>`).join("")}${evBox("i"+it.no)}</div>`;
   }
   return `<div class="item" data-item="${it.no}"><div class="item-h"><div class="num">${it.no}</div><div class="item-t">${it.t}${it.d?` <span style="color:var(--muted);font-weight:500">(${it.d})</span>`:""}${it.note?`<small>${it.note}</small>`:""}</div><div class="sc" data-sc="${it.c}"></div></div>
