@@ -1170,14 +1170,13 @@ function screenPositions(id, tab = "board") {
     const drawRound = () => {
       const posKey = rounds[r], w = P[posKey];
       let answered = false;
-      const reveal = h("div", { class: "wordline", style: "min-height:1.6em" }, "");
+      const reveal = h("div", { class: "wordline big", html: wordWithHighlight(w) });
       const q = h("div", { class: "qopts" }, Object.entries(POS).map(([k, meta]) => {
         const b = h("button", { class: "qopt" }, h("span", { class: "boxes", html: [0,1,2].map(n => `<i class="${n === meta.n ? "on" : ""}"></i>`).join("") }), meta.label);
         b.onclick = () => {
           if (answered) return; answered = true;
           if (k === posKey) { right++; b.classList.add("right"); Sound.good(); sayCheer(); }
           else { b.classList.add("wrong"); [...q.children][Object.keys(POS).indexOf(posKey)].classList.add("right"); Sound.boop(); Mascot.say("الحرف في " + POS[posKey].label, { hop: false, voice: ["p:inpos", "p:pos_" + posKey] }); }
-          reveal.innerHTML = wordWithHighlight(w);
           setTimeout(() => { r++; r < rounds.length ? drawRound() : finish("listen", starsFromRatio(right / rounds.length), "أجبت " + right + " من " + rounds.length); }, 1500);
         };
         return b;
@@ -1186,8 +1185,9 @@ function screenPositions(id, tab = "board") {
         h("div", { class: "dots" }, rounds.map((_, n) => h("i", { class: n < r ? "ok" : n === r ? "cur" : "" }))),
         h("button", { class: "speak", "aria-label": "اسمع الكلمة", html: ICON.speaker, onclick: () => Voice.say(w.w, [W(w)]) }),
         h("div", { class: "art", html: artHTML(w.art), style: "font-size:64px" }),
-        h("p", { style: "margin:0;font-weight:700" }, "استمع للكلمة: أين تسمع حرف (" + dch(l) + ")؟"),
-        q, reveal);
+        reveal,
+        h("p", { style: "margin:0;font-weight:700" }, "انظر إلى الحرف الملوّن: أين جاء حرف (" + dch(l) + ")؟"),
+        q);
       setTimeout(() => Voice.say(w.w, [W(w)]), 300);
     };
     drawRound();
